@@ -1,0 +1,132 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.cdmtech.atlas.maven</groupId>
+  <artifactId>cdm-docprocess-plugin</artifactId>
+  <packaging>maven-plugin</packaging>
+  <version>1.0.4-SNAPSHOT</version>
+
+  <parent>
+	  <groupId>com.cdmtech</groupId>
+	  <artifactId>cdm-parent</artifactId>
+	  <version>1.0.1</version>
+  </parent>
+
+  <name>Release Documentation Process Plugin</name>
+  <description>Plugin for processing documentation and generating styled documentation.</description>
+  <inceptionYear>2009</inceptionYear>
+  
+  <properties>
+    <mavenVersion>2.2.1</mavenVersion>
+    <java.compiler.version>1.5</java.compiler.version>
+  </properties>
+  
+  <prerequisites>
+    <maven>${mavenVersion}</maven>
+  </prerequisites>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-plugin-plugin</artifactId>
+        <version>2.5.1</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-tools-ant</artifactId>
+            <version>2.5.1</version>
+          </dependency>
+        </dependencies>  
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+		<pluginManagement>
+			<plugins>
+           <plugin>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-changes-plugin</artifactId>
+              <configuration>
+                <toAddresses>
+                  <toAddress>releases-cdmmvnplugins@devnet.local</toAddress>
+                </toAddresses>
+                <developmentTeam>Atlas</developmentTeam>
+              </configuration>
+           </plugin>
+			</plugins>
+		</pluginManagement>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-script-ant</artifactId>
+      <version>${mavenVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>urbanophile</groupId>
+      <artifactId>java-getopt</artifactId>
+      <version>1.0.9</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>xalan</groupId>
+      <artifactId>xalan</artifactId>
+      <version>2.7.0</version>
+    </dependency>
+  </dependencies>  
+ 
+  <organization>
+    <name>CDM Technologies, Inc.</name>
+    <url>www.cdmtech.com</url>
+  </organization>
+  
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-changes-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>deploy</phase>
+                <goals>
+                  <goal>announcement-mail</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <issueManagement>
+    <system>jira</system>
+    <url>https://jira.cadrc.calpoly.edu/jira/BrowseProject.jspa?id=10640</url>
+  </issueManagement>
+  
+  <scm>
+    <connection>scm:svn:svn://slosvn.devnet.local/svnroot/groups/atlas/maven-plugins/trunk/cdm-docprocess-plugin</connection>
+    <developerConnection>scm:svn:svn://slosvn.devnet.local/svnroot/groups/atlas/maven-plugins/trunk/cdm-docprocess-plugin</developerConnection>
+  </scm>
+  
+  <distributionManagement>
+    <site>
+      <id>cdm-site</id>
+      <url>file:///home/hudson/sites/plugins/cdm-docprocess-plugin</url>      
+    </site>
+  </distributionManagement>
+</project>

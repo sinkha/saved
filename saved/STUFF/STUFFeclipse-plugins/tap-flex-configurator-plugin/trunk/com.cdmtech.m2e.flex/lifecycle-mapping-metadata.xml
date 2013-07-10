@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lifecycleMappingMetadata>
+
+  <lifecycleMappings>
+      <lifecycleMapping>
+         <packagingType>swf</packagingType>
+         <lifecycleMappingId>configure-flex-project-lifecycle</lifecycleMappingId>
+      </lifecycleMapping>
+      
+      <lifecycleMapping>
+         <packagingType>swc</packagingType>
+         <lifecycleMappingId>configure-flex-project-lifecycle</lifecycleMappingId>
+      </lifecycleMapping>
+      
+      <lifecycleMapping>
+         <packagingType>air</packagingType>
+         <lifecycleMappingId>configure-flex-project-lifecycle</lifecycleMappingId>
+      </lifecycleMapping>
+   </lifecycleMappings>
+
+   <pluginExecutions>
+   
+      <pluginExecution>
+         <pluginExecutionFilter>
+            <groupId>org.sonatype.flexmojos</groupId>
+            <artifactId>flexmojos-maven-plugin</artifactId>
+            <versionRange>[3.0,)</versionRange>
+            <goals>
+               <goal>wrapper</goal>
+               <goal>copy-flex-resources</goal>
+            </goals>
+         </pluginExecutionFilter>
+         <action>
+            <execute />
+         </action>
+      </pluginExecution>
+   
+      <pluginExecution>
+         <pluginExecutionFilter>
+            <groupId>org.sonatype.flexmojos</groupId>
+            <artifactId>flexmojos-maven-plugin</artifactId>
+            <versionRange>[3.0,)</versionRange>
+            <goals>
+               <goal>compile-swf</goal>
+               <goal>compile-swc</goal>
+               <goal>test-compile</goal>
+            </goals>
+         </pluginExecutionFilter>
+         <action>
+            <configurator>
+               <id>flexmojos-compile-configurator</id>
+            </configurator>
+         </action>
+      </pluginExecution>
+   
+   </pluginExecutions>
+</lifecycleMappingMetadata>

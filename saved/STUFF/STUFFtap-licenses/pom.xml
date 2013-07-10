@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <name>Tapestry Licenses</name>
+  <groupId>com.tapestrysolutions.atlas.license</groupId>
+  <artifactId>tap-licenses</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  
+  <parent>
+      <groupId>com.cdmtech</groupId>
+      <artifactId>cdm-parent</artifactId>
+      <version>1.1.0-RC</version>
+  </parent>
+  
+  <description>Tapestry source code licenses</description>
+  
+
+    <build>
+       <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <releaseProfiles>release</releaseProfiles>
+                    <preparationGoals>changes:changes-check clean verify</preparationGoals>
+                </configuration>
+            </plugin>      
+       </plugins>
+        <pluginManagement>
+            <plugins>
+	           <plugin>
+	             <groupId>org.apache.maven.plugins</groupId>
+	             <artifactId>maven-changes-plugin</artifactId>
+	              <configuration>
+	                <toAddresses>
+	                  <toAddress>releases@devnet.local</toAddress>
+	                </toAddresses>
+	                <developmentTeam>Atlas</developmentTeam>
+	              </configuration>
+	           </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+   <profiles>
+     <profile>
+       <id>release</id>
+       <build>
+         <plugins>
+           <plugin>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-changes-plugin</artifactId>
+            <executions>
+               <execution>                 
+                 <phase>deploy</phase>
+                 <goals>
+                   <goal>announcement-mail</goal>
+                 </goals>
+               </execution>
+             </executions>
+           </plugin>
+         </plugins>
+       </build>
+     </profile>   
+   </profiles>
+
+  <developers>
+    <developer>
+      <id>kjacobsen</id>
+      <name>Karla Jacobsen</name>
+      <email>kjacobsen@tapestrysolutions.com</email>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:svn:svn://slosvn.devnet.local/svnroot/groups/atlas/tap-license/trunk</connection>
+    <developerConnection>scm:svn:svn://slosvn.devnet.local/svnroot/groups/atlas/tap-license/trunk</developerConnection>
+  </scm>
+
+  <distributionManagement>
+    <site>
+      <id>cdm-site</id>
+      <url>file:///home/hudson/sites/groups/atlas/tap-license</url>
+    </site>
+  </distributionManagement>
+ 
+  </project>

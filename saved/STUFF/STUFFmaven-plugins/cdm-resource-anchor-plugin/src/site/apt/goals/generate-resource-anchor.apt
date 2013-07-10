@@ -1,0 +1,120 @@
+cdm-resource-anchor:generate-resource-anchor
+
+	<<Full name:>>
+	
+	com.cdmtech.atlas.maven:cdm-resource-anchor-plugin:1.0.1:generate-resource-anchor
+	
+	<<Description:>>
+	
+	Generates an ActionScript class which contains static variable references to image files.
+	
+	<<Attributes:>>
+	
+	* Requires a Maven 2.0.1 project to be executed.
+	
+* Required Parameters
+	
+*--------------+-----------------+-----------------+----------------------+
+|| Name        || Type           || Since          || Description         |
+*--------------+-----------------+-----------------+----------------------+
+| <<{{outputDirectory}}>> | <<<File>>> |  | Build root directory for generated resource anchor class. |
+*--------------+-----------------+-----------------+----------------------+
+| <<{{resourceAnchorName}}>> | <<<String>>> |  | Name used for Resource Anchor class. By default the artifactId will be reformatted in camel case and "ResourceAnchor" will be appended. For example, a project with artifactID 'my-project' will become 'MyProjectResourceAnchor'. |
+*--------------+-----------------+-----------------+----------------------+
+
+* Optional Parameters
+	
+*--------------+-----------------+-----------------+----------------------+
+|| Name        || Type           || Since          || Description         |
+*--------------+-----------------+-----------------+----------------------+
+| <<{{convertToLowerCase}}>> | <<<boolean>>> |  | Option to convert the resource class names (taken from the image file names) to lower case. This setting overrides the convertToUpperCase setting. |
+|                    |               |         | <<Default value:>> <<<false>>> |
+*--------------+-----------------+-----------------+----------------------+
+| <<{{convertToUpperCase}}>> | <<<boolean>>> |  | Option to convert the resource class names (taken from the image file names) to upper case. |
+|                    |               |         | <<Default value:>> <<<false>>> |
+*--------------+-----------------+-----------------+----------------------+
+| <<{{excludes}}>> | <<<String[]>>> | <<<1.0-alpha-5>>> | A list of files to exclude. Can contain ant-style wildcards and double wildcards. |
+*--------------+-----------------+-----------------+----------------------+
+| <<{{extendedGeneration}}>> | <<<boolean>>> |  | If true, generate extended version of class which contains a mapping of symbols to names and extra function to retrieve the resource. |
+|                    |               |         | <<Default value:>> <<<false>>> |
+*--------------+-----------------+-----------------+----------------------+
+| <<{{imagesDirectory}}>> | <<<File>>> |  | Root directory of the image files to be used in resource anchor. |
+*--------------+-----------------+-----------------+----------------------+
+| <<{{includes}}>> | <<<String[]>>> | <<<1.0-alpha-5>>> | A list of files to include. Can contain ant-style wildcards and double wildcards. By default, everything in the imagesDirectory is included. |
+*--------------+-----------------+-----------------+----------------------+
+| <<{{resourceAnchorPackage}}>> | <<<String>>> |  | Package to be used for the anchor class. |
+*--------------+-----------------+-----------------+----------------------+
+| <<{{useFullPathNames}}>> | <<<boolean>>> | <<<1.1.0>>> | If true, full paths are used in generating resource anchor variables and will allow for same name files that are in different directories. |
+|                    |               |         | <<Default value:>> <<<false>>> |
+*--------------+-----------------+-----------------+----------------------+
+| <<{{warnAboutHyphens}}>> | <<<boolean>>> |  | If false, suppress log output warning users about the usage of hyphens in the file names. |
+|                    |               |         | <<Default value:>> <<<true>>> |
+*--------------+-----------------+-----------------+----------------------+
+| <<{{warnAboutSpaces}}>> | <<<boolean>>> |  | If false, suppress log output warning users about the usage of spaces in the file names. |
+|                    |               |         | <<Default value:>> <<<true>>> |
+*--------------+-----------------+-----------------+----------------------+
+
+* Parameter Details
+
+	<<{convertToLowerCase}:>>
+	
+	Option to convert the resource class names (taken from the image file names) to lower case. This setting overrides the convertToUpperCase setting.
+	
+	* <<Type:>> <<<boolean>>>
+	
+	* <<Required:>> <<<No>>>
+	
+	* <<Expression:>> <<<$\{convertToLowerCase\}>>>
+	
+	* <<Default:>> <<<false>>>
+	
+	[]
+	
+=======================================================================
+
+	<<{convertToUpperCase}:>>
+	
+	Option to convert the resource class names (taken from the image file names) to upper case.
+	
+	* <<Type:>> <<<boolean>>>
+	
+	* <<Required:>> <<<No>>>
+	
+	* <<Expression:>> <<<$\{convertToUpperCase\}>>>
+	
+	* <<Default:>> <<<false>>>
+	
+	[]
+	
+=======================================================================
+
+	<<{excludes}:>>
+	
+	A list of files to exclude. Can contain ant-style wildcards and double wildcards.
+	
+	* <<Type:>> <<<java.lang.String[]>>>
+	
+	* <<Since:>> <<<1.0-alpha-5>>>
+	
+	* <<Required:>> <<<No>>>
+	
+	[]
+	
+=======================================================================
+
+	<<{extendedGeneration}:>>
+	
+	If true, generate extended version of class which contains a mapping of symbols to names and extra function to retrieve the resource.
+	
+	* <<Type:>> <<<boolean>>>
+	
+	* <<Required:>> <<<No>>>
+	
+	* <<Expression:>> <<<$\{extendedGeneration\}>>>
+	
+	* <<Default:>> <<<false>>>
+	
+	[]
+	
+=======================================================================
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <publishDate position="right"/>
+  <version position="right"/>
+  
+  <body>
+    <menu name="Overview">
+      <item name="Introduction" href="index.html"/>
+      <item name="Goals" href="plugin-info.html"/>
+      <item name="Usage" href="usage.html"/>
+      <item name="FAQ" href="faq.html"/>
+    </menu>
+   
+    <menu name="Examples">
+      <item name="Change the package" href="examples/change-package.html"/>
+      <item name="Sample ActionScript" href="examples/sample-as-version.html"/>
+      <item name="Sample Java" href="examples/sample-java-version.html"/>
+      <item name="Using Java Version" href="examples/using-java-version.html"/>
+    </menu>
+    
+    <menu ref="reports"/>
+  </body>
+</project>

@@ -1,0 +1,4 @@
+Path:             maven-resgen-plugin
+Url:              http://svn.apache.org/repos/asf/incubator/npanday/tags/npanday-1.4.0-incubating/plugins/maven-resgen-plugin
+Repository Root:  http://svn.apache.org/repos/asf/incubator/npanday/tags/npanday-1.4.0-incubating/plugins
+Revision:         1100028

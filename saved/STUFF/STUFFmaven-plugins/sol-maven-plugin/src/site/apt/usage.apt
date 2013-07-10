@@ -1,0 +1,504 @@
+ ------
+Usage
+ ------
+Chris Leighton
+ <csleight@cdmtech.com>
+ ------
+ 2010-12-13
+ ------
+
+Usage
+
+  This plugin is used to transform data.
+
+* Importing beans from xml
+
+  To import beans from an xml document:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.sol.maven.plugins</groupId>
+        <artifactId>sol-maven-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>import-xml</id>
+            <goals>
+              <goal>import-xml</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>*.xml</include>
+              </includes>
+              <includesDirectory>${project.build.directory}/xml</includesDirectory>
+              <schemaPath>${project.build.directory}/xsd/model.xsd</schemaPath>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+  <dependencies>
+    ...
+    <dependency>
+      <groupId>com.cdmtech.core</groupId>
+      <artifactId>core_version</artifactId>
+      <version>1.00.00-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+</project>
+
++-----+
+
+* Exporting beans to xml
+
+  To export beans to an xml document:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.sol.maven.plugins</groupId>
+        <artifactId>sol-maven-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>export-objects</id>
+            <goals>
+              <goal>export-objects</goal>
+            </goals>
+            <configuration>
+              <queryCriteria>
+                <className>package.qualified.model.object.CoreObject</className>
+                <includeSubclasses>true</includeSubclasses>
+              </queryCriteria>
+              <schemaPath>${project.build.directory}/xsd/model.xsd</schemaPath>
+              <exportDirectory>${project.build.directory}/exported-xml</exportDirectory>
+              <exportFilename>exported.xml</exportFilename>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+
+
+* Clearing objects
+
+  To remove all beans from the BeanManager:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.sol.maven.plugins</groupId>
+        <artifactId>sol-maven-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>clear-objects</id>
+            <goals>
+              <goal>clear-objects</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+
+
+* Applying XSLT
+
+  To apply an xslt stylesheet transformation to an xml document:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.sol.maven.plugins</groupId>
+        <artifactId>sol-maven-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>apply-xslt</id>
+            <goals>
+              <goal>apply-xslt</goal>
+            </goals>
+            <configuration>
+              <transformationSets>
+                <transformationSet>
+                  <includes>
+                    <include>*.xml</include>
+                  </includes>
+                  <includesDirectory>${project.build.directory}/source-xml</includesDirectory>
+                  <stylesheet>path/to/stylesheet.xslt</stylesheet>
+                  <outputDirectory>${project.build.directory}/target-xml</outputDirectory>
+                  <outputFilename>${project.artifactId}.xml</outputFilename>
+                </transformationSet>
+              </transformationSets>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+
+
+* Transforming Shapefiles into GML
+
+  To transform shapefile(s) into gml:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.sol.maven.plugins</groupId>
+        <artifactId>sol-maven-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>shp-to-gml</id>
+            <goals>
+              <goal>shp-to-gml</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>*.shp</include>
+              </includes>
+              <includesDirectory>${project.build.directory}/shapefiles</includesDirectory>
+              <outputDirectory>${project.build.directory}/gml</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+
+
+* Validating XML against a schema
+
+  To validate xml document(s) against a schema:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.sol.maven.plugins</groupId>
+        <artifactId>sol-maven-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>validate-xml</id>
+            <goals>
+              <goal>validate</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>*.xml</include>
+              </includes>
+              <includesDirectory>${project.build.directory}/xml</includesDirectory>
+              <schema>path/to/schema.xsd</schema>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+
+
+* Injecting XML
+
+  To inject nodes of a source xml document into a target document:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.sol.maven.plugins</groupId>
+        <artifactId>sol-maven-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>inject-xml</id>
+            <goals>
+              <goal>inject-xml</goal>
+            </goals>
+            <configuration>
+              <source>${project.build.directory}/xml/source.xml</source>
+              <target>${project.build.directory}/xml/target.xml</target>
+              <result>${project.build.directory}/xml/result.xml</result>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+
+
+* Importing Shared Object Model (SOM) ship beans from SVG
+
+  To import SOM ship beans from svg:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.sol.maven.plugins</groupId>
+        <artifactId>sol-maven-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>import-svg</id>
+            <goals>
+              <goal>import-svg</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>*.svg</include>
+              </includes>
+              <includesDirectory>${project.build.directory}/svg</includesDirectory>
+              <type>top</type>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+
+
+* Importing Shared Object Model (SOM) ship beans from VGP
+
+  To import SOM ship beans from vgp:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.sol.maven.plugins</groupId>
+        <artifactId>sol-maven-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>import-vgp</id>
+            <goals>
+              <goal>import-vgp</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>*.vgp</include>
+              </includes>
+              <includesDirectory>${project.build.directory}/vgp</includesDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+
+
+* Exporting Shared Object Model (SOM) ship beans to ICODES v6 XML
+
+  To export SOM ship beans to icodes6 xml:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.sol.maven.plugins</groupId>
+        <artifactId>sol-maven-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>export-objects-to-icodes6-ship</id>
+            <goals>
+              <goal>export-objects-to-icodes6-ship</goal>
+            </goals>
+            <configuration>
+              <exportFile>${project.build.outputDirectory}/${project.artifactId}.xml</exportFile>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+
+
+* Generating a component metadata XML file
+
+  To generate a component metadata xml file:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.sol.maven.plugins</groupId>
+        <artifactId>sol-maven-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>create-component-metadata</id>
+            <goals>
+              <goal>create-component-metadata</goal>
+            </goals>
+            <configuration>
+              <id>myComponentId</id>
+              <version>${project.version}</version>
+              <domainName>myDomainName</domainName>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+
+
+* Generating a component properties file
+
+  To generate a component properties file:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.sol.maven.plugins</groupId>
+        <artifactId>sol-maven-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>create-component-properties</id>
+            <goals>
+              <goal>create-component-properties</goal>
+            </goals>
+            <configuration>
+              <name>myComponentName</name>
+              <sourceSystems>sourceSystem1,sourceSystem2</sourceSystems>
+              <sourceSystemDisplayNames>Source System 1, Source System 2</sourceSystemDisplayNames>
+              <sourceDomains>sourceDomain1,sourceDomain2</sourceDomains>
+              <sourceDomainDisplayNames>Source Domain 1, Source Domain 2</sourceDomainDisplayNames>
+              <system>targetSystem</system>
+              <systemDisplayName>Target System v1</systemDisplayName>
+              <domain>targetDomain</domain>
+              <domainDisplayName>Target Domain</domainDisplayName>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+
+
+* Initializing the ICODES component version maven property
+
+  To initialize the ICODES component version maven property:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.sol.maven.plugins</groupId>
+        <artifactId>sol-maven-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>initialize-icodes-component-version</id>
+            <goals>
+              <goal>initialize-icodes-component-version</goal>
+            </goals>
+            <configuration>
+              <propertyName>my.icodes.component.version</propertyName>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>

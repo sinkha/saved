@@ -1,0 +1,34 @@
+<!ELEMENT constraint ( value+ ) >
+
+<!ELEMENT description ( #PCDATA | emphasis | link | list | literal )* >
+
+<!ELEMENT element ( #PCDATA | description )* >
+<!ATTLIST element id ID #IMPLIED >
+<!ATTLIST element occurs ( 1 | unbounded ) #IMPLIED >
+<!ATTLIST element ref IDREF #IMPLIED >
+<!ATTLIST element type NMTOKEN #IMPLIED >
+
+<!ELEMENT emphasis ( #PCDATA | emphasis )* >
+<!ATTLIST emphasis style ( bold | italic ) #REQUIRED >
+
+<!ELEMENT item ( #PCDATA | emphasis | link | list )* >
+<!ATTLIST item id NMTOKEN #IMPLIED >
+
+<!ELEMENT key ( #PCDATA | element )* >
+
+<!ELEMENT link ( #PCDATA ) >
+<!ATTLIST link ref CDATA #REQUIRED >
+
+<!ELEMENT list ( item+ ) >
+
+<!ELEMENT property ( description | key | value )* >
+<!ATTLIST property use ( required | optional ) #IMPLIED >
+
+<!ELEMENT propertyGroup ( description | element | key | property | propertyGroup | type | value )* >
+<!ATTLIST propertyGroup name CDATA #IMPLIED >
+<!ATTLIST propertyGroup use NMTOKEN #IMPLIED >
+
+<!ELEMENT type ( constraint ) >
+<!ATTLIST type id NMTOKEN #REQUIRED >
+
+<!ELEMENT value ( #PCDATA | element )* >

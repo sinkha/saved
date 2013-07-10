@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faqs id="FAQ" title="Frequently Asked Questions">
+  <part id="General">
+    <faq id="question">
+      <question>Why even have this silly plugin?</question>
+      <answer>
+        <p>
+         This plugin was created to replace functionality previously provided by the ICODES code generator.
+        </p>
+      </answer>
+    </faq>
+  </part>
+</faqs>

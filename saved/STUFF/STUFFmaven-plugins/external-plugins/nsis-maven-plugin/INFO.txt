@@ -1,0 +1,4 @@
+Path:             nsis-maven-plugin
+Url:              http://svn.codehaus.org/mojo/trunk/sandbox/nsis-maven-plugin
+Repository Root:  http://svn.codehaus.org/mojo/trunk/sandbox/
+Revision:         12285

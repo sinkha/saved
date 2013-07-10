@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>  
+	  <groupId>com.cdmtech.atlas.maven</groupId>
+	  <artifactId>cdm-version-plugin-test-parent</artifactId>
+	  <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  
+  <name>ActionScript test of cdm-version-plugin </name>
+  <artifactId>cdm-version-plugin-as-test</artifactId>
+  <packaging>swf</packaging>
+  
+  <properties>
+    <flex-version>4.0.0.14159</flex-version>
+  </properties>
+
+  <build>
+    <sourceDirectory>src/main/flex</sourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.atlas.maven</groupId>
+        <artifactId>cdm-version-plugin</artifactId>
+        <version>2.1.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>generate-as-version</id>
+            <goals>
+              <goal>generate-as-version</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <scmBuildId>${SVN_REVISION}</scmBuildId>
+          <ciBuildId>${BUILD_NUMBER}</ciBuildId>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.flexmojos</groupId>
+        <artifactId>flexmojos-maven-plugin</artifactId>
+        <version>3.6</version>
+        <extensions>true</extensions>
+        <configuration>
+          <targetPlayer>10.0.0</targetPlayer>
+          <sourceFile>VersionForm.mxml</sourceFile>
+          <debug>true</debug>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>com.adobe.flex</groupId>
+            <artifactId>compiler</artifactId>
+            <version>4.0.0.14159</version>
+            <type>pom</type>
+            <scope>compile</scope>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.adobe.flex.framework</groupId>
+      <artifactId>flex-framework</artifactId>
+      <version>${flex-version}</version>
+      <type>pom</type>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+  
+  <scm>
+    <connection>scm:svn:svn://cvs/svnroot/groups/atlas/maven-plugins/trunk/cdm-version-plugin/it/cdm-version-plugin-as-test</connection>
+    <developerConnection>scm:svn:svn://cvs/svnroot/groups/atlas/maven-plugins/trunk/cdm-version-plugin/it/cdm-version-plugin-as-test</developerConnection>
+  </scm>
+</project>

@@ -1,0 +1,19 @@
+CDM Help System Anchor Plugin
+
+  This plugin is used to generate an ActionScript 'resource anchor' class to create static variable references to URLs.
+
+* Goals Overview
+
+  The CDM Help System Anchor Plugin has one goal:
+
+  * {{{./generate-url-anchor-mojo.html}cdm-helpsystem-anchor:generate-url-anchor}} generates the ActionScript URL resource anchor.
+  
+* Usage
+
+  General instructions on how to use the cdm-helpsystem-anchor-plugin can be found on the {{{usage.html}usage page}}. 
+
+  In case you still have questions regarding the plugin's usage, please have a look at the {{{faq.html}FAQ}} and feel
+  free to contact the author.
+
+
+  

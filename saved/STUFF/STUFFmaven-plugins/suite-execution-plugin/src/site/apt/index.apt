@@ -1,0 +1,27 @@
+Suite Execution Plugin
+
+  This Suite Execution Plugin is used to execute suites using the execution
+  framework.
+
+* Goals Overview
+
+  The Suite Execution Plugin has one goal:
+
+  * {{{./process-mojo.html}suite-execution:process}} Process execution suite.
+
+* Usage
+
+  General instructions on how to use the suite-execution-plugin can be found on
+  the {{{./usage.html}usage page}}. This plugin wraps the more general CDM 
+  Commons {{{./doc/execframework_article.pdf}Execution Framework}}.
+
+  In case you still have questions regarding the plugin's usage, please have a
+  look at the {{{./faq.html}FAQ}} and feel free to contact the author.
+
+* Examples
+
+  Simple examples:
+
+  * {{{./examples/process-embedded.html}Process Embedded Suite}}
+  
+  * {{{./examples/process-external.html}Process External Suite}}

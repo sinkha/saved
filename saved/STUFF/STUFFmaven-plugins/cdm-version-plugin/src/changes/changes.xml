@@ -1,0 +1,52 @@
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>CDM Version Plugin</title>
+    <author email="kjacobse@cdmtech.com">Karla Jacobsen</author>
+  </properties>
+  
+  <!-- 
+    Note: Date can be any string when not released
+    Action Types:
+      * add : added functionnality to the project.
+      * fix : bug fix for the project.
+      * update : updated some part of the project.
+      * remove : removed some functionnality from the project.
+      
+     system - id of issue tracking system
+     dev - matches a developer described in developer section of the pom
+     
+   -->
+  <body>
+    <release date="2012-6-27" version="2.1.2"  description="Update release">
+      <action dev="rleighton@devnet.local" type="update">
+        No longer generate static initializer block. 
+      </action>
+    </release>
+    <release date="2011-9-29" version="2.1.1"  description="Update release">
+      <action dev="kjacobse@cdmtech.com" type="add">
+        Add generation of html page to display version information. 
+      </action>
+      <action dev="kjacobse@cdmtech.com" issue="CDMMVNPLUGINS-7" type="update">
+        Update plugin to support version with the format X.X.X.X
+      </action>
+    </release>
+    <release date="2011-1-17" version="2.1.0"  description="Update release">
+      <action dev="kjacobse@cdmtech.com" issue="CDMMVNPLUGINS-3" type="update">
+        Add check for presence and correct version of core_version
+      </action>
+      <action dev="kjacobse@cdmtech.com" issue="CDMMVNPLUGINS-7" type="update">
+        Update plugin to support version with the format X.X.X.X
+      </action>
+    </release>
+    <release version="2.0.0"  description="Next release">
+      <action dev="kjacobse@cdmtech.com" issue="CDMMVNPLUGINS-1" type="update">
+        Add Findbugs reporting
+      </action>
+      <action dev="kjacobse@cdmtech.com" issue="CDMMVNPLUGINS-2" type="update">
+        Add SCM revision number and ci build number to Version class.
+      </action>
+    </release>
+  </body>
+</document>

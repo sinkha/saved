@@ -1,0 +1,19 @@
+CDM ActionScipt Dependencies Plugin
+
+  This plugin is used to generate an ActionScript class to reference other classes within the project.
+
+* Goals Overview
+
+  The CDM Help System Anchor Plugin has one goal:
+
+  * {{{./generate-as-dependencies.html}cdm-as-dependencies:generate-as-dependencies}} generates the ActionScript class.
+  
+* Usage
+
+  General instructions on how to use the cdm-as-dependencies can be found on the {{{usage.html}usage page}}. 
+
+  In case you still have questions regarding the plugin's usage, please have a look at the {{{faq.html}FAQ}} and feel
+  free to contact the author.
+
+
+  

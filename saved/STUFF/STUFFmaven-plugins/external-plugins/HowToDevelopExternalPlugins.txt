@@ -1,0 +1,7 @@
+1) Open INFO.txt.
+2) Check out code from the repository and revision identified 
+    in INFO.txt into an eclipse project with the name of the 
+    Path property (also found in INFO.txt).
+3) Apply patch.txt to newly checked out project.
+  * Right-click on project.
+  * "Team" -> "Apply Patch"

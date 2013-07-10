@@ -1,0 +1,117 @@
+property:before    {
+	content: "Property:";
+}
+
+choice > element[id]:before    {
+	content: "<" attr(id) ">" ":";
+	display: inline;
+}
+
+property > value > element    {
+	display: inline;
+}
+
+choice > element[ref]:before    {
+	content: "<" attr(ref) ">" ":";
+	display: inline;
+}
+
+property > value > choice    {
+	display: inline;
+}
+
+link    {
+	display: inline;
+	margin-left: 0pt;
+	color: blue;
+}
+
+property > key > element[ref]:before    {
+	content: "<" attr(ref) ">";
+	display: inline;
+}
+
+property > key > element[ref]    {
+	display: inline;
+	margin-left: 0pt;
+}
+
+value > *    {
+	margin-left: 0pt;
+}
+
+value > choice > element    {
+	display: inline;
+	margin-left: 0pt;
+	margin-top: 0pt;
+	margin-right: 5pt;
+	margin-bottom: 0pt;
+}
+
+property > value > element[type]:before    {
+	content: "<" attr(type) ">" ":";
+	display: inline;
+}
+
+property > value > element[ref]:before    {
+	content: "<" attr(ref) ">" ":";
+	display: inline;
+}
+
+property > key:after    {
+	content: " =";
+}
+
+property > value    {
+	display: inline;
+}
+
+property > key    {
+	display: inline;
+	font-weight: bold;
+}
+
+propertyGroup > element:before    {
+	content: "Element: " attr(id) " [" attr(type) "]";
+}
+
+description:before    {
+	content: "Description: ";
+}
+
+type:before    {
+	content: "Type: " attr(id);
+}
+
+propertyGroup:before    {
+	content: "PropertyGroup: " attr(name);
+}
+
+@media morphon {
+}
+\$processing-instruction    {
+	color: rgb(255, 0, 0);
+	margin: 5pt;
+}
+
+\$comment:after    {
+	content: "-->";
+}
+
+\$comment:before    {
+	content: "<!--";
+}
+
+\$comment    {
+	color: rgb(0, 0, 128);
+	margin: 5pt;
+}
+
+*    {
+	display: block;
+	margin-left: 10pt;
+	margin-top: 0pt;
+	margin-right: 0pt;
+	margin-bottom: 0pt;
+}
+

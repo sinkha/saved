@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <name>Example Project Parent Pom</name>
+  <groupId>com.cdmtech.atlas.example</groupId>
+  <artifactId>example-parent</artifactId>
+  <version>1.31-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  
+  <parent>
+	  <groupId>com.tapestysolutions</groupId>
+	  <artifactId>tapestry-parent</artifactId>
+	  <version>1.0.0</version>
+  </parent>
+  
+  <description>Example maven project. Used for testing and providing example of Maven, Hudson/Jenkins, SVN, and other configuration settings and processes.</description>
+  
+  <modules>
+	<module>example-hello</module>
+	<!--<module>example-flex-hello</module>-->
+	<module>example-goodbye</module>
+  </modules>
+  
+  <properties>
+    <flex-version>4.5.1.21328</flex-version>
+    <testProjectVersion>6.0.1.13</testProjectVersion>
+  </properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.sonatype.flexmojos</groupId>
+					<artifactId>flexmojos-maven-plugin</artifactId>
+					<version>3.8</version>
+					<extensions>true</extensions>
+					<configuration>
+						<targetPlayer>10.0.0</targetPlayer>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>com.adobe.flex</groupId>
+							<artifactId>compiler</artifactId>
+							<version>${flex-version}</version>
+							<type>pom</type>
+						</dependency>
+					</dependencies>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>test.com.cdmtech.cadrc.test</groupId>
+				<artifactId>test-project</artifactId>
+				<version>${testProjectVersion}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+  <developers>
+    <developer>
+      <id>kjacobsen</id>
+      <name>Karla Jacobsen</name>
+      <email>kjacobsen@tapestrysolutions.com</email>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:svn:svn://slosvn.devnet.local/svnroot/groups/atlas/example/trunk</connection>
+    <developerConnection>scm:svn:svn://slosvn.devnet.local/svnroot/groups/atlas/example/trunk</developerConnection>
+  </scm>
+
+  <distributionManagement>
+    <site>
+      <id>cdm-site</id>
+      <url>file:///home/hudson/sites/groups/atlas/example</url>
+    </site>
+  </distributionManagement>
+ 
+  </project>

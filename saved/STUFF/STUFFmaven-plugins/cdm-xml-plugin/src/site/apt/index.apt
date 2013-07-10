@@ -1,0 +1,19 @@
+XML Maven Plugin
+
+  This plugin is used to process, transform and validate XML.
+
+* Goals Overview
+
+  The CDM XML Maven Plugin has several goals:
+  
+  * {{{./apply-xslt-mojo.html}cdm-xml:apply-xslt}} applys xslt to source xml to produce target artifact(s).
+  
+  * {{{./validate-mojo.html}cdm-xml:validate}} validates source xml against a schema.
+
+* Usage
+
+  General instructions on how to use the cdm-xml-plugin can be found on the {{{usage.html}usage page}}. 
+
+  In case you still have questions regarding the plugin's usage, please have a look at the {{{faq.html}FAQ}} and feel
+  free to contact the author.
+

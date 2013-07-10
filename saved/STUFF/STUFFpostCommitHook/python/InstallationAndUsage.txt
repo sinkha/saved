@@ -1,0 +1,15 @@
+Installation:
+  1. Copy the contents of the hooks directory into the hooks directory of the svn repository.
+  2. Check if svnlook is in your PATH:
+      $ which svnlook
+     If it was not in your PATH you will need to add it to postCommitHook.properties PATH variable after the next step.
+  3. Run the configure.py script:  $ python configure.py
+    - prompts user for default delay value
+    - generates the post-commit file, tools/post-commit/lib/postCommitHook.properties file, and the logs directory (all relative to the hooks folder).
+    - should configure the permissions on logs directory, but doesn't always work right so you may need to run:
+      $ chmod -R 755 logs post-commit
+      $ chmod 755 post-commit
+      $ chmod 755 post-commit.py
+  4. Test.
+   
+Usage:

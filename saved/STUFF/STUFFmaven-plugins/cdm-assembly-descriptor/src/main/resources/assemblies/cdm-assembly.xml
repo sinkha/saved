@@ -1,0 +1,29 @@
+<assembly>
+	<!-- identifier used as classifier when deploying -->
+  <id>dist</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+
+  <includeBaseDirectory>false</includeBaseDirectory>
+  
+  <!-- Include a site directory in distribution for handling documentation -->
+  <!--includeSiteDirectory>true</includeSiteDirectory-->
+  
+  <fileSets>
+    <fileSet>
+      <directory>${project.basedir}/src/main/dist</directory>
+      <outputDirectory></outputDirectory>
+      <includes>
+        <include>**/**</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>${project.basedir}/target/dist</directory>
+      <outputDirectory></outputDirectory>
+      <includes>
+        <include>**/**</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+</assembly>

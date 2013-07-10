@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="XMLSchemaToHTML.xsl" type="text/xsl"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+  <xsd:annotation>
+    <xsd:documentation>
+      Property file documentation
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <xsd:element name="propertyGroup" type="groupType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Group comprising properties and types/elements used to define properties.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="property" type="propertyType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Property definition comprised of key/value templates.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="description" type="contentType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Property feature description.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="element" type="elementType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Property element definition.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="type" type="typeType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Property element type definition.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="constraint" type="constraintType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Property element type constraint definition.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="value" type="valueType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Property value definition.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="choice" type="choiceType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Property value choice definition.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="key" type="keyType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Property key definition.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="item" type="contentType">
+    <xsd:annotation>
+      <xsd:documentation>
+        List item.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="emphasis" type="emphasisType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Emphasized text.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="link" type="linkType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Link reference.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="list" type="listType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Item list.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:complexType name="propertyType">
+    <xsd:sequence>
+      <xsd:element ref="description" minOccurs="1" maxOccurs="1"/>
+      <xsd:element ref="key" minOccurs="1" maxOccurs="1"/>
+      <xsd:element ref="value" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="use" type="useType" use="optional"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="groupType">
+    <xsd:sequence>
+      <xsd:element ref="description" minOccurs="1" maxOccurs="1"/>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="type"/>
+        <xsd:element ref="element"/>
+      </xsd:choice>
+      <xsd:element ref="key" minOccurs="0" maxOccurs="1"/>
+      <xsd:element ref="value" minOccurs="0" maxOccurs="1"/>
+      <xsd:choice minOccurs="1" maxOccurs="unbounded">
+        <xsd:element ref="property"/>
+        <xsd:element ref="propertyGroup"/>
+      </xsd:choice>
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="elementType" mixed="true">
+    <xsd:sequence>
+      <xsd:element ref="description" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:string" use="optional"/>
+    <xsd:attribute name="type" type="xsd:string" use="optional"/>
+    <xsd:attribute name="ref" type="xsd:string" use="optional"/>
+    <xsd:attribute name="occurs" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="choiceType">
+    <xsd:sequence>
+      <xsd:element ref="element" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="constraintType">
+    <xsd:sequence>
+      <xsd:element ref="value" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="typeType">
+    <xsd:sequence>
+      <xsd:element ref="description" minOccurs="0" maxOccurs="1"/>
+      <xsd:element ref="constraint" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:string" use="required"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="keyType" mixed="true">
+    <xsd:sequence>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="element"/>
+        <xsd:element ref="choice"/>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="valueType" mixed="true">
+    <xsd:sequence>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="element"/>
+        <xsd:element ref="choice"/>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="linkType" mixed="true">
+    <xsd:attribute name="ref" type="xsd:string" use="required">
+      <xsd:annotation>
+        <xsd:documentation>
+          Link reference.
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+  <xsd:complexType name="listType">
+    <xsd:sequence>
+      <xsd:element ref="item" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="contentType" mixed="true">
+    <xsd:sequence>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="emphasis"/>
+        <xsd:element ref="link"/>
+        <xsd:element ref="list"/>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:simpleType name="useType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="optional"/>
+      <xsd:enumeration value="required"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="styleType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="bold"/>
+      <xsd:enumeration value="italic"/>
+      <xsd:enumeration value="underline"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="emphasisType">
+    <xsd:complexContent>
+      <xsd:extension base="contentType">
+        <xsd:attribute name="style" type="styleType" use="optional"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>
+

@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="XMLSchemaToHTML.xsl" type="text/xsl"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+  <xsd:annotation>
+    <xsd:documentation>
+      Component Release Notes
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <xsd:element name="releaseNotes">
+    <xsd:annotation>
+      <xsd:documentation>
+        Component release notes document structure providing a formal structure constraining content.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="short" minOccurs="1" maxOccurs="1"/>
+        <xsd:element ref="description" minOccurs="1" maxOccurs="1"/>
+        <xsd:element ref="requirements" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="distribution" minOccurs="1" maxOccurs="1"/>
+        <xsd:element ref="installation" minOccurs="1" maxOccurs="1"/>
+        <xsd:element ref="usage" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="test" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="component" minOccurs="1" maxOccurs="1"/>
+        <xsd:element ref="faq" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+      <xsd:attribute name="title" type="xsd:string" use="required">
+        <xsd:annotation>
+          <xsd:documentation>
+            Title of release notes document.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="short" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>
+        Short one line description of component.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="description" type="contentType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Full component description.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="requirements" type="contentType">
+    <xsd:annotation>
+      <xsd:documentation>
+        External requirements (not dependencies) for component usage.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="distribution" type="contentType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Component distribution contents.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="installation" type="contentType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Component installation instructions.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="usage" type="contentType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Component usage instructions.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="test" type="contentType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Component test process.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="component" type="componentType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Component information.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="faq" type="contentType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Frequently asked questions (with, hopefully some answers).
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="internal" type="internalType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Internal component dependency.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="external" type="externalType">
+    <xsd:annotation>
+      <xsd:documentation>
+        External component dependency.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="copyright" type="refType">
+    <xsd:annotation>
+      <xsd:documentation>
+        External component copyright.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="license" type="refType">
+    <xsd:annotation>
+      <xsd:documentation>
+        External component license.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="log" type="contentType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Component release log entry.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="depend" type="dependType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Component dependency list.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="release" type="releaseType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Component release information.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="contact" type="contactType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Contact information.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="primary" type="linkType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Primary contact.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="additional" type="linkType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Additional contact.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="item" type="contentType">
+    <xsd:annotation>
+      <xsd:documentation>
+        List item.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="emphasis" type="emphasisType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Emphasized text.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="link" type="linkType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Link reference.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="list" type="listType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Item list.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="literal" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>
+        Literal block of text.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:simpleType name="nameType">
+    <xsd:restriction base="xsd:string">
+       <xsd:pattern value="([a-zA-Z]+(_[a-zA-Z]+)?)"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="versionType">
+    <xsd:restriction base="xsd:string">
+       <xsd:pattern value="([1-9]?[0-9]\.[0-9][0-9](p[1-9]?[0-9])?)"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="internalType" mixed="true">
+    <xsd:attribute name="name" type="nameType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>
+          Internal component name.
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="ref" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>
+          Reference to component documentation.
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="version" type="versionType">
+      <xsd:annotation>
+        <xsd:documentation>
+          Internal component version.
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+  <xsd:complexType name="externalType" mixed="true">
+    <xsd:sequence>
+      <xsd:element ref="copyright" minOccurs="0" maxOccurs="1"/>
+      <xsd:element ref="license" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string" use="required">
+      <xsd:annotation>
+        <xsd:documentation>
+          External component name.
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="ref" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>
+          Reference to component information.
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="version" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>
+          External component version.
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+  <xsd:complexType name="dependType">
+    <xsd:sequence>
+      <xsd:choice minOccurs="1" maxOccurs="unbounded">
+        <xsd:element ref="internal"/>
+        <xsd:element ref="external"/>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="releaseType">
+    <xsd:sequence>
+      <xsd:element ref="log" minOccurs="1" maxOccurs="unbounded"/>
+      <xsd:element ref="depend" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="version" type="versionType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>
+          Component version.
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="date" type="xsd:date" use="required">
+      <xsd:annotation>
+        <xsd:documentation>
+          Component release date.
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+  <xsd:complexType name="componentType">
+    <xsd:sequence>
+      <xsd:element ref="release" minOccurs="1" maxOccurs="unbounded"/>
+      <xsd:element ref="contact" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="name" type="nameType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>
+          Component name.
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="ref" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>
+          Reference to component documentation.
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+  <xsd:complexType name="refType" mixed="true">
+    <xsd:attribute name="ref" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>
+          Optional reference.
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+  <xsd:complexType name="linkType" mixed="true">
+    <xsd:attribute name="ref" type="xsd:string" use="required">
+      <xsd:annotation>
+        <xsd:documentation>
+          Link reference.
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+  <xsd:complexType name="contactType">
+    <xsd:sequence>
+      <xsd:element ref="primary" minOccurs="1" maxOccurs="1"/>
+      <xsd:element ref="additional" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="listType">
+    <xsd:sequence>
+      <xsd:element ref="item" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="contentType" mixed="true">
+    <xsd:sequence>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="emphasis"/>
+        <xsd:element ref="link"/>
+        <xsd:element ref="list"/>
+        <xsd:element ref="literal"/>
+      </xsd:choice>
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:ID">
+      <xsd:annotation>
+        <xsd:documentation>
+          Identifier (may be referenced).
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+  <xsd:simpleType name="styleType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="bold"/>
+      <xsd:enumeration value="italic"/>
+      <xsd:enumeration value="underline"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="emphasisType">
+    <xsd:complexContent>
+      <xsd:extension base="contentType">
+        <xsd:attribute name="style" type="styleType" use="optional"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>
+

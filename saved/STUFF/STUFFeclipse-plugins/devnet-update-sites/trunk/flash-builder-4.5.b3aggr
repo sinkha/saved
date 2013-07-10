@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="DevNet Update Site - Flash Builder" buildRoot="C:\Users\svanhoose\Documents\Projects\Update sites\build\flashbuilder">
+  <validationSets label="base">
+    <validationRepositories location="C:\Users\svanhoose\Documents\Projects\Update sites\p2_metas\flashbuilder_4.5"/>
+  </validationSets>
+  <validationSets label="main" extends="//@validationSets[label='base']">
+    <contributions label="m2e">
+      <repositories enabled="false" location="C:\Users\svanhoose\Documents\Projects\Update sites\3rd-party-mirrors\m2e-releases">
+        <features name="org.eclipse.m2e.feature.feature.group" versionRange="1.0.100.20110804-1717" categories="//@customCategories[identifier='maven-integration']"/>
+      </repositories>
+      <repositories location="C:\Users\svanhoose\Documents\Projects\Update sites\aggregated_mirrors\m2e">
+        <features name="org.eclipse.m2e.feature.feature.group" versionRange="1.0.100.20110804-1717" categories="//@customCategories[identifier='maven-integration']"/>
+      </repositories>
+    </contributions>
+    <contributions label="cdm m2e connectors">
+      <repositories location="C:\dev\workspaces\plugin_dev\tap-flex-configurator-plugin\com.cdmtech.m2e.flex.site\target\site">
+        <features description="Where does this description show up?" name="com.cdmtech.m2e.flex.feature.feature.group" versionRange="0.0.1.201203301434" categories="//@customCategories[identifier='maven-integration']"/>
+      </repositories>
+    </contributions>
+    <contributions label="m2e cdm version plugin">
+      <repositories location="C:\Users\svanhoose\Documents\Projects\Update sites\cdmversionexport14">
+        <features name="com.cdmtech.m2e.cdmversion.feature.feature.group" versionRange="1.0.0.201210161505" categories="//@customCategories[identifier='maven-integration']"/>
+      </repositories>
+    </contributions>
+    <contributions label="subversive">
+      <repositories location="C:\Users\svanhoose\Documents\Projects\Update sites\aggregated_mirrors\subversive-1.0.0.I20120818-with-connectors">
+        <features name="org.eclipse.team.svn.feature.group" versionRange="1.0.0.I20120818-1700" categories="//@customCategories[identifier='version-control']"/>
+        <features name="org.polarion.eclipse.team.svn.connector.feature.group" versionRange="3.0.0.I20121013-1700" categories="//@customCategories[identifier='version-control']"/>
+        <features name="org.polarion.eclipse.team.svn.connector.svnkit17.feature.group" versionRange="3.0.0.I20121013-1700" categories="//@customCategories[identifier='version-control']"/>
+        <features name="org.polarion.eclipse.team.svn.connector.svnkit16.sources.feature.group" versionRange="3.0.0.I20121013-1700"/>
+        <features name="org.polarion.eclipse.team.svn.connector.svnkit16.feature.group" versionRange="3.0.0.I20121013-1700" categories="//@customCategories[identifier='version-control']"/>
+        <features name="org.polarion.eclipse.team.svn.connector.sources.feature.group" versionRange="3.0.0.I20121013-1700"/>
+        <features name="org.polarion.eclipse.team.svn.connector.source.feature.group" versionRange="3.0.0.I20121013-1700"/>
+        <features name="org.polarion.eclipse.team.svn.m2eclipse.feature.group" versionRange="3.0.0.I20120601-1700"/>
+      </repositories>
+    </contributions>
+    <contributions label="sysdeo tomcat">
+      <repositories location="C:\Users\svanhoose\Documents\Projects\Update sites\tomcat\custombuild">
+        <features description="Sysdeo Tomcat Plugin from eclipsetotale.com. Allows context management and start/stop of tomcat from within eclipse." name="com.sysdeo.eclipse.tomcat.feature.feature.group" versionRange="3.3.0"/>
+      </repositories>
+    </contributions>
+  </validationSets>
+  <configurations/>
+  <customCategories identifier="maven-integration" label="Maven Integration" description="Plugins to provide maven/flex integration." features="//@validationSets[label='main']/@contributions[label='cdm%20m2e%20connectors']/@repositories.0/@features.0 //@validationSets[label='main']/@contributions[label='m2e']/@repositories.0/@features.0 //@validationSets[label='main']/@contributions[label='m2e']/@repositories.1/@features.0 //@validationSets[label='main']/@contributions[label='m2e%20cdm%20version%20plugin']/@repositories.0/@features.0"/>
+  <customCategories identifier="version-control" label="Version Control" description="Version control plugins. e.g. SVN" features="//@validationSets[label='main']/@contributions[label='subversive']/@repositories.0/@features.0 //@validationSets[label='main']/@contributions[label='subversive']/@repositories.0/@features.1 //@validationSets[label='main']/@contributions[label='subversive']/@repositories.0/@features.2 //@validationSets[label='main']/@contributions[label='subversive']/@repositories.0/@features.4"/>
+</aggregator:Aggregation>

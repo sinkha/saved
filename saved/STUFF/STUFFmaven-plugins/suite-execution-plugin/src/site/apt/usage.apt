@@ -1,0 +1,60 @@
+ ------
+ Usage
+ ------
+ Russell Leighton
+ <rleighto@cdmtech.com>
+ ------
+ 2010-12-22
+ ------
+
+Usage
+
+  This plugin is used to process execution suites that are defined using an XML document adhering to the {{{./doc/xsd/Suite.html}suite schema}} provided by the CDM Commons {{{./doc/execframework_article.pdf}Execution Framework}}.
+
+  Note that the execution suite processing language was developed to handle general process control and contains elements that focus on launching and managing complex (likely asynchronous) execution sequences. Used in the context of a Maven initiated process much of this complexity is not required since typical build-time processes are synchronous. Additionally, when executing Java-based processes it is recommended that the Maven dependencies be used for resource resolution rather than the suite execution classpath specification (i.e., avoid using the <classpath> element and instead include the necessary dependencies in the plugin configuration).
+
+  Key to execution suite definition is understanding the use of the {{{./doc/xsd/Suite.html#path}\<path\>}} element for referencing directories and files as well as suite output structure. 
+
+  Suite output structure is defined based on suite containment structure and is best illustrated through an example.
+
++-----+
+<suite id="exec">
+  <suite id="generated-source">
+     ...
+  </suite>
+</suite>
++-----+
+
+  The suite execution directory in this example will be located at $\{project.build.directory\}/exec/generated-source. Path elements that reference the suite execution directory (i.e., \<path ref="."\>) will result in an absolute path prefixed with this location. Path elements that reference the parent suite execution directory (i.e., \<path ref=".."\>) will result in an absolute path prefixed with $\{project.build.directory\}/exec. Finally, path elements that reference the root directory (i.e., \<path ref="/"\>) will result in an absolute path set to $\{project.build.directory\}.
+
+  The following illustrates use of the {{{./doc/xsd/Suite.html#path}\<path\>}} element showing the resulting path statements for each usage.
+
++-----+
+<suite id="exec">
+  <path id="exec.dir" ref="."/>
+   ...
+  <suite id="generated-source">
+    <path id="src.file" ref=".">file.in</path>
+    <path id="bin.dir" ref="..">bin</path>
+    <path id="doc.dir" ref="/">doc</path>
+    <path id="bin.file" ref="bin.dir">run.sh</path>
+    <path id="exec.file" ref="exec.dir">exec.in</path>
+     ...
+  </suite>
+</suite>
++-----+
+
+  The paths produced are:
+
+  * exec.dir -> $\{project.build.directory\}/exec
+
+  * src.file -> $\{project.build.directory\}/exec/generated-source/file.in
+
+  * bin.dir -> $\{project.build.directory\}/exec/bin
+
+  * doc.dir -> $\{project.build.directory\}/doc
+
+  * bin.file -> $\{project.build.directory\}/exec/bin/run.sh
+
+  * exec.file -> $\{project.build.directory\}/exec/exec.in
+

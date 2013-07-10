@@ -1,0 +1,179 @@
+component > release > depend > internal    {
+	display: inline;
+}
+
+component > release > depend > external    {
+	display: inline;
+}
+
+component > release > depend > internal:before    {
+	content: attr(name) " ";
+	font-size: medium;
+}
+
+component > release > depend > external:before    {
+	content: attr(name) " ";
+	font-size: medium;
+}
+
+emphasis[style="underline"]    {
+	text-decoration: underline;
+}
+
+emphasis[style="italic"]    {
+	font-style: italic;
+}
+
+emphasis    {
+	display: inline;
+	margin-left: 0pt;
+	margin-right: 0pt;
+}
+
+emphasis[style="bold"]    {
+	font-weight: bold;
+}
+
+component > release:after    {
+	content: " ";
+	display: block;
+}
+
+description:after    {
+	display: block;
+	content: " ";
+}
+
+short:after    {
+	content: " ";
+	display: block;
+}
+
+component:after    {
+	display: block;
+	content: " ";
+}
+
+test:after    {
+	content: " ";
+	display: block;
+}
+
+component > release > depend    {
+	display: inline;
+}
+
+@media morphon {
+}
+component > release:before    {
+	content: attr(version) " - " attr(date);
+	font-size: medium;
+}
+
+releaseNotes:before    {
+	content: attr(title);
+	font-size: 20pt !important;
+	display: block;
+}
+
+*:before    {
+	font-weight: bold;
+	font-size: x-large;
+}
+
+*    {
+	display: block;
+	color: black;
+	text-align: left;
+	margin-left: 5pt;
+	margin-right: 5pt;
+}
+
+component > release > depend:before    {
+	display: inline;
+	content: "Dependencies: ";
+	font-size: medium;
+}
+
+short:before    {
+	content: "Short Description";
+	display: block;
+}
+
+description:before    {
+	content: "Description";
+	display: block;
+}
+
+requirements:before    {
+	content: "External Requirements";
+	display: block;
+}
+
+distribution:before    {
+	content: "Distribution Contents";
+	display: block;
+}
+
+installation:before    {
+	content: "Installation Instructions";
+	display: block;
+}
+
+component > release > log:before    {
+	content: counter(log,circle) " ";
+}
+
+usage:before    {
+	content: "Usage Instructions";
+	display: block;
+}
+
+test:before    {
+	content: "Test Process";
+	display: block;
+}
+
+component:before    {
+	content: "Component Releases";
+	display: block;
+}
+
+releaseNotes    {
+	text-align: center;
+	margin-left: 0pt;
+	margin-right: 0pt;
+}
+
+contact > primary:before    {
+	content: counter(primary,disc) " ";
+}
+
+contact > additional:before    {
+	content: counter(additional,circle) " ";
+}
+
+faq:before    {
+	content: "Frequently Asked Questions";
+	display: block;
+}
+
+contact:before    {
+	content: "Contact Information";
+}
+
+item:before    {
+	content: counter(item,circle) " ";
+}
+
+literal    {
+	display: inline;
+}
+
+link    {
+	display: inline;
+	color: blue;
+	margin-left: 0pt;
+	margin-right: 0pt;
+}
+

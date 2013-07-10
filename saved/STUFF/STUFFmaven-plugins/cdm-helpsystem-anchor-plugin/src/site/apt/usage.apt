@@ -1,0 +1,43 @@
+ ------
+Usage
+ ------
+Karla Jacobsen
+ <kjacobse@cdmtech.com>
+ ------
+ 2010-11-30
+ ------
+
+Usage
+
+  This plugin can be used to generate an ActionScript class which contains static variable references to URLs.
+
+* Generating the URL resource anchor
+
+  To generate the URL resource anchor class:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.atlas.maven</groupId>
+        <artifactId>cdm-helpsystem-anchor-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>generate-url-anchor</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+

@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>com.cdmtech.atlas.maven</groupId>
+  <artifactId>cdm-assembly-descriptor</artifactId>
+  <version>1.0.3-SNAPSHOT</version>
+  <name>CDM Shared Assembly Descriptor</name>
+
+  <parent>
+	  <groupId>com.cdmtech</groupId>
+	  <artifactId>cdm-parent</artifactId>
+	  <version>1.0.1</version>
+  </parent>
+
+  <build>
+		<pluginManagement>
+			<plugins>
+           <plugin>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-changes-plugin</artifactId>
+              <configuration>
+                <toAddresses>
+                  <toAddress>releases-cdmmvnplugins@devnet.local</toAddress>
+                </toAddresses>
+                <developmentTeam>Atlas</developmentTeam>
+              </configuration>
+           </plugin>
+			</plugins>
+		</pluginManagement>
+  </build>
+
+  <profiles>
+     <profile>
+       <id>release</id>
+       <build>
+         <plugins>
+           <plugin>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-changes-plugin</artifactId>
+            <executions>
+               <execution>                 
+                 <phase>deploy</phase>
+                 <goals>
+                   <goal>announcement-mail</goal>
+                 </goals>
+               </execution>
+             </executions>
+           </plugin>
+         </plugins>
+       </build>
+     </profile>
+  </profiles>
+  
+  <scm>
+    <connection>scm:svn:svn://cvs/svnroot/groups/atlas/maven-plugins/trunk/cdm-assembly-descriptor</connection>
+    <developerConnection>scm:svn:svn://cvs/svnroot/groups/atlas/maven-plugins/trunk/cdm-assembly-descriptorn</developerConnection>
+  </scm>
+  
+  <distributionManagement>
+    <site>
+      <id>cdm-site</id>
+      <url>file:///home/hudson/sites/plugins/cdm-assembly-descriptor</url>      
+    </site>
+  </distributionManagement>
+</project>

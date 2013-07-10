@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+	  <groupId>com.cdmtech.atlas.example</groupId>
+	  <artifactId>example-parent</artifactId>
+	  <version>1.28-SNAPSHOT</version>
+	  <relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<name>Example Flex Hello</name>
+	<artifactId>example-flex-hello</artifactId>
+	<packaging>swf</packaging>
+	
+  <build>
+  <sourceDirectory>src/main/flex</sourceDirectory>
+    <plugins>
+      <plugin>
+		  <groupId>org.sonatype.flexmojos</groupId>
+		  <artifactId>flexmojos-maven-plugin</artifactId>
+		  <version>4.0-beta-7</version>
+		</plugin>
+    </plugins>
+  </build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>flex-framework</artifactId>
+			<version>${flex-version}</version>
+			<type>pom</type>
+		</dependency>
+	</dependencies>
+	
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>2.3.1</version>
+        <configuration>
+              <findbugsXmlOutput>true</findbugsXmlOutput>
+              <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
+              <xmlOutput>true</xmlOutput>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.flexmojos</groupId>
+        <artifactId>flexmojos-maven-plugin</artifactId>
+        <version>3.8</version>
+      </plugin>
+    </plugins>  
+  </reporting>
+
+</project>

@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>com.tapestrysolutions.atlas.maven</groupId>
+  <artifactId>tapestry-checkstyle</artifactId>
+  <version>1.1-SNAPSHOT</version>
+  <name>Tapestry Shared Checkstyle Configuration</name>
+
+  <parent>
+      <groupId>com.tapestrysolutions</groupId>
+      <artifactId>tapestry-parent</artifactId>
+      <version>1.0.0</version>
+  </parent>
+
+  
+  <scm>
+    <connection>scm:svn:https://devlvs100.devnet.local/repos/corp/resources/atlas/maven-plugins/trunk/tapestry-checkstyle</connection>
+    <developerConnection>scm:svn:https://devlvs100.devnet.local/repos/corp/resources/atlas/maven-plugins/trunk/tapestry-checkstyle</developerConnection>
+  </scm>
+  
+  <distributionManagement>
+    <site>
+      <id>cdm-site</id>
+      <url>file:///home/hudson/sites/plugins/tapestry-checkstyle</url>      
+    </site>
+  </distributionManagement>
+</project>

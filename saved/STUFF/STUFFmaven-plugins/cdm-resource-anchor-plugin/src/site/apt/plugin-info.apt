@@ -1,0 +1,9 @@
+Plugin Documentation
+	
+	Goals available for this plugin:
+
+*--------------------------------+-----------------+----------------------------------------+
+|| Goal                          || Report?        || Description                           |
+*--------------------------------+-----------------+----------------------------------------+
+| {{{./goals/generate-resource-anchor.html}cdm-resource-anchor:generate-resource-anchor}} | No | Generates an ActionScript class which contains static variable references to image files. |                                         
+*--------------------------------+-----------------+----------------------------------------+

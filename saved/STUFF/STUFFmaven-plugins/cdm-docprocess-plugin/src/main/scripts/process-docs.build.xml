@@ -1,0 +1,32 @@
+<project>
+  <condition property="releasenotes.exists" >
+    <available type="file" file="${basedir}/src/main/doc/release_notes.xml"/>
+  </condition>
+  <condition property="propertynotes.exists" >
+    <available type="file" file="${basedir}/src/main/doc/properties_notes.xml"/>
+  </condition>
+
+  <target name="process-releasenotes" if="releasenotes.exists">
+    <copy file="${basedir}/src/main/doc/release_notes.xml"
+          tofile="${basedir}/target/dist/doc/${artifactId}.xml"/>
+    <java classname="com.cdmtech.atlas.tool.xml.Transform">
+      <arg value="-i"/>
+      <arg value="${basedir}/target/dist/doc/${artifactId}.xml"/>
+      <arg value="-o"/>
+      <arg value="${basedir}/target/dist/doc/${artifactId}.html"/>
+      <arg value="xsl/ReleaseNotesToHTML.xsl"/>
+    </java>
+  </target>
+
+  <target name="process-propertynotes" if="propertynotes.exists">
+    <copy file="${basedir}/src/main/doc/properties_notes.xml"
+          tofile="${basedir}/target/dist/doc/${artifactId}_properties.xml"/>
+    <java classname="com.cdmtech.atlas.tool.xml.Transform">
+      <arg value="-i"/>
+      <arg value="${basedir}/target/dist/doc/${artifactId}_properties.xml"/>
+      <arg value="-o"/>
+      <arg value="${basedir}/target/dist/doc/${artifactId}_properties.html"/>
+      <arg value="xsl/PropertiesToHTML.xsl"/>
+    </java>
+  </target>
+</project>

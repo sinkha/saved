@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:fx="http://ns.adobe.com/mxml/2009" 
+     xmlns:s="library://ns.adobe.com/flex/spark" 
+     xmlns:mx="library://ns.adobe.com/flex/mx"
+     initialize="versionForm_initializeHandler(event)">
+  <fx:Script>
+    <![CDATA[
+      import mx.events.FlexEvent;
+      import com.cdmtech.atlas.maven.cdm_version_plugin_as_test.Version;
+      
+      
+      protected function versionForm_initializeHandler(event:FlexEvent):void
+      {
+        try {
+          lblVersion.text = Version.qualifier;
+        }
+        catch (ex:Error) {}
+        
+        try {
+          lblBuildDate.text = Version.builddate;
+        }
+        catch (ex:Error) {}
+      }
+
+    ]]>
+  </fx:Script>
+  
+  <mx:FormItem label="Build Version:"
+         indicatorGap="2">
+    <mx:Label id="lblVersion"
+           text="undefined"/>
+  </mx:FormItem>
+  <mx:FormItem label="Build Date:"
+         indicatorGap="2">
+    <mx:Label id="lblBuildDate"
+           text="undefined"/>
+  </mx:FormItem>
+  
+</mx:Form>

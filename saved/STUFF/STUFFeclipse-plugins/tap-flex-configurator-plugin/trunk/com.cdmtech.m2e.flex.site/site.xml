@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/com.cdmtech.m2e.flex.feature_0.0.1.qualifier.jar" id="com.cdmtech.m2e.flex.feature" version="0.0.1.qualifier">
+      <category name="m2e-flex-category"/>
+   </feature>
+   <category-def name="m2e-flex-category" label="m2e - Flex"/>
+</site>

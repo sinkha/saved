@@ -1,0 +1,83 @@
+ ------
+ Process External Suite
+ ------
+ Russell Leighton
+ <rleighto@cdmtech.com>
+ ------
+ 2010-12-22
+ ------
+
+Process External Suite
+
+  This example illustrates execution of a suite defined in an external file using the \<suiteFile\> element. Note the use of the \<properties\> element to define a property value passed to the execution suite. Use of properties can help to generalize execution suites to enable reuse within multiple executions. For simple execution suites the suite definition may be embedded within the project POM (refer to {{{./process-embedded.html}Process Embedded Suite}} for an example).
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.atlas.maven</groupId>
+        <artifactId>suite-execution-plugin</artifactId>
+        <version>1.1.1</version>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>process</goal>
+            </goals>
+            <configuration>
+              <suiteFile>${basedir}/src/main/model/modelProcess.xxs</suiteFile>
+              <properties>
+                <model.name>exchangeControl</model.name>
+              </properties>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.tapestrysolutions.tirac</groupId>
+            <artifactId>tirac-sdk</artifactId>
+            <version>2.0.0</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
++-----+
+
+  The following is the example external suite file. Note the property definition for <<model.name>> whose value is passed using the \<properties\> configuration element. Also note the use of a {{{../doc/xsd/Suite.html#command}\<command\>}} element (<<extract>>) as an input pipe to a case command (<<xmi>>). In this example the <<UnZip>> tool pipes the extracted content to standard output which is read by the <<Transform>> tool as input. Finally, note the use of {{{../doc/xsd/Suite.html#source}\<source\>}} and {{{../doc/xsd/Suite.html#artifact}\<artifact\>}} elements which in this example are used primarily for clarity and convenience since typically artifacts, produced by suite executions within a maven build, will always be generated.
+
++-----+
+<suite basepath="." output="model">
+  <property id="model.name"/>
+  <path id="model.path" ref=".">model</path>
+  <source><property ref="model.name"/>.zuml</source>
+  <command id="extract">
+    <class>com.cdmtech.core.tool.UnZip</class>
+    <option id="f"><source/></option>
+    <option id="p"/>
+    <arg><property ref="model.name"/>.xmi</arg>
+  </command>
+  <case id="xmi" name="Extract Model XMI">
+    <artifact path="model.path"><property ref="model.name"/>.xmi</artifact>
+    <command input="extract">
+      <class>com.cdmtech.core.tool.xml.Transform</class>
+      <option id="s"><source/></option>
+      <option id="o"><artifact/></option>
+      <arg path="/">doc/xsl/PoseidonToCore.xsl</arg>
+    </command>
+  </case>
+  <case id="schema" name="Generate XML Schema">
+    <command>
+      <class>com.cdmtech.core.tool.uml.schema.SchemaProducer</class>
+      <option id="d" path="model.path"/>
+      <arg path="model.path"><property ref="model.name"/>.xmi</arg>
+    </command>
+  </case>
+</suite>
++-----+

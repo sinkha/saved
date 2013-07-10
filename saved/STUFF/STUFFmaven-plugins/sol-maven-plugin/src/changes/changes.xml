@@ -1,0 +1,58 @@
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>SOL Maven Plugin</title>
+    <author email="csleight@cdmtech.com">Chris Leighton</author>
+  </properties>
+  
+  <!-- 
+    Note: Date can be any string when not released
+    Action Types:
+      * add : added functionnality to the project.
+      * fix : bug fix for the project.
+      * update : updated some part of the project.
+      * remove : removed some functionnality from the project.
+      
+     system - id of issue tracking system
+     dev - matches a developer described in developer section of the pom
+     
+   -->
+  <body>
+    <release version="1.1.6" date="2013-02-27" description="Release">
+      <action dev="jundesse" type="update">Updated to latest sol translator to fix transform multiplication order issue.</action>
+    </release> 
+    <release version="1.1.5" date="2013-02-26" description="Release">
+      <action dev="jundesse" type="update">Updated to latest sol translator to fix container stow area name bug</action>
+    </release> 
+    <release version="1.1.4" date="2013-02-25" description="Release">
+      <action dev="jundesse" type="update">Updated to latest sol translator</action>
+    </release>      
+    <release version="1.1.3"  description="Sprint Release">
+      <action dev="jundesse" type="update">Changed the version utility so that the target system schema version is used for the conveyance version.</action>
+    </release>    
+    <release version="1.1.2"  description="Sprint Release">
+      <action dev="jundesse" type="fix">Updated to using the new 6.0.3.3 Sol Translator which fixes the JTS Order bug</action>
+    </release>    
+    <release version="1.1.1"  description="Sprint Release">
+      <action dev="jundesse" type="add">Added support for filtering invalid railcars</action>
+      <action dev="jundesse" type="add">Updated to using the new 6.0.3.2 Sol Translator which has support for ECP 205: Engr and Peo Areas.</action>
+      <action dev="jundesse" type="add">Updated to using the new 6.0.3.2 Sol Translator which added Height to the configurations.xml file for ships</action>
+    </release>  
+    <release version="1.1.0"  description="Sprint Release">
+      <action dev="jundesse" type="update">Release for ICODES 6.0.3.X</action>
+    </release>  
+    <release version="1.0.2"  description="Sprint Release">
+      <action dev="jundesse" type="update">Release for ICODES 6.0.2.X</action>
+    </release>
+    <release version="1.0.1"  description="Sprint Release">
+      <action dev="jundesse" type="update">Sprint Release</action>
+    </release>
+    <release version="1.0.0"  description="Next release">
+      <action dev="csleight" type="update">Upcoming release</action>
+    </release>
+    <release version="1.0.0-alpha-1"  description="Testing plugin for official release">
+      <action dev="kjacobse" type="update">Upcoming release</action>
+    </release>
+  </body>
+</document>

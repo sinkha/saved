@@ -1,0 +1,18 @@
+CDM Resource Anchor Plugin
+
+  This plugin is used to generate an ActionScript 'resource anchor' class to create static variable references to images.
+
+* Goals Overview
+
+  The CDM Resource Anchor Plugin has one goal:
+
+  * {{{./generate-resource-anchor-mojo.html}cdm-resource-anchor:generate-resource-anchor}} generates the ActionScript resource anchor.
+  
+* Usage
+
+  General instructions on how to use the cdm-resource-anchor-plugin can be found on the {{{usage.html}usage page}}. 
+
+  In case you still have questions regarding the plugin's usage, please have a look at the {{{faq.html}FAQ}} and feel
+  free to contact the author.
+
+  

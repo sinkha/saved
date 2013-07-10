@@ -1,0 +1,123 @@
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>Example Project</title>
+    <author email="kjacobse@cdmtech.com">Karla Jacobsen</author>
+  </properties>
+  <body>
+    <release version="1.29" date="2013-04-30" description="Demo">
+    </release>
+    <release version="1.28" date="2013-02-22" description="Testing javadoc agg.">
+    </release>
+    <release version="1.27" date="2012-09-07" description="Testing useEditMode for locking svn during a release.">
+    </release>
+    <release version="1.26" date="2012-04-19" description="Testing new report settings.">
+    </release>
+    <release version="1.25" date="2012-04-19" description="Testing possible new release process">
+    </release>
+    <release version="1.24" date="2012-04-18" description="Testing possible new release process">
+    </release>
+    <release version="1.23" date="2012-04-18" description="Testing possible new release process">
+    </release>
+    <release version="1.22" date="2012-03-26" description="Testing release process">
+    </release>
+	<release version="1.19" date="2012-03-26" description="Testing release process">
+	</release>
+	<release version="1.18" date="2011-12-15" description="Test release">
+		<action dev="kjacobse" type="update">Updated parent version.</action>
+	</release>
+      <release version="1.17" date="2011-11-2" description="Test release">
+      <action dev="kjacobse" type="update">Testing for SVN problem</action>
+    </release>
+     <release version="1.16" date="2011-10-28" description="Test release">
+      <action dev="kjacobse" type="update">Testing for SVN problem</action>
+    </release>
+     <release version="1.15" date="2011-10-17" description="Test release">
+      <action dev="kjacobse" type="update">Testingnew parent pom</action>
+    </release>
+     <release version="1.14" date="2011-07-28" description="Test release">
+      <action dev="kjacobse" type="update">Testing</action>
+    </release>
+     <release version="1.13" date="2011-10-03" description="Test release">
+      <action dev="kjacobse" type="update">Testing</action>
+    </release>
+     <release version="1.12" date="2011-07-28" description="Test release">
+      <action dev="kjacobse" type="update">Testing</action>
+    </release>
+     <release version="1.11" date="2011-07-14" description="Test release">
+      <action dev="kjacobse" type="update">Testing variation of site configuration. Attempting to speed up release builds by reducing the generated site content.</action>
+    </release>
+ 
+     <release version="1.10" date="2011-06-28" description="Test release">
+      <action dev="kjacobse" type="update">Testing non absolute path to pom in Jenkins configuration.</action>
+      <action dev="kjacobse@cdmtech.com" issue="EXAMPLE-7" type="update">Make sure email is still working.</action>
+    </release>
+    
+    <release version="1.9" date="2010-11-16" description="Tenth release of Example project. ">
+      <action dev="kjacobse" type="add">
+        Testing reusable announcement.vm
+      </action>
+      <action dev="kjacobse@cdmtech.com" issue="EXAMPLE-7" type="update">
+        Test new configuration of announcement email
+      </action>
+    </release>
+    
+    <release version="1.8" date="2010-09-22" description="Ninth release of Example project. ">
+      <action dev="kjacobse" type="add">
+        Added changes log file. The maven-changes-plugin now combines the changes.xml with the Jira reported issues in the announcement email.
+      </action>
+      <action dev="kjacobse@cdmtech.com" issue="EXAMPLE-5" type="update">
+        Continued testing of release and build procedures
+      </action>
+    </release>
+    
+		<release version="1.7" date="2010-09-21" description="">
+		      <action dev="kjacobse@cdmtech.com" issue="EXAMPLE-4" type="update">
+		        Still testing release announcement email.
+		      </action>
+		</release>
+    
+		<release version="1.6" date="2010-09-21" description="">
+		      <action dev="kjacobse@cdmtech.com" issue="EXAMPLE-3" type="update">
+		        Continued testing of release and build procedures
+		      </action>
+		</release>
+    
+		<release version="1.5" date="2010-09-21" description="Minor updates">
+		      <action dev="kjacobse@cdmtech.com" issue="EXAMPLE-2" type="update">
+		        Test out project release announcements
+		      </action>
+		</release>
+    
+		<release version="1.4" date="2010-09-02" description="Minor updates">
+		      <action dev="kjacobse@cdmtech.com" issue="EXAMPLE-1" type="add">
+		        Add Findbugs reporting
+		      </action>
+		</release>
+    
+    <release version="1.3" date="2010-08-02" description="Fourth release of Example project. ">
+      <action dev="kjacobse" type="update">
+        Release of example maven project.
+      </action>
+    </release>
+    
+    <release version="1.2" date="2010-08-02" description="Third release of Example project. ">
+      <action dev="kjacobse" type="update">
+        Release of example maven project.
+      </action>
+    </release>
+    
+    <release version="1.1" date="2010-06-08" description="Second release of Example project. ">
+      <action dev="kjacobse" type="update">
+        Release of example maven project.
+      </action>
+    </release>
+
+    <release version="1.0" date="2010-06-07" description="Initial release of Example project using Maven.">
+      <action dev="kjacobse" type="update">
+        Initial release of example maven project.
+      </action>
+    </release>
+  </body>
+</document>

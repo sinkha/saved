@@ -1,0 +1,42 @@
+Index: pom.xml
+===================================================================
+--- pom.xml	(revision 1130285)
++++ pom.xml	(working copy)
+@@ -26,6 +26,7 @@
+   </parent>  
+   <modelVersion>4.0.0</modelVersion>  
+   <artifactId>maven-resgen-plugin</artifactId>  
++  <version>1.4.0-incubating-cdm</version>
+   <packaging>maven-plugin</packaging>  
+   <name>NPanday :: ResGen Maven Plugin</name>  
+   <description>Maven Plugin for .NET: Generates assembly resources</description>
+@@ -36,4 +37,17 @@
+       <version>${plexus.utils.version}</version>
+     </dependency>
+   </dependencies>
++  
++  <distributionManagement>
++    <repository>
++      <id>releases</id>
++      <name>CDM Release Repository </name>
++      <url>https://hudson149.cdm.cdmtech.com/nexus/content/repositories/releases</url>
++    </repository>
++    <snapshotRepository>
++      <id>snapshots</id>
++      <name>CDM Snapshot Repository</name>
++      <url>https://hudson149.cdm.cdmtech.com/nexus/content/repositories/snapshots</url>
++    </snapshotRepository>
++  </distributionManagement>
+ </project>
+Index: src/main/java/npanday/plugin/resgen/ExistingResxGenerator.java
+===================================================================
+--- src/main/java/npanday/plugin/resgen/ExistingResxGenerator.java	(revision 1130285)
++++ src/main/java/npanday/plugin/resgen/ExistingResxGenerator.java	(working copy)
+@@ -156,6 +156,7 @@
+     {
+         List<String> commands = new ArrayList<String>();
+                                             
++        commands.add( "/useSourcePath" );
+         commands.add( sourceFile.getAbsolutePath() );
+         if( name != null || "".equals(name))
+         {

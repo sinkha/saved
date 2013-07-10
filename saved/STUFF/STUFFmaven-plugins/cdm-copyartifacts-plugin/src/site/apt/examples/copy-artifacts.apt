@@ -1,0 +1,90 @@
+ ------
+ Process Embedded Suite
+ ------
+ Russell Leighton
+ <rleighto@cdmtech.com>
+ ------
+ 2011-03-03
+ ------
+
+Copy Artifacts
+
+  The following example illustrates a use case for an installer build requiring multiple "packs" each of which contain a core component with dependencies (exclusions may also be defined). As part of the package phase the staging directory is populated with "pack" directories which are used by the installer builder to create separately installable packages.
+
++-----+
+<project>
+  ...
+  <properties>
+    <staging.directory>${project.build.directory}/izpack</staging.directory>
+    ...
+  </properties>
+
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.atlas.maven</groupId>
+        <artifactId>cdm-copyartifacts-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <stripVersion>true</stripVersion>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.cdmtech.commons</groupId>
+                  <artifactId>commons-java-execframework</artifactId>
+                  <version>4.25.0-SNAPSHOT</version>
+                  <outputDirectory>${staging.directory}/client/suite/lib</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>cosmos-demo</artifactId>
+                  <version>${project.version}</version>
+                  <outputDirectory>${staging.directory}/demo/lib</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>cosmos-client</artifactId>
+                  <version>${project.version}</version>
+                  <outputDirectory>${staging.directory}/client/lib</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>cosmos-server</artifactId>
+                  <version>${project.version}</version>
+                  <outputDirectory>${staging.directory}/server/lib</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>cosmos-agents</artifactId>
+                  <version>${project.version}</version>
+                  <outputDirectory>${staging.directory}/agents/lib</outputDirectory>
+                  <exclusions>
+                    <exclusion>
+                      <groupId>com.cdmtech.core</groupId>
+                      <artifactId>core_bean</artifactId>
+                    </exclusion>
+                  </exclusions>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>cosmos-application</artifactId>
+                  <version>${project.version}</version>
+                  <outputDirectory>${staging.directory}/application/lib</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
++-----+

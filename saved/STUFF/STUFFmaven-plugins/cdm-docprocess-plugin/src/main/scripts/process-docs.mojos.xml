@@ -1,0 +1,42 @@
+<pluginMetadata>
+  <mojos>
+    <mojo>
+      <goal>process-releasenotes</goal>
+      <call>process-releasenotes</call>
+      <description>Process component release notes.</description>
+      <parameters>
+        <parameter>
+          <name>artifactId</name>
+          <property>artifactId</property>
+          <required>false</required>
+          <expression>${artifactId}</expression>
+          <type>java.lang.Object</type>
+          <defaultValue>${project.artifactId}</defaultValue>
+        </parameter>
+        <parameter>
+          <name>basedir</name>
+          <property>basedir</property>
+          <required>false</required>
+          <expression>${basedir}</expression>
+          <type>java.lang.Object</type>
+          <defaultValue>${basedir}</defaultValue>
+        </parameter>
+      </parameters>
+    </mojo>
+    <mojo>
+      <goal>process-propertynotes</goal>
+      <call>process-propertynotes</call>
+      <description>Process component property notes.</description>
+      <parameters>
+        <parameter>
+          <name>artifactId</name>
+          <property>artifactId</property>
+          <required>false</required>
+          <expression>${artifactId}</expression>
+          <type>java.lang.Object</type>
+          <defaultValue>${project.artifactId}</defaultValue>
+        </parameter>
+      </parameters>
+    </mojo>
+  </mojos>
+</pluginMetadata>

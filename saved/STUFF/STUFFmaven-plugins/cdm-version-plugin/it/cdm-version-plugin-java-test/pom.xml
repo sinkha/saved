@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>  
+    <groupId>com.cdmtech.atlas.maven</groupId>
+    <artifactId>cdm-version-plugin-test-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  
+  <name>Java test of cdm-version-plugin</name>
+  <artifactId>cdm-version-plugin-java-test</artifactId>
+  <packaging>jar</packaging>
+
+  <build>
+    <plugins>
+        <!-- Use Java 1.6 -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>1.6</source>
+            <target>1.6</target>
+          </configuration>
+        </plugin>
+      <plugin>
+        <groupId>com.cdmtech.atlas.maven</groupId>
+        <artifactId>cdm-version-plugin</artifactId>
+        <version>2.1.2-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>generate-java-version</id>
+            <goals>
+              <goal>generate-java-version</goal>
+            </goals>
+          </execution>
+        </executions>
+				<configuration>
+					<scmBuildId>${SVN_REVISION}</scmBuildId>
+					<ciBuildId>${BUILD_NUMBER}</ciBuildId>
+				</configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.cdmtech.core</groupId>
+      <artifactId>core_version</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+  </dependencies>
+  
+  <scm>
+    <connection>scm:svn:svn://cvs/svnroot/groups/atlas/maven-plugins/trunk/cdm-version-plugin/it/cdm-version-plugin-java-test</connection>
+    <developerConnection>scm:svn:svn://cvs/svnroot/groups/atlas/maven-plugins/trunk/cdm-version-plugin/it/cdm-version-plugin-java-test</developerConnection>
+  </scm>
+</project>

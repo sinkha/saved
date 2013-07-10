@@ -1,0 +1,103 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   
+   <groupId>com.cdmtech.m2e.flex</groupId>
+   <artifactId>com.cdmtech.m2e.flex-parent</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <packaging>pom</packaging>
+   
+   <name>m2e Flex Configurator Parent</name>
+   
+   <properties>
+      <tycho-version>0.12.0</tycho-version>
+      <manifest-location>META-INF</manifest-location>
+   </properties>
+   
+   <modules>
+      <module>com.cdmtech.m2e.flex</module>
+      <module>com.cdmtech.m2e.flex.feature</module>
+      <module>com.cdmtech.m2e.flex.site</module>
+<!--      <module>com.cdmtech.m2e.flex.tests</module>-->
+   </modules>
+
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>tycho-maven-plugin</artifactId>
+            <version>${tycho-version}</version>
+            <extensions>true</extensions>
+         </plugin>
+
+<!--          <plugin> -->
+<!--             <groupId>org.codehaus.mojo</groupId> -->
+<!--             <artifactId>build-helper-maven-plugin</artifactId> -->
+<!--             <version>1.3</version> -->
+<!--             <executions> -->
+<!--                <execution> -->
+<!--                   <id>attach-artifacts</id> -->
+<!--                   <phase>package</phase> -->
+<!--                   <goals> -->
+<!--                      <goal>attach-artifact</goal> -->
+<!--                   </goals> -->
+<!--                   <configuration> -->
+<!--                      <artifacts> -->
+<!--                         <artifact> -->
+<!--                            <file>m2e-flex-e36.target</file> -->
+<!--                            <type>target</type> -->
+<!--                            <classifier>m2e-flex-e36</classifier> -->
+<!--                         </artifact> -->
+<!--                      </artifacts> -->
+<!--                   </configuration> -->
+<!--                </execution> -->
+<!--             </executions> -->
+<!--          </plugin> -->
+
+         <plugin>
+            <groupId>org.codehaus.tycho</groupId>
+            <artifactId>target-platform-configuration</artifactId>
+            <configuration>
+               <resolver>p2</resolver>
+               <environments>
+                  <environment>
+                     <os>win32</os>
+                     <ws>win32</ws>
+                     <arch>x86</arch>
+                  </environment>
+<!--                  <environment>-->
+<!--                     <os>win32</os>-->
+<!--                     <ws>win32</ws>-->
+<!--                     <arch>x86_64</arch>-->
+<!--                  </environment>-->
+               </environments>
+<!--                <artifact> -->
+<!--                   <groupId>com.cdmtech.m2e.flex</groupId> -->
+<!--                   <artifactId>com.cdmtech.m2e.flex</artifactId> -->
+<!--                   <version>${project.version}</version> -->
+<!--                   <classifier>${target.platform}</classifier> -->
+<!--                </artifact> -->
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+
+   <repositories>
+      <repository>
+         <id>helios</id>
+         <layout>p2</layout>
+         <url>file:///C:/Users/svanhoose/Documents/p2_repositories/plugin_dev</url>
+      </repository>
+      <repository>
+         <id>flashbuilder4</id>
+         <layout>p2</layout>
+         <url>file:///C:/Users/svanhoose/Documents/p2_repositories/flashbuilder_4.5</url>
+      </repository>
+   </repositories>
+   
+   <scm>
+     <connection>scm:svn:svn://slosvn.devnet.local/svnroot/groups/eclipse-plugins/tap-flex-configurator-plugin/trunk</connection>
+     <developerConnection>scm:svn:svn://slosvn.devnet.local/svnroot/groups/eclipse-plugins/tap-flex-configurator-plugin/trunk</developerConnection>
+   </scm>
+  
+</project>

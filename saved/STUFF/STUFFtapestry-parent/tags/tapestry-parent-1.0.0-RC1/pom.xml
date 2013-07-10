@@ -1,0 +1,247 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tapestysolutions</groupId>
+    <name>Tapestry Parent POM</name>
+    <artifactId>tapestry-parent</artifactId>
+    <version>1.0.0-RC1</version>
+    <packaging>pom</packaging>
+
+    <description>Parent project pom to house commonly used plugins, distributionManagement, organization, and other such relevant information.</description>
+
+    <!--
+    Example of configuration elements needed in child POMs...
+      <parent>
+          <groupId>com.tapestysolutions</groupId>
+          <artifactId>tapestry-parent</artifactId>
+          <version>1.0.0-SNAPSHOT</version>
+      </parent>
+
+     <scm>
+      <connection>scm:svn:svn://slosvn.devnet.local/svnroot/groups/atlas/example/trunk</connection>
+      <developerConnection>scm:svn:svn://slosvn.devnet.local/svnroot/groups/atlas/example/trunk</developerConnection>
+     </scm>
+  
+      <distributionManagement>
+        <site>
+          <id>cdm-site</id>
+          <url>file:///home/hudson/sites/groups/atlas/example</url>
+        </site>
+      </distributionManagement>
+    -->
+    
+    <organization>
+        <name>Tapestry Solutions, Inc.</name>
+        <url>http://www.tapestrysolutions.com</url>
+    </organization>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.compiler.version>1.6</java.compiler.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.0-beta-3</version>
+                <configuration>
+                    <reportPlugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-jxr-plugin</artifactId>
+                            <version>2.2</version>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-pmd-plugin</artifactId>
+                            <version>2.5</version>
+                            <configuration>
+                                <linkXref>true</linkXref>
+                                <sourceEncoding>utf-8</sourceEncoding>
+                                <minimumTokens>100</minimumTokens>
+                                <targetJdk>${java.compiler.version}</targetJdk>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>findbugs-maven-plugin</artifactId>
+                            <version>2.3.2</version>
+                            <configuration>
+                                <findbugsXmlOutput>true</findbugsXmlOutput>
+                                <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
+                                <xmlOutput>true</xmlOutput>
+                                <failOnError>false</failOnError>
+                                <!-- Removed to work around findbugs error. This issue should be 
+                                    fixed in the next version: 2.3.3 <trace>true</trace> -->
+                                <fork>false</fork>
+                                <debug>false</debug>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-changes-plugin</artifactId>
+                            <version>2.6</version>
+                            <reportSets>
+                                <reportSet>
+                                    <reports>
+                                        <report>changes-report</report>
+                                    </reports>
+                                </reportSet>
+                            </reportSets>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>versions-maven-plugin</artifactId>
+                            <version>1.2</version>
+                            <reportSets>
+                                <reportSet>
+                                    <reports>
+                                        <report>dependency-updates-report</report>
+                                        <report>plugin-updates-report</report>
+                                    </reports>
+                                </reportSet>
+                            </reportSets>
+                        </plugin>
+                        <plugin>
+                            <groupId>com.adobe.ac</groupId>
+                            <artifactId>flex-pmd-maven-plugin</artifactId>
+                            <version>1.2</version>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-javadoc-plugin</artifactId>
+                            <version>2.8</version>
+                            <reportSets>
+                                <reportSet>
+                                    <id>javadoc</id>
+                                    <reports>
+                                        <report>javadoc</report>
+                                        <!-- Removed aggregate report to workaround bug which pops up during 
+                                            releases -->
+                                        <!-- <report>aggregate</report> -->
+                                    </reports>
+                                </reportSet>
+                            </reportSets>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-project-info-reports-plugin</artifactId>
+                            <version>2.4</version>
+                            <configuration>
+                                <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+                                <reportSet>
+                                    <reports>
+                                        <report>dependencies</report>
+                                        <report>license</report>
+                                        <report>scm</report>
+                                    </reports>
+                                </reportSet>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-checkstyle-plugin</artifactId>
+                            <version>2.6</version>
+                            <configuration>
+                                <configLocation>checkstyle/java_style.xml</configLocation>
+                            </configuration>
+                        </plugin>
+                    </reportPlugins>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.cdmtech.atlas.maven</groupId>
+                        <artifactId>cdm-tools-config</artifactId>
+                        <version>1.0.0</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>2.2.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.3.2</version>
+                    <configuration>
+                        <source>${java.compiler.version}</source>
+                        <target>${java.compiler.version}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonatype.flexmojos</groupId>
+                    <artifactId>flexmojos-maven-plugin</artifactId>
+                    <version>4.0-RC1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>1.7</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.3.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>1.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.8</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>2.3</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-changes-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <url>http://hudson/sites/tapestry-parent</url>
+
+    <scm>
+        <connection>scm:svn:svn://slosvn.devnet.local/svnroot/projects/tapestry-parent/tags/tapestry-parent-1.0.0-RC1</connection>
+        <developerConnection>scm:svn:svn://slosvn.devnet.local/svnroot/projects/tapestry-parent/tags/tapestry-parent-1.0.0-RC1</developerConnection>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>CDM Release Repository </name>
+            <url>https://nexus.devnet.local/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>CDM Snapshot Repository</name>
+            <url>https://nexus.devnet.local/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <site>
+            <id>cdm-site</id>
+            <url>file:///home/hudson/sites/tapestry-parent</url>
+        </site>
+    </distributionManagement>
+
+
+
+</project>

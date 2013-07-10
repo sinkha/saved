@@ -1,0 +1,14 @@
+ ------
+ Usage
+ ------
+ Russell Leighton
+ <rleighto@cdmtech.com>
+ ------
+ 2011-02-11
+ ------
+
+Usage
+
+  This plugin is used to copy repository artifacts, with their transitive
+  dependencies, to an optionally specified output directory.
+

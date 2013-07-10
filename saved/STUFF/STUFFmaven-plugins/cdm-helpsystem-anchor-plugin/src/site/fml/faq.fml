@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faqs id="FAQ" title="Frequently Asked Questions">
+  <!--<part id="General">
+    <faq id="question">
+      <question>Why include an extended generation option?</question>
+      <answer>
+        <p>
+          Most projects don't require a mapping or table lookup for finding variables based on image file names. In fact, this option was added to deal with a special case of military symbology images.
+        </p>
+      </answer>
+    </faq>
+  </part>-->
+</faqs>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lifecycleMappingMetadata>
+
+   <pluginExecutions>
+   
+      <pluginExecution>
+         <pluginExecutionFilter>
+            <groupId>com.cdmtech.atlas.maven</groupId>
+		    <artifactId>cdm-version-plugin</artifactId>
+            <versionRange>[1.0,)</versionRange>
+            <goals>
+               <goal>generate-as-version</goal>
+            </goals>
+         </pluginExecutionFilter>
+         <action>
+            <configurator>
+               <id>cdm-as-version-plugin-configurator</id>
+            </configurator>
+         </action>
+      </pluginExecution>
+   
+      <pluginExecution>
+         <pluginExecutionFilter>
+            <groupId>com.cdmtech.atlas.maven</groupId>
+		    <artifactId>cdm-version-plugin</artifactId>
+            <versionRange>[1.0,)</versionRange>
+            <goals>
+               <goal>generate-java-version</goal>
+            </goals>
+         </pluginExecutionFilter>
+         <action>
+            <configurator>
+               <id>cdm-java-version-plugin-configurator</id>
+            </configurator>
+         </action>
+      </pluginExecution>
+   
+   </pluginExecutions>
+</lifecycleMappingMetadata>

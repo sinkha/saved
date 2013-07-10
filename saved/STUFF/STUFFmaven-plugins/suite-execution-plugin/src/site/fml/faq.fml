@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faqs id="FAQ" title="Frequently Asked Questions">
+  <part id="General">
+    <title>General</title>
+    <faq id="suite-defined">
+      <question>How is an execution suite defined?</question>
+      <answer>
+        <p>
+          Suites are defined using an XML based language designed to manage process execution. Refer to the <a href="./usage.html">Usage</a> page for more information.
+        </p>
+      </answer>
+    </faq>
+  </part>
+</faqs>

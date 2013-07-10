@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <bannerLeft>
+    <name>Tapestry Solutions</name>
+    <src>images/tapestry_logo.png</src>
+    <href>http://www.tapestrysolutions.com</href>
+  </bannerLeft>
+
+  <publishDate position="right"/>
+  <version position="right"/>
+
+  <body>
+    <menu name="Overview">
+      <item name="Introduction" href="index.html"/>
+      <item name="Goals" href="plugin-info.html"/>
+      <item name="Usage" href="usage.html"/>
+      <item name="FAQ" href="faq.html"/>
+    </menu>
+    
+    <menu name="Examples">
+      <item name="Process Embedded Suite" href="examples/process-embedded.html"/>
+      <item name="Process External Suite" href="examples/process-external.html"/>
+    </menu>
+    
+<!--    <menu ref="reports"/> -->
+  </body>
+<!--
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-classic-skin</artifactId>
+    <version>1.1-SNAPSHOT</version>
+  </skin>
+-->
+</project>

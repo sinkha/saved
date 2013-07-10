@@ -1,0 +1,36 @@
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>Suite Execution Plugin</title>
+    <author email="rleighton@devnet.local">Russ Leighton</author>
+  </properties>
+  
+  <!-- 
+    Note: Date can be any string when not released
+    Action Types:
+      * add : added functionality to the project.
+      * fix : bug fix for the project.
+      * update : updated some part of the project.
+      * remove : removed some functionality from the project.
+      
+     system - id of issue tracking system
+     dev - matches a developer described in developer section of the pom
+     
+   -->
+  <body>
+    <release version="1.1.2">
+      <action dev="rleighto" type="add">Added testSourceRoot property for adding test phase source code path.</action>
+      <action dev="rleighto" type="update">Updated to current execframework release.</action>
+    </release>
+    <release version="1.1.1">
+      <action dev="rleighto" type="update">Fixed some bugs identified by FindBugs report.</action>
+      <action dev="rleighto" type="update">Updated to new commons execframework v 4.25.0</action>
+    </release>
+    <release version="1.1.0">
+      <action dev="kjacobse" type="update">Updated reporting and documentation.</action>
+      <action dev="rleighto" type="add">Can now bind to any lifecycle.</action>
+      <action dev="rleighto" type="add">Suites can now be embedded in plugin execution.</action>
+    </release>
+  </body>
+</document>

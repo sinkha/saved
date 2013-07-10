@@ -1,0 +1,41 @@
+ ------
+Changing the Version package
+ ------
+Karla Jacobsen
+ <kjacobse@cdmtech.com>
+ ------
+ 2010-04-30
+ ------
+
+Changing the Version package
+
+  You can create change the package (and/or path) that your Version class is generated into by setting the 'versionPackage' parameter.
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.atlas.maven</groupId>
+        <artifactId>cdm-version-plugin</artifactId>
+        <version>${project.version}</version>
+        <executions>
+          <execution>
+            <id>generate-as-version</id>
+            <goals>
+              <goal>generate-as-version</goal>
+            </goals>
+            <configuration>
+              <versionPackage>com.cdmtech.version</versionPackage>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
++-----+

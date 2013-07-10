@@ -1,0 +1,111 @@
+<title>Release Notes - $action.getText($project) - $action.getText($version) - Changes XML</title>
+<body>
+<table>
+<tr>
+<td>
+ 
+#foreach ($issueType in $issueTypes)
+#if($issueType.issues.size() > 0)
+<h2>$textUtils.htmlEncode($issueType.name)</h2>
+<ul>
+#set ($count = 0)
+#foreach ($issue in $issueType.issues)
+
+#if ($count == 0)
+#set ($vers = $issue.projectObject.versions)
+#end
+#set ($count = $count + 1)
+#set ($status = $issue.getStatusObject())
+## check for resolved or closed or migrated
+#if ($status.getId() == "5" || $status.getId() == "6" || $status.getId() == "10066")
+<li>[<a href='$!appProps.getString("jira.baseurl")/browse/$issue.key'>$issue.key</a>] -
+ $textUtils.htmlEncode($issue.summary)</li>
+#end
+#end
+</ul>
+#end
+#end
+</td>
+</tr>
+ 
+<tr>
+<td>
+
+<hr width="100%">
+<a name="editarea"><h2>$action.getText('release.notes.edit.copy')</h2></a>
+<p>$action.getText('release.notes.description')<br></p>
+ 
+<textarea rows="40" cols="120">
+#foreach ($verRel in $vers)
+#if ($verRel.name == $version)
+#set ($versObj = $verRel)
+#end
+#end
+<release version="$version" date="$!versObj.releaseDate.toString().substring(0, 10)" description="$!versObj.description">
+#foreach ($issueType in $issueTypes)
+#if($issueType.issues.size() > 0)
+#if($issueType.name == "New Feature")
+#foreach ($issue in $issueType.issues)
+#set ($status = $issue.getStatusObject())
+## check for resolved or closed or migrated
+#if ($status.getId() == "5" || $status.getId() == "6" || $status.getId() == "10066")
+      <action dev="$issue.assigneeId" issue="$issue.key" type="add">$textUtils.htmlEncode($issue.summary)</action>
+#end
+#end#end#end#end
+#foreach ($issueType in $issueTypes)
+#if($issueType.issues.size() > 0)
+#if($issueType.name == "Improvement")
+#foreach ($issue in $issueType.issues)
+#set ($status = $issue.getStatusObject())
+## check for resolved or closed or migrated
+#if ($status.getId() == "5" || $status.getId() == "6" || $status.getId() == "10066")
+      <action dev="$issue.assigneeId" issue="$issue.key" type="update">$textUtils.htmlEncode($issue.summary)</action>
+#end
+#end#end#end#end
+#foreach ($issueType in $issueTypes)
+#if($issueType.issues.size() > 0)
+#if($issueType.name == "Task")
+#foreach ($issue in $issueType.issues)
+#set ($status = $issue.getStatusObject())
+## check for resolved or closed or migrated
+#if ($status.getId() == "5" || $status.getId() == "6" || $status.getId() == "10066")
+      <action dev="$issue.assigneeId" issue="$issue.key" type="update">$textUtils.htmlEncode($issue.summary)</action>
+#end
+#end#end#end#end
+#foreach ($issueType in $issueTypes)
+#if($issueType.issues.size() > 0)
+#foreach ($issue in $issueType.issues)
+#if($issue.isSubTask())
+#set ($status = $issue.getStatusObject())
+## check for resolved or closed or migrated
+#if ($status.getId() == "5" || $status.getId() == "6" || $status.getId() == "10066")
+      <action dev="$issue.assigneeId" issue="$issue.key" type="update">$textUtils.htmlEncode($issue.summary)</action>
+#end
+#end#end#end#end
+#foreach ($issueType in $issueTypes)
+#if($issueType.issues.size() > 0)
+#if($issueType.name == "Bug")
+#foreach ($issue in $issueType.issues)
+#set ($status = $issue.getStatusObject())
+## check for resolved or closed or migrated
+#if ($status.getId() == "5" || $status.getId() == "6" || $status.getId() == "10066")
+      <action dev="$issue.assigneeId" issue="$issue.key" type="fix">$textUtils.htmlEncode($issue.summary)</action>
+#end
+#end#end#end#end
+#foreach ($issueType in $issueTypes)
+#if($issueType.issues.size() > 0)
+#if(($issueType.name != "Bug") && ($issueType.name != "Task") && ($issueType.name != "Improvement") && ($issueType.name != "New Feature"))
+#foreach ($issue in $issueType.issues)
+#if(!$issue.isSubTask())
+#set ($status = $issue.getStatusObject())
+## check for resolved or closed or migrated
+#if ($status.getId() == "5" || $status.getId() == "6" || $status.getId() == "10066")
+      <action dev="$issue.assigneeId" issue="$issue.key" type="update">$textUtils.htmlEncode($issue.summary)</action>
+#end
+#end#end#end#end#end
+</release>
+</textarea>
+</td>
+</tr>
+</table>
+</body>

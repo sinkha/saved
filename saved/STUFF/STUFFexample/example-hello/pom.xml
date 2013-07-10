@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<!--  Testing 1 2 3 -->
+	
+	<parent>
+	  <groupId>com.cdmtech.atlas.example</groupId>
+	  <artifactId>example-parent</artifactId>
+	  <version>1.31-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<name>Example Hello</name>
+	<artifactId>example-hello</artifactId>
+	<packaging>jar</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.atlas.maven</groupId>
+        <artifactId>cdm-version-plugin</artifactId>
+        <version>2.1.1</version>
+        <executions>
+          <execution>
+            <id>generate-java-version</id>
+            <goals>
+              <goal>generate-java-version</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <scmBuildId>${SVN_REVISION}</scmBuildId>
+          <ciBuildId>${BUILD_NUMBER}</ciBuildId>
+        </configuration>
+      </plugin>
+      <!--
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>       
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+          <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+            </manifest>
+            <manifestEntries>
+              <SCM-Revision>${buildNumber}</SCM-Revision>
+              <SCM-Branch>${buildScmBranch}</SCM-Branch>
+              <Timestamp>${timestamp}</Timestamp>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+      -->
+    </plugins>
+  </build>	
+
+	<dependencies>
+		<dependency>
+		  <groupId>urbanophile</groupId>
+		  <artifactId>java-getopt</artifactId>
+		  <version>1.0.9</version>
+		</dependency>
+		<dependency>
+		  <groupId>rhino</groupId>
+		  <artifactId>js</artifactId>
+		  <version>1.7R3pre</version>
+		</dependency>
+    <dependency>
+      <groupId>com.cdmtech.core</groupId>
+      <artifactId>core_version</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+	</dependencies>
+
+</project>

@@ -1,0 +1,32 @@
+CDM Version Plugin
+
+  This plugin is used to generate a Java or ActionScript version class.
+
+* Goals Overview
+
+  The CDM Version Plugin has two goals:
+
+  * {{{./generate-java-version-mojo.html}cdm-version:generate-java-version}} generates the Java version.
+  
+  * {{{./generate-as-version-mojo.html}cdm-version:generate-as-version}} generates the ActionScript version.
+
+* Usage
+
+  General instructions on how to use the cdm-version-plugin can be found on the {{{usage.html}usage page}}. 
+
+  In case you still have questions regarding the plugin's usage, please have a look at the {{{faq.html}FAQ}} and feel
+  free to contact the author.
+
+* Examples
+
+  Simple examples:
+
+  * {{{examples/change-package.html}Change the Version Package}}
+  
+  * {{{examples/sample-as-version.html}Sample of generated ActionScript version class }}
+
+  * {{{examples/sample-java-version.html}Sample of generated Java version class }}
+
+  * {{{examples/using-java-version.html}Example of code invoking the generated Java version class }}
+  
+  * {{{examples/extended-generation.html}Using Extended Generation}}

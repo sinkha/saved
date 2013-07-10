@@ -1,0 +1,29 @@
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>Tapestry Parent Project</title>
+    <author email="kjacobsen@tapestrysolutions.com">Karla Jacobsen</author>
+  </properties>
+  
+  <body>
+    <release version="1.1.0" date="2013-04-30" description="Update Release">
+      <action dev="kjacobse" type="update">Updated plugin versions.</action>
+    </release> 
+    <release version="1.1.0-RC2" date="2012-10-31" description="Update Release">
+      <action dev="kjacobse" type="update">Updated plugin versions.</action>
+    </release> 
+    <release version="1.1.0-RC" date="2012-05-21" description="Update Release">
+      <action dev="kjacobse" type="update">Change Info plugin to produce additional reports.</action>
+    </release> 
+    <release version="1.0.2" date="2012-05-18" description="Update Release">
+      <action dev="kjacobse" type="update">Changes pre-release goal changes:announcement-generate to changes:changes-check</action>
+    </release> 
+    <release version="1.0.1" date="2011-10-28" description="Update Release">
+      <action dev="kjacobse" type="update">Removed Changelog plugins from site plugin to work-around release problem.</action>
+    </release>   
+    <release version="1.0.0" date="2011-10-17" description="Initial release of Parent POM">
+      <action dev="kjacobse" type="update">Initial release of base parent project.</action>
+    </release>   
+  </body>
+</document>

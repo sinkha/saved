@@ -1,0 +1,30 @@
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>CDM Resource Anchor Plugin</title>
+    <author email="kjacobse@cdmtech.com">Karla Jacobsen</author>
+  </properties>
+  
+  <!-- 
+    Note: Date can be any string when not released
+    Action Types:
+      * add : added functionnality to the project.
+      * fix : bug fix for the project.
+      * update : updated some part of the project.
+      * remove : removed some functionnality from the project.
+      
+     system - id of issue tracking system
+     dev - matches a developer described in developer section of the pom
+     
+   -->
+  <body>
+    <release version="1.0.1" date="2010-09-16" description="Initial release">
+      <action dev="kjacobse" type="fix" issue="CDMMVNPLUGINS-5">Extended generation incorrectly replaces spaces and hyphens with underscores in the mapping.</action>
+      <action dev="kjacobse" type="update" issue="CDMMVNPLUGINS-6">Fill in plugin documentation.</action>
+    </release>
+    <release version="1.0.0" date="2010-09-16" description="Initial release">
+      <action dev="kjacobse" type="update">Intial release</action>
+    </release>
+  </body>
+</document>

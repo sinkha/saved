@@ -1,0 +1,4 @@
+Path:             /launch4j
+Url:              svn://alakai.org/eoa/maven/trunk/plugins/launch4j
+Repository Root:  svn://alakai.org/eoa/maven/trunk/plugins
+Revision:         486

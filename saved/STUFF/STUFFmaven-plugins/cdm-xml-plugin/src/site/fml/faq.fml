@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faqs id="FAQ" title="Frequently Asked Questions">
+  <part id="General">
+    <faq id="question">
+      <question>Can I validate against a schema without extracting from a dependency?</question>
+      <answer>
+        <p>
+          Yes. If the schema, and any schemas it references, is in the classpath for the plugin, specifying the correct relative path will result in using the schema discovered by the ClassLoader. If however, that path specified resolves to a valid file on the filesystem, it will assume that all resources referenced by that schema will also be on the filesystem (and won't bother to look in the classpath).
+        </p>
+      </answer>
+    </faq>
+  </part>
+</faqs>

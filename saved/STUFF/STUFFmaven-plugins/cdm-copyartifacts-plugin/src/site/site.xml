@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <bannerLeft>
+    <name>CDM</name>
+    <src>images/cdm_logo.png</src>
+    <href>http://www.cdmtech.com</href>
+  </bannerLeft>
+
+  <publishDate position="right"/>
+  <version position="right"/>
+  
+  <body>
+    <menu name="Overview">
+      <item name="Introduction" href="index.html"/>
+      <item name="Goals" href="plugin-info.html"/>
+      <item name="Usage" href="usage.html"/>
+    </menu>
+    
+    <menu name="Examples">
+      <item name="Copy Artifacts" href="examples/copy-artifacts.html"/>
+    </menu>
+    
+    <menu ref="reports"/>
+  </body>
+<!--
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-classic-skin</artifactId>
+    <version>1.1-SNAPSHOT</version>
+  </skin>
+-->
+</project>

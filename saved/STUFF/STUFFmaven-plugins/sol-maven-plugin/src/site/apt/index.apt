@@ -1,0 +1,41 @@
+SOL Maven Plugin
+
+  This plugin is used to transform data.
+
+* Goals Overview
+
+  The SOL Maven Plugin has several goals:
+
+  * {{{./import-xml-mojo.html}sol-maven:import-xml}} imports beans from xml.
+  
+  * {{{./export-objects-mojo.html}sol-maven:export-objects}} exports beans to xml given query criteria.
+  
+  * {{{./clear-objects-mojo.html}sol-maven:clear-objects}} removes all beans from the BeanManager.
+  
+  * {{{./apply-xslt-mojo.html}sol-maven:apply-xslt}} applys xslt to source xml to produce target artifact(s).
+  
+  * {{{./shp-to-gml-mojo.html}sol-maven:shp-to-gml}} transforms source shapefile(s) into gml artifact(s).
+  
+  * {{{./validate-mojo.html}sol-maven:validate}} validates source xml against a schema.
+  
+  * {{{./inject-xml-mojo.html}sol-maven:inject-xml}} inserts all xml elements under the source document's root node into the target document's root node.
+  
+  * {{{./import-svg-mojo.html}sol-maven:import-svg}} imports Shared Object Model (SOM) ship beans from svg.
+  
+  * {{{./import-vgp-mojo.html}sol-maven:import-vgp}} imports Shared Object Model (SOM) ship beans from vgp.
+  
+  * {{{./export-objects-to-icodes6-ship-mojo.html}sol-maven:export-objects-to-icodes6-ship}} exports Shared Object Model ship beans to icodes6 xml.
+  
+  * {{{./create-component-metadata.html}sol-maven:create-component-metadata}} generates a component metadata xml file.
+  
+  * {{{./create-component-properties.html}sol-maven:create-component-properties}} generates a component properties file.
+  
+  * {{{./initialize-icodes-component-version.html}sol-maven:initialize-icodes-component-version}} initializes the ICODES component version maven property.
+
+* Usage
+
+  General instructions on how to use the sol-maven-plugin can be found on the {{{usage.html}usage page}}. 
+
+  In case you still have questions regarding the plugin's usage, please have a look at the {{{faq.html}FAQ}} and feel
+  free to contact the author.
+

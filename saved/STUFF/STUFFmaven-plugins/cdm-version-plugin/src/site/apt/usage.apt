@@ -1,0 +1,145 @@
+ ------
+Usage
+ ------
+Karla Jacobsen
+ <kjacobse@cdmtech.com>
+ ------
+ 2010-04-30
+ ------
+
+Usage
+
+  This plugin can be used to generate either a Version.java or Version.as class.
+
+* Generating a Java version class
+
+  To generate a Java version class:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.atlas.maven</groupId>
+        <artifactId>cdm-version-plugin</artifactId>
+        <version>2.1.0</version>
+        <executions>
+          <execution>
+            <id>generate-java-version</id>
+            <goals>
+              <goal>generate-java-version</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+  <dependencies>
+    ...
+    <dependency>
+      <groupId>com.cdmtech.core</groupId>
+      <artifactId>core_version</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+  </dependencies>
+</project>
+
++-----+
+
+* Generating an ActionScript version class
+
+  To generate an ActionScript version class:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.atlas.maven</groupId>
+        <artifactId>cdm-version-plugin</artifactId>
+        <version>2.1.0</version>
+        <executions>
+          <execution>
+            <id>generate-as-version</id>
+            <goals>
+              <goal>generate-as-version</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+
+* Using Hudson to provide the scmBuildId and/or ciBuildId
+
+  Here is an example configuration for providing the scmBuildId and ciBuildId. SVN_REVISION and BUILD_NUMBER are Hudson environment variables. You are free to replace them with other values (or combinations of values). 
+  
+  Proper function of this plugin assumes that the build is through a CI tool (in this case Hudson). If building in a local development environment, you may provide values manually in the POM or from the commandline (ex - mvn clean deploy -DBUILD_NUMBER=33).
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.atlas.maven</groupId>
+        <artifactId>cdm-version-plugin</artifactId>
+        <version>2.1.0</version>
+        <executions>
+          <execution>
+            ...
+          </execution>
+        </executions>
+        <configuration>
+          <scmBuildId>${SVN_REVISION}</scmBuildId>
+          <ciBuildId>${BUILD_NUMBER}</ciBuildId>
+        </configuration>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+
+* Using the plugin for project with a X.X.X.X version style.
+
+  Here is an example configuration for a project which uses an extended version (e.g. 6.0.1.0). The first placeholder of this version indicates an external release version.
+  
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.atlas.maven</groupId>
+        <artifactId>cdm-version-plugin</artifactId>
+        <version>2.1.0</version>
+        <executions>
+          <execution>
+            ...
+          </execution>
+        </executions>
+        <configuration>
+          <hasExternalVersion>true</hasExternalVersion>
+        </configuration>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+

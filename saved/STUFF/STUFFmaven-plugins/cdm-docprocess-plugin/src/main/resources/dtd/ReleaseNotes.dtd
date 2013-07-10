@@ -1,0 +1,73 @@
+<!ELEMENT additional ( #PCDATA ) >
+<!ATTLIST additional ref CDATA #REQUIRED >
+
+<!ELEMENT component ( release+, contact ) >
+<!ATTLIST component name NMTOKEN #REQUIRED >
+<!ATTLIST component ref CDATA #IMPLIED >
+
+<!ELEMENT contact ( primary, additional* ) >
+
+<!ELEMENT copyright ( #PCDATA ) >
+<!ATTLIST copyright ref CDATA #IMPLIED >
+
+<!ELEMENT depend ( external | internal )+ >
+
+<!ELEMENT description ( #PCDATA | emphasis | link | list | literal )* >
+
+<!ELEMENT distribution ( #PCDATA | emphasis | link | list | literal )* >
+<!ATTLIST distribution id NMTOKEN #IMPLIED >
+
+<!ELEMENT emphasis ( #PCDATA | emphasis )* >
+<!ATTLIST emphasis style ( bold | italic ) #REQUIRED >
+
+<!ELEMENT external ( #PCDATA | copyright | license )* >
+<!ATTLIST external name NMTOKEN #REQUIRED >
+<!ATTLIST external ref CDATA #REQUIRED >
+<!ATTLIST external version NMTOKEN #REQUIRED >
+
+<!ELEMENT faq ( #PCDATA | emphasis | link | list | literal )* >
+<!ATTLIST faq id NMTOKEN #IMPLIED >
+
+<!ELEMENT installation ( #PCDATA | emphasis | link | list | literal )* >
+
+<!ELEMENT internal ( #PCDATA ) >
+<!ATTLIST internal name NMTOKEN #REQUIRED >
+<!ATTLIST internal ref CDATA #IMPLIED >
+<!ATTLIST internal version NMTOKEN #REQUIRED >
+
+<!ELEMENT item ( #PCDATA | emphasis | link | list | literal )* >
+<!ATTLIST item id NMTOKEN #IMPLIED >
+
+<!ELEMENT license ( #PCDATA ) >
+<!ATTLIST license ref CDATA #REQUIRED >
+
+<!ELEMENT link ( #PCDATA ) >
+<!ATTLIST link ref CDATA #REQUIRED >
+
+<!ELEMENT list ( item+ ) >
+
+<!ELEMENT literal ( #PCDATA ) >
+
+<!ELEMENT log ( #PCDATA | emphasis | link | list | literal )* >
+<!ATTLIST log id NMTOKEN #IMPLIED >
+
+<!ELEMENT primary ( #PCDATA ) >
+<!ATTLIST primary ref CDATA #REQUIRED >
+
+<!ELEMENT release ( log+, depend? ) >
+<!ATTLIST release date NMTOKEN #REQUIRED >
+<!ATTLIST release version NMTOKEN #REQUIRED >
+
+<!ELEMENT releaseNotes ( short, description, requirements?, distribution, installation, usage?, test?, component, faq? ) >
+<!ATTLIST releaseNotes title CDATA #REQUIRED >
+
+<!ELEMENT requirements ( #PCDATA | emphasis | link | list | literal )* >
+<!ATTLIST requirements id NMTOKEN #IMPLIED >
+
+<!ELEMENT short ( #PCDATA ) >
+
+<!ELEMENT test ( #PCDATA | emphasis | link | list | literal )* >
+<!ATTLIST test id NMTOKEN #IMPLIED >
+
+<!ELEMENT usage ( #PCDATA | emphasis | link | list | literal )* >
+<!ATTLIST usage id NMTOKEN #IMPLIED >

@@ -1,0 +1,34 @@
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>CDM Document Processing Plugin</title>
+    <author email="kjacobse@cdmtech.com">Karla Jacobsen</author>
+  </properties>
+  
+  <!-- 
+    Note: Date can be any string when not released
+    Action Types:
+      * add : added functionnality to the project.
+      * fix : bug fix for the project.
+      * update : updated some part of the project.
+      * remove : removed some functionnality from the project.
+      
+     system - id of issue tracking system
+     dev - matches a developer described in developer section of the pom
+     
+   -->
+  <body>
+    <release date="2011-08-04" version="1.0.3">
+      <action dev="rleighto" type="update">Added condition properties for release and properties notes existence (execute respective targets only if source doc exists).</action>
+      <action dev="rleighto" type="update">Added XML source for release and property notes to dist output directory.</action>
+    </release>
+    <release date="2011-03-03" version="1.0.2">
+      <action dev="rleighto" type="update">XMLSchemaToHTML.xsl: Added conditional output for attributes and elements defined/referenced in complex types.</action>
+      <action dev="rleighto" type="update">XMLInstanceToLaTeXInclude.xsl: Improved XML instance document formatting.</action>
+    </release>
+    <release version="1.0.1"  description="Next release">
+      <action dev="kjacobse" type="update">Releasing with unpadded version number.</action>
+    </release>
+  </body>
+</document>

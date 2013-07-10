@@ -1,0 +1,95 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CDM LaTeX style
+%%
+%% the following define the commands provided by this style
+%%
+%% set head rule width
+\newcommand{\headrulewidth}{0.4pt}
+%%
+%% set top header content
+\newcommand{\cdmheader}[1]{\def\cdm@head{#1}}
+%%
+%% set file name
+\newcommand{\cdmfilename}[1]{\def\cdm@file{File: #1}}
+%%
+%% set author name(s)
+\renewcommand{\author}[1]{\gdef\@author{#1}\def\cdm@author{Author: #1}}
+%%
+%% set date string
+\renewcommand{\date}[1]{\gdef\@date{#1}\def\cdm@date{Last Update: #1}}
+%%
+%% set title
+\renewcommand{\title}[1]{\gdef\@title{#1}\def\cdm@title{#1}}
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{verbose,letterpaper,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage{graphics}
+
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+  \pdffalse
+\else
+  \pdfoutput=1
+  \pdftrue
+\fi
+
+\ifpdf
+  \usepackage[pdftex,colorlinks=true,linkcolor=blue,hyperindex=true]{hyperref}
+  \pdfcompresslevel=9
+  \DeclareGraphicsExtensions{.jpg,.pdf,.png}
+  \pdfpagewidth=8.5in
+  \pdfpageheight=11in
+\else
+  \usepackage{hyperref}
+  \DeclareGraphicsExtensions{.jpg,.gif,.eps,.png}
+\fi
+
+\def\ps@cadrc{%
+\ps@plain
+\def\@mkboth{\protect\markboth}%
+\def\@oddhead{\@lodd\cdm@header\@rodd}%
+\def\@evenhead{\@lodd\cdm@header\@rodd}%
+\def\cdm@head{Collaborative Agent Design Research Center, Cal Poly, San Luis Obispo, California 93407}
+\addtolength{\headheight}{\baselineskip}
+}
+
+\def\ps@cdm{%
+\ps@plain
+\def\@mkboth{\protect\markboth}%
+\def\@oddhead{\@lodd\cdm@header\@rodd}%
+\def\@evenhead{\@lodd\cdm@header\@rodd}%
+\def\cdm@head{CDM Technologies, Inc., 2975 McMillan Ave., Suite 272, San Luis Obispo, California 93401}
+\addtolength{\headheight}{\baselineskip}
+}
+
+\def\ps@cdmtitle{%
+\ps@plain
+\def\@mkboth{\protect\markboth}%
+\def\@oddhead{\@lodd\cdm@header\@rodd}%
+\def\@evenhead{\@lodd\cdm@header\@rodd}%
+\def\cdm@head{CDM Technologies, Inc.: \cdm@title}
+\addtolength{\headheight}{\baselineskip}
+}
+
+\def\@lodd{\if@reversemargin\hss\else\relax\fi}
+\def\@rodd{\if@reversemargin\relax\else\hss\fi}
+\def\cdm@file{}
+\def\cdm@author{}
+\def\cdm@date{}
+\def\cdm@title{}
+
+\def\cdm@header{%
+\hbox to\textwidth{\vbox{
+  \hbox{\parbox[b]{\textwidth}{\centering{\cdm@head}\strut}}\headrule
+  \hbox{\rlap{
+     \parbox[t]{\textwidth}{\raggedright{\cdm@file}\strut}}\hfill
+     \parbox[t]{\textwidth}{\centering{\cdm@author}\strut}\hfill\llap{
+     \parbox[t]{\textwidth}{\raggedleft{\cdm@date}\strut}}}
+  }
+}}
+
+\def\headrule{{\hrule\@height\headrulewidth\@width\textwidth}}

@@ -1,0 +1,46 @@
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>CDM Help System URL Anchor Generator Plugin</title>
+    <author email="kjacobse@cdmtech.com">Karla Jacobsen</author>
+  </properties>
+  
+  <!-- 
+    Note: Date can be any string when not released
+    Action Types:
+      * add : added functionality to the project.
+      * fix : bug fix for the project.
+      * update : updated some part of the project.
+      * remove : removed some functionality from the project.
+      
+     system - id of issue tracking system
+     dev - matches a developer described in developer section of the pom
+     
+   -->
+  <body>
+    <release version="1.3.3" date="2011-04-15" description="Bug Fix release">
+      <action dev="kjacobse" type="update">Code refactor.</action>
+      <action dev="kjacobse" type="update">Fixed NullPointerException caused by parsing problem.</action>
+    </release>
+    <release version="1.3.2" date="2011-03-16" description="Bug Fix release">
+      <action dev="kjacobse" type="update">Fixed problem with duplicate entries appearing in Index.</action>
+    </release>
+    <release version="1.3.1" date="2011-03-16" description="Bug Fix release">
+      <action dev="kjacobse" type="update">Changed goal so that the index transform does not fail as quietly and errors can be more easily identified.</action>
+      <action dev="kjacobse" type="update">Fixed file parsing so that the index transform goal does not required empty spaces after each grouping in the index.</action>
+    </release>
+    <release version="1.3.0" date="2011-03-15" description="Minor release">
+      <action dev="kjacobse" type="update">Added new goal to support transforming content pages to be used by FarHTML tool.</action>
+    </release>
+    <release version="1.2.0" date="2011-01-26" description="Minor release">
+      <action dev="kjacobse" type="update">Added support for including redirect values in the linked URLs.</action>
+    </release>
+    <release version="1.1.0" date="2010-09-16" description="Minor release">
+      <action dev="kjacobse" type="update">Property files now require configuration and do not default to help_url.properties</action>
+    </release>
+    <release version="1.0.0" date="2010-09-16" description="Initial release">
+      <action dev="kjacobse" type="update">Intial release</action>
+    </release>
+  </body>
+</document>

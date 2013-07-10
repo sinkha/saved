@@ -1,0 +1,59 @@
+ ------
+ Process Embedded Suite
+ ------
+ Russell Leighton
+ <rleighto@cdmtech.com>
+ ------
+ 2010-12-22
+ ------
+
+Process Embedded Suite
+
+  Suite execution cases may be embedded directly in the project POM suite-execution-plugin configuration. Execution cases may be defined in an enclosing \<suite\> element contained in the plugin \<configuration\> element for specific executions. It is recommended that if the execution suite is more complex than a single simple case that the suite be defined in an external file (refer to {{{./process-external.html}Process External Suite}} for an example). For more information on the execution suite schema refer to the {{{../doc/xsd/Suite.html}suite schema documentation}}.
+
+  The following example illustrates execution of a Java class to generate code from a model XMI file. Note that the execution of the Java class occurs within the Maven Java VM using the plugin classloader. All plugin dependencies are included in the classloader resource path, hence, the requirement to include the dependency artifact that contains the Java class required. Also note that this example shows use of the \<sourceRoot\> element to specify the source location for the generated code so that the compile phase will include the resulting generated code.
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.atlas.maven</groupId>
+        <artifactId>suite-execution-plugin</artifactId>
+        <version>1.1.1</version>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>process</goal>
+            </goals>
+            <configuration>
+              <suite>
+                <case id="interface">
+                  <command>
+                    <class>com.cdmtech.core.tool.uml.java.InterfaceProducer</class>
+                    <option id="d" path=".">src</option>
+                    <arg path=".">exampleModel.xmi</arg>
+                  </command>
+                </case>
+              </suite>
+              <sourceRoot>${project.build.directory}/src</sourceRoot>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.tapestrysolutions.tirac</groupId>
+            <artifactId>tirac-model-java-core</artifactId>
+            <version>2.0.0</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
++-----+

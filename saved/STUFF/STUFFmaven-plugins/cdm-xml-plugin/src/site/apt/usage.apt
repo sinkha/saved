@@ -1,0 +1,92 @@
+ ------
+Usage
+ ------
+Chris Leighton
+ <csleight@cdmtech.com>
+ ------
+ 2010-12-13
+ ------
+
+Usage
+
+  This plugin is used to process, transform and validate XML.
+
+* Applying XSLT
+
+  To apply an xslt stylesheet transformation to an xml document:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.atlas.maven</groupId>
+        <artifactId>cdm-xml-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>apply-xslt</id>
+            <goals>
+              <goal>apply-xslt</goal>
+            </goals>
+            <configuration>
+              <transformationSets>
+                <transformationSet>
+                  <includes>
+                    <include>*.xml</include>
+                  </includes>
+                  <includesDirectory>${project.build.directory}/source-xml</includesDirectory>
+                  <stylesheet>path/to/stylesheet.xslt</stylesheet>
+                  <outputDirectory>${project.build.directory}/target-xml</outputDirectory>
+                  <outputFilename>${project.artifactId}.xml</outputFilename>
+                </transformationSet>
+              </transformationSets>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+
++-----+
+
+* Validating XML against a schema
+
+  To validate xml document(s) against a schema:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>com.cdmtech.atlas.maven</groupId>
+        <artifactId>cdm-xml-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>validate-xml</id>
+            <goals>
+              <goal>validate</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>*.xml</include>
+              </includes>
+              <includesDirectory>${project.build.directory}/xml</includesDirectory>
+              <schema>path/to/schema.xsd</schema>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.m2e.core.lifecycleMappingMetadataSource">
+   </extension>
+   <extension
+         point="org.eclipse.m2e.core.lifecycleMappings">
+      <lifecycleMapping
+            class="com.cdmtech.m2e.flex.FlexLifecycleMapping"
+            id="configure-flex-project-lifecycle">
+      </lifecycleMapping>
+   </extension>
+   <extension
+         id="com.cdmtech.maven.flex.markers.problem"
+         name="Maven Flex Configurator Problem"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <persistent value="true"/>
+   </extension>
+   <extension
+         point="org.eclipse.m2e.core.projectConfigurators">
+      <configurator
+            class="com.cdmtech.m2e.flex.FlexmojosCompileConfigurator"
+            id="flexmojos-compile-configurator">
+      </configurator>
+   </extension>
+
+</plugin>

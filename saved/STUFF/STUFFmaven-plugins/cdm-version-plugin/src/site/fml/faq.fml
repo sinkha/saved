@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faqs id="FAQ" title="Frequently Asked Questions">
+  <part id="General">
+    <faq id="question">
+      <question>Can I change the package of the generated class?</question>
+      <answer>
+        <p>
+          Yes. Refer to the 'versionDirectory' parameter in the Goals documentation.
+        </p>
+      </answer>
+    </faq>
+  </part>
+</faqs>

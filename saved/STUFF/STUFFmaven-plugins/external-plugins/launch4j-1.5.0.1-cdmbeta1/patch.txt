@@ -1,0 +1,168 @@
+### Eclipse Workspace Patch 1.0
+#P launch4j
+Index: plugin/src/main/java/com/akathist/maven/plugins/launch4j/Jre.java
+===================================================================
+--- plugin/src/main/java/com/akathist/maven/plugins/launch4j/Jre.java	(revision 486)
++++ plugin/src/main/java/com/akathist/maven/plugins/launch4j/Jre.java	(working copy)
+@@ -73,6 +73,15 @@
+ 	 * Sets java's maximum heap size in MB, like the -Xmx flag.
+ 	 */
+ 	int maxHeapSize;
++	
++	/**
++	 * Optional, defaults to preferJre; Allows you to specify a 
++	 * preference for a public JRE or a private JDK runtime. Valid 
++	 * values are: 
++	 * jreOnly, preferJre, preferJdk, jdkOnly
++	 *
++	 */
++	String jdkPreference;
+ 
+ 	/**
+ 	 * Use this to pass arbitrary options to the java/javaw program.
+@@ -95,6 +104,8 @@
+ 		ret.setDontUsePrivateJres(dontUsePrivateJres);
+ 		ret.setInitialHeapSize(initialHeapSize);
+ 		ret.setMaxHeapSize(maxHeapSize);
++		if(jdkPreference!=null)
++			ret.setJdkPreference(jdkPreference);
+ 		ret.setOptions(opts);
+ 
+ 		return ret;
+Index: pom.xml
+===================================================================
+--- pom.xml	(revision 486)
++++ pom.xml	(working copy)
+@@ -8,7 +8,7 @@
+   <modelVersion>4.0.0</modelVersion>
+   <artifactId>launch4j-parent</artifactId>
+   <packaging>pom</packaging>
+-  <version>SNAPSHOT</version>
++  <version>1.5.0.1-cdmbeta1</version>
+   <name>launch4j-parent</name>
+   <scm>
+     <connection>scm:svn:svn://alakai.org/eoa/maven/trunk/plugins/launch4j</connection>
+@@ -28,4 +28,17 @@
+   <modules>
+     <module>plugin</module>
+   </modules>
++  
++	<distributionManagement>
++		<repository>
++			<id>releases</id>
++			<name>CDM Release Repository </name>
++			<url>https://hudson149.cdm.cdmtech.com/nexus/content/repositories/releases</url>
++		</repository>
++		<snapshotRepository>
++			<id>snapshots</id>
++			<name>CDM Snapshot Repository</name>
++			<url>https://hudson149.cdm.cdmtech.com/nexus/content/repositories/snapshots</url>
++		</snapshotRepository>
++	</distributionManagement>
+ </project>
+Index: plugin/src/main/java/com/akathist/maven/plugins/launch4j/ClassPath.java
+===================================================================
+--- plugin/src/main/java/com/akathist/maven/plugins/launch4j/ClassPath.java	(revision 486)
++++ plugin/src/main/java/com/akathist/maven/plugins/launch4j/ClassPath.java	(working copy)
+@@ -41,6 +41,16 @@
+ 	 * @parameter default-value=true
+ 	 */
+ 	boolean addDependencies = true;
++	
++	/**
++	 * When set to true, the plugin will expand the name of snapshot dependencies to include the full,
++	 * explicit snapshot version. In other words, a dependency such as my-example-1.0.0-SNAPSHOT.jar will
++	 * be expanded to something like my-example-1.0.0-20100414.174620-2.jar. When this option is turned off
++	 * (expandSnapshots=false), the original name of an artifact will be preserved (my-example-1.0.0-SNAPSHOT.jar).
++	 *
++	 * @parameter default-value=true
++	 */
++	boolean expandSnapshots = true;
+ 
+ 	/**
+ 	 * If you want maven to build the classpath from dependencies, you can optionally set the jarLocation,
+@@ -87,6 +97,7 @@
+ 			if (jarLocation == null) jarLocation = "";
+ 			else if ( ! jarLocation.endsWith("/")) jarLocation += "/";
+ 
++			log.info("Adding dependencies to classpath list...");
+             for (Artifact dep : dependencies)
+             {
+                 if (Artifact.SCOPE_COMPILE.equals(dep.getScope()) ||
+@@ -97,7 +108,7 @@
+                     // ********** patch submitted by Mark Heinze (jira at software57 dot com)
+                     // Hack to change SNAPSHOT to version number (LAUNCHPLUGIN-2)
+                     // capture any occurrences of digits or periods, greedily
+-                    if (depFilename.indexOf("SNAPSHOT") > 0)
++                    if (expandSnapshots && depFilename.indexOf("SNAPSHOT") > 0)
+                     {
+                         depFilename = snapshotArtifactFilename(dep, depFilename);
+                         final String originalName = dep.getFile().getName();
+@@ -106,6 +117,7 @@
+                         }
+                     }
+                     // ********** end patch *********************************************
++                    log.info("Adding jar to list: " + jarLocation + depFilename);
+                     cp.add(jarLocation + depFilename);
+                 }
+             }
+Index: plugin/pom.xml
+===================================================================
+--- plugin/pom.xml	(revision 486)
++++ plugin/pom.xml	(working copy)
+@@ -3,13 +3,13 @@
+   <parent>
+     <groupId>org.bluestemsoftware.open.maven.plugin</groupId>
+     <artifactId>launch4j-parent</artifactId>
+-    <version>SNAPSHOT</version>
++    <version>1.5.0.1-cdmbeta1</version>
+   </parent>
+   <modelVersion>4.0.0</modelVersion>
+   <artifactId>launch4j-plugin</artifactId>
+   <packaging>maven-plugin</packaging>
+   <name>launch4j-plugin</name>
+-  <version>SNAPSHOT</version>
++  <version>1.5.0.1-cdmbeta1</version>
+   <description>Creates a launch4j windows installer (*.exe) from an executable jar file.</description>
+   <scm>
+     <connection>scm:svn:svn://alakai.org/eoa/maven/trunk/plugins/launch4j/plugin</connection>
+Index: plugin/src/main/java/com/akathist/maven/plugins/launch4j/Launch4jMojo.java
+===================================================================
+--- plugin/src/main/java/com/akathist/maven/plugins/launch4j/Launch4jMojo.java	(revision 486)
++++ plugin/src/main/java/com/akathist/maven/plugins/launch4j/Launch4jMojo.java	(working copy)
+@@ -137,6 +137,20 @@
+ 	 * @required
+ 	 */
+ 	private String headerType;
++	
++	/**
++	 * Specify the classifier to use when attaching the exe as an artifact.
++	 *
++	 * @parameter
++	 */
++	private String classifier;
++	
++	/**
++	 * Whether to attach the generated exe as an artifact. 
++	 *
++	 * @parameter default-value=true
++	 */
++	private boolean attachArtifact;
+ 
+ 	/**
+ 	 * The name of the executable you want launch4j to produce.
+@@ -324,7 +338,13 @@
+ 
+ 		try {
+ 			b.build();
+-            projectHelper.attachArtifact( project, "exe", outfile );
++			if(attachArtifact) {
++				if(classifier==null)
++					projectHelper.attachArtifact( project, "exe", outfile );
++				else
++					projectHelper.attachArtifact( project, "exe", classifier, outfile );				
++			}
++            
+ 		} catch (BuilderException e) {
+ 			getLog().error(e);
+ 			throw new MojoExecutionException("Failed to build the executable; please verify your configuration.", e);
