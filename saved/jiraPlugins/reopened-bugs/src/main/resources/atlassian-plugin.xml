@@ -1,0 +1,71 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    </plugin-info>
+
+	<jql-function key="reopenedBugsSearchJQL" name="Reopened Bugs Search"
+	class="com.tapestrysolutions.jira.plugins.report.reopenedbugs.ReopenedBugsSearch">
+		<fname>reopenedBugsSearch</fname>
+		<description>Provides a JQL function to search for reopened bugs.</description>
+		<list>true</list>
+	</jql-function>
+        
+    <report key="reopenedbugs-report" name="Reopened Bugs Report"
+    	class="com.tapestrysolutions.jira.plugins.report.reopenedbugs.ReopenedBugsReport" >
+    	<description key="report.reopenedbugs.description" />
+    	
+    	<!-- the label of this report which the user will use to select it -->
+    	<label key="report.reopenedbugs.label" />
+    	
+    	<!-- the 'view' template is used to render the HTML result -->
+    	<resource type="velocity" name="view"
+    		location="templates/reopenedbugs/reopenedbugs-report.vm" />
+    		
+    	<!--
+    		The 'excel' template is used to render an Excel result.
+    		The 'Excel view' of the report will only be visible if
+    		this template exists for the plugin-module
+    	-->
+    	<resource type="velocity" name="excel"
+    		location="templates/reopenedbugs/excel-reopenedbugs-report.vm" />
+    	
+    	<!-- this is a .properties file containing the i18n keys for this report -->
+    	<resource type="i18n" name="i18n" location="com.tapestrysolutions.jira.plugins.report.reopenedbugs.reopenedbugs_report" />
+
+		<!-- the properties of this report which the user must select before running it -->
+		<properties>
+			<property>
+				<key>projectId</key>
+				<name>report.reopenedbugs.project.name</name>				
+				<description>report.reopenedbugs.project.description</description>
+				
+				<!-- valid types are string, text, long, select, date -->
+				<type>multiselect</type>
+								
+				<!-- the values generator is a class which will generate the values for this select list -->
+				<values class="com.tapestrysolutions.jira.plugins.report.reopenedbugs.ProjectValuesGenerator" />								           
+			</property>
+			
+			<property>			
+				<key>versionId</key>
+				<name>report.reopenedbugs.cycle.name</name>				
+				<description>report.reopenedbugs.cycle.description</description>				
+				<type>multiselect</type>												
+				<values class="com.tapestrysolutions.jira.plugins.report.reopenedbugs.CycleValuesGenerator" />				
+				<cascade-from>projectId</cascade-from>											        
+			</property>
+			
+			<property>			
+				<key>personId</key>
+				<name>report.reopenedbugs.person.name</name>				
+				<description>report.reopenedbugs.person.description</description>
+				<type>string</type>
+				<!-- values class="com.tapestrysolutions.jira.plugins.report.reopenedbugs.ProjectPersonValuesGenerator" />
+				<cascade-from>projectId</cascade-from -->				
+			</property>							
+		</properties>
+		    	
+    </report>        
+</atlassian-plugin>

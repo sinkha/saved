@@ -1,0 +1,21 @@
+<project name="Jad">
+   
+	<property name="output.repo" value="${build.dir}/target/jad-update-site"/>
+	<property name="extra.dir" value="${build.dir}/extras"/>
+	
+   <property name="temp.repo" value="file:/${build.dir}/temp" />
+   
+   <eclipse.publish.featuresAndBundles repository="${temp.repo}">
+      <bundles dir="${extra.dir}/plugins" />
+   </eclipse.publish.featuresAndBundles>
+   
+   <p2.mirror destination="${output.repo}">
+      
+      <source>
+         <repository location="http://webobjects.mdimension.com/jadclipse/3.6/" />
+      </source>
+      
+
+      
+    </p2.mirror>
+ </project>

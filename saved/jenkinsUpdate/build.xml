@@ -1,0 +1,52 @@
+<project default="gather-plugins">
+	
+	<target name="gather-plugins">
+		<delete dir="plugins"/>
+		<delete dir="war"/>
+		
+		<mkdir dir="plugins"/>
+		<mkdir dir="plugins/winson"/>
+		<mkdir dir="plugins/roberts"/>
+		<mkdir dir="war"/>
+			
+		<get src="http://updates.jenkins-ci.org/latest/m2release.hpi" dest="plugins/m2release.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/analysis-core.hpi" dest="plugins/analysis-core.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/checkstyle.hpi" dest="plugins/checkstyle.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/findbugs.hpi" dest="plugins/findbugs.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/warnings.hpi" dest="plugins/warnings.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/dependencyanalyzer.hpi" dest="plugins/dependencyanalyzer.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/ssh-slaves.hpi" dest="plugins/ssh-slaves.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/email-ext.hpi" dest="plugins/email-ext.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/pmd.hpi" dest="plugins/pmd.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/analysis-collector.hpi" dest="plugins/analysis-collector.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/maven-info.hpi" dest="plugins/maven-info.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/backup.hpi" dest="plugins/backup.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/subversion.hpi" dest="plugins/subversion.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/thinBackup.hpi" dest="plugins/thinBackup.hpi"/>
+		
+		<get src="http://updates.jenkins-ci.org/latest/dashboard-view.hpi" dest="plugins/winson/dashboard-view.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/dry.hpi" dest="plugins/winson/dry.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/tasks.hpi" dest="plugins/winson/tasks.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/cppcheck.hpi" dest="plugins/winson/cppcheck.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/deploy.hpi" dest="plugins/winson/deploy.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/m2-extra-steps.hpi" dest="plugins/winson/m2-extra-steps.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/msbuild.hpi" dest="plugins/winson/msbuild.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/parameterized-trigger.hpi" dest="plugins/winson/parameterized-trigger.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/python.hpi" dest="plugins/winson/python.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/violations.hpi" dest="plugins/winson/violations.hpi"/>
+		
+		<get src="http://updates.jenkins-ci.org/latest/active-directory.hpi" dest="plugins/winson/active-directory.hpi"/>
+		
+		<get src="http://updates.jenkins-ci.org/latest/extra-columns.hpi" dest="plugins/roberts/extra-columns.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/global-build-stats.hpi" dest="plugins/roberts/global-build-stats.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/next-executions.hpi" dest="plugins/roberts/next-executions.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/progress-bar-column-plugin.hpi" dest="plugins/roberts/progress-bar-column-plugin.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/build-metrics.hpi" dest="plugins/roberts/build-metrics.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/build-pipeline-plugin.hpi" dest="plugins/roberts/build-pipeline-plugin.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/console-column-plugin.hpi" dest="plugins/roberts/console-column-plugin.hpi"/>
+		<get src="http://updates.jenkins-ci.org/latest/perforce.hpi" dest="plugins/roberts/perforce.hpi"/>
+
+		<!--<get src="http://mirrors.jenkins-ci.org/war-stable/1.466.1/jenkins.war" dest="war/hudson.war"/>-->
+		<get src="http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war" dest="war/hudson.war"/>
+	</target>
+</project>

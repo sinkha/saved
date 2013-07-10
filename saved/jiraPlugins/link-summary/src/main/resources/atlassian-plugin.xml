@@ -1,0 +1,31 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    </plugin-info>
+    
+    <resource type="download" name="link-summary-thumbnail.png" location="images/link-summary-thumbnail.png"/>
+    
+    <gadget name="Link Summary (Requirement to Test Case)" key="link-summary-rec-tc" location="link-summary-rec-tc.xml"/>
+    
+    <gadget name="Link Summary (Requirement to Task)" key="link-summary-rec-task" location="link-summary-rec-task.xml"/>
+    
+    <gadget name="Link Summary" key="link-summary" location="link-summary.xml"/>
+    
+    <rest name="Link Summary Service" key="gadget-rest-resources" path="/link-summary-service" version="1.0"/>
+	
+	<jql-function key="linkSummaryProjectSearchJQL" name="Link Summary Project Search"
+	class="com.tapestrysolutions.jira.plugins.gadgets.LinkSummaryProjectSearch">
+		<fname>linkSummaryProjectSearch</fname>
+		<description>Provides a JQL function to compare issue links by type.</description>
+		<list>true</list>
+	</jql-function>
+	
+	<jql-function key="linkSummaryFilterSearchJQL" name="Link Summary Filter Search"
+	class="com.tapestrysolutions.jira.plugins.gadgets.LinkSummaryFilterSearch">
+		<fname>linkSummaryFilterSearch</fname>
+		<description>Provides a JQL function to compare issue links by type.</description>
+		<list>true</list>
+	</jql-function>
+</atlassian-plugin>

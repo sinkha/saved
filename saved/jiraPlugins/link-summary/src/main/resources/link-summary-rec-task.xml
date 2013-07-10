@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs title="Requirement to Task or Sub-task (includes Task/s Link Completed) Link Summary"
+                 directory_title="Requirement to Task Link Summary"
+                 description="Shows requirement to task link statistics"
+                 author="Tapestry Solutions"
+                 thumbnail='#staticResourceUrl("com.tapestrysolutions.jira.plugins.gadgets.link-summary:link-summary-rec-task", "link-summary-thumbnail.png")'
+                 screenshot='#staticResourceUrl("com.tapestrysolutions.jira.plugins.gadgets.link-summary:link-summary-rec-task", "link-summary-thumbnail.png")'>
+        <Require feature="dynamic-height"/>
+        <Require feature="oauthpopup"/>
+        <Require feature="setprefs"/>
+        <Require feature="settitle"/>
+        <Require feature="views"/>
+        <Optional feature="atlassian.util"/>
+        <Optional feature="gadget-directory">
+        	<Param name="categories">
+        		JIRA
+        	</Param>
+        </Optional>
+        #oauth
+        #supportedLocales("gadget.common")
+    </ModulePrefs>
+    <UserPref name="isConfigured" datatype="hidden" default_value="false"/>
+    <UserPref name="firstTime" datatype="hidden" default_value="true"/>
+    <UserPref name="version" datatype="hidden"/>
+    <UserPref name="searchId" datatype="hidden"/>
+    <UserPref name="yField" datatype="hidden"/>
+    <UserPref name="sortBy" datatype="hidden"/>
+    <UserPref name="sortDirection" datatype="hidden"/>
+    <UserPref name="maxRows" datatype="hidden" default_value="10"/>
+    <UserPref name="enforceMax" datatype="hidden" default_value="true"/>
+    
+    <Content type="html">
+    <![CDATA[
+        #requireResource("com.atlassian.jira.gadgets:jira-global")
+        #includeResources()
+ 		
+ 		<style type="text/css">
+ 			.totalRow {
+ 				text-align: left;
+ 				border-top: double;
+ 			}
+ 			.topHeaders {
+ 				background-color: LightGrey;
+ 			}
+ 			#totalUniqueIssues {
+ 				text-align: left;
+ 			}
+ 		</style>
+ 		
+        <script type="text/javascript">
+            (function ()
+            {
+ 
+                var gadget = AJS.Gadget({
+                    baseUrl: "__ATLASSIAN_BASE_URL__",
+                    useOauth: "/rest/gadget/1.0/currentUser",
+                    config: {
+                        descriptor: function(args)
+                        {
+ 
+                            var gadget = this;
+                            gadgets.window.setTitle("Requirement to Task Link Summary Configuration");
+                            //var projectPicker = AJS.gadget.fields.projectPicker(gadget, "projectId", args.projectOptions);
+                            
+                            var filterOptions = [];
+                            
+                            if (Array.isArray(args.projectOptions.options)) {
+                            	for (var i = 0; i < args.projectOptions.options.length; ++i) {
+                            		
+                            		filterOptions.push({
+                            			id: i+"_id",
+                            			label: args.projectOptions.options[i].label + " (Project)",
+                            			value: args.projectOptions.options[i].label + "_p"
+                            		});
+                            		
+                            	}
+                            }
+                            if (Array.isArray(args.filterOptions.options)) {
+                            	for (var i = 0; i < args.filterOptions.options.length; ++i) {
+                            		
+                            		filterOptions.push({
+                            			id: i+"_2_id",
+                            			label: args.filterOptions.options[i].label + " (Filter)",
+                            			value: args.filterOptions.options[i].label + "_f"
+                            		});
+                            	}
+                            }
+ 
+                            return {
+ 
+                                theme : function()
+                                {
+                                    if (gadgets.window.getViewportDimensions().width < 450)
+                                    {
+                                        return "gdt top-label";
+                                    }
+                                    else
+                                    {
+                                        return "gdt";
+                                    }
+                                }(),
+                                fields: [
+                                    //projectPicker,
+                                    {
+                                    	id: "test-field",
+                                    	userpref: "searchId",
+                                    	label: "Project or Filter",
+                                    	description: "The project of filter that includes the issues to be used in the summary.",
+                                    	type: "select",
+                                    	selected: gadget.getPref("searchId"),
+                                    	options: filterOptions
+                                    },
+                                    {
+                                    	id: "y-field",
+                                    	userpref: "yField",
+                                    	label: "Y-Field",
+                                    	description: "How you want your summary grouped.",
+                                    	type: "select",
+                                    	selected: gadget.getPref("yField"),
+                                    	options: [
+                                    		{
+                                    			id: "component",
+                                    			label: "Component",
+                                    			value: "component"
+                                    		},
+                                    		{
+                                    			id: "assignee",
+                                    			label: "Assignee",
+                                    			value: "assignee"
+                                    		},
+                                    		{
+                                    			id: "fixVersion",
+                                    			label: "Fix Version",
+                                    			value: "fixVersion"
+                                    		},
+                                    		{
+                                    			id: "resolution",
+                                    			label: "Resolution",
+                                    			value: "resolution"
+                                    		},
+                                    		{
+                                    			id: "status",
+                                    			label: "Status",
+                                    			value: "status"
+                                    		}
+                                    	]
+                                    },
+                                    {
+                                    	id: "sort-by",
+                                    	userpref: "sortBy",
+                                    	label: "Sort By",
+                                    	description: "How you would like the list sorted.",
+                                    	type: "select",
+                                    	selected: gadget.getPref("sortBy"),
+                                    	options: [
+                                    		{
+                                    			id: "natural",
+                                    			label: "Natural",
+                                    			value: "natural"
+                                    		},
+                                    		{
+                                    			id: "rowTotals",
+                                    			label: "Row Totals",
+                                    			value: "rowTotals"
+                                    		}
+                                    	]
+                                    },
+                                    {
+                                    	id: "sort-direction",
+                                    	userpref: "sortDirection",
+                                    	label: "Sort Direction",
+                                    	description: "What direction the sorting goes.",
+                                    	type: "select",
+                                    	selected: gadget.getPref("sortDirection"),
+                                    	options: [
+                                    		{
+                                    			id: "ascending",
+                                    			label: "Ascending",
+                                    			value: "ascending"
+                                    		},
+                                    		{
+                                    			id: "descending",
+                                    			label: "Descending",
+                                    			value: "descending"
+                                    		}
+                                    	]
+                                    },
+                                    {
+                                    	id: "maximumRows",
+                                    	userpref: "maxRows",
+                                    	label: "Maximum Rows",
+                                    	description: "How many rows will be displayed when 'Show All' is disabled.",
+                                    	type: "text",
+                                    	value: gadget.getPref("maxRows")
+                                    },
+                                    {
+                                    	userpref: "version",
+                                    	type: "hidden",
+                                    	value: "1.1"
+                                    },
+                                    AJS.gadget.fields.nowConfigured()
+                                ]
+                            };
+                        },
+                        args: function()
+                        {
+                            return [
+                                {
+                                    key: "projectOptions",
+                                    ajaxOptions: { 
+                                    	url: "/rest/gadget/1.0/filtersAndProjects",
+                                    	data: {
+                                    		showFilters: "false"
+                                    	}
+                                    }
+ 
+                                },
+                                {
+                                	key: "filterOptions",
+                                	ajaxOptions: {
+                                		url: "/rest/gadget/1.0/filtersAndProjects",
+                                		data: {
+                                			showProjects: "false"
+                                		}
+                                	}
+                                }
+                            ];
+                        }
+                    },
+                    view: {
+                    	enableReload: true,
+                    	onResizeReload: true,
+                    	onResizeAdjustHeight: false,
+                    	template: function (args) {
+                    		var gadget = this;
+                    		
+                    		if (gadget.getPref("version") != "1.1") {
+                    			gadget.savePref("isConfigured", "false");
+                    			gadget.showConfig();
+                    		}
+                    		
+                    		
+                    		var tableSummary = args.linksumm;
+                    		var searchId = this.getPref("searchId");
+                    		searchId = searchId.substr(0, searchId.length - 2);
+                    		
+                    		gadgets.window.setTitle(searchId + " (Requirement linking to Task)");
+                    		
+                    		var maxRows = parseInt(gadget.getPref("maxRows"));
+                    		
+                    		if (isNaN(maxRows)) {
+                    			maxRows = 10;
+                    			gadget.savePref("maxRows", "10");
+                    		}
+                    		
+                    		if (gadget.getPref("enforceMax") == "false") {
+                    			maxRows = 9999;
+                    		}
+                    		
+                    		var cellContentsGen = function (count, searchStr) {
+                    			if (count == 0) {
+                    				return "0";
+                    			}
+                    			
+                    			var out = "__ATLASSIAN_BASE_URL__/secure/IssueNavigator.jspa?reset=true&mode=hide&jqlQuery=" + searchStr;
+                    			
+                    			return AJS.$("<a/>").attr("href", out).append(count);
+                    		}
+                    		
+                    		var rowCount = 0;
+                    		
+                    		var yName = "";
+                    		if (gadget.getPref("yField") == "assignee") {
+                    			yName = "Assignee";
+                    		}
+                    		else if (gadget.getPref("yField") == "fixVersion") {
+                    			yName = "Fix Version";
+                    		}
+                    		else if (gadget.getPref("yField") == "component") {
+                    			yName = "Component";
+                    		}
+                    		
+                    		if (tableSummary.rows != null && tableSummary.rows.length > 0) {
+                    			var table = AJS.$("<table/>").attr("border", "1").attr("cellpadding", "5").attr("cellspacing", "5").attr("width", "100%");
+                    			table.append(AJS.$("<tr/>").append(AJS.$("<th/>").attr("rowspan", "2").append(yName).addClass("topHeaders"),
+                    				AJS.$("<th/>").attr("colspan", "3").append("Requirement to Task").addClass("topHeaders")));
+                    			table.append(AJS.$("<tr/>").append(AJS.$("<th/>").append("Linked").addClass("topHeaders"), AJS.$("<th/>").append("Not Linked").addClass("topHeaders"), AJS.$("<th/>").append("Total").addClass("topHeaders")));
+                    			
+                    			for (var i = 0; i < tableSummary.rows.length && rowCount < maxRows; ++i) {
+                    				var row = tableSummary.rows[i];
+                    				table.append(AJS.$("<tr/>").append(AJS.$("<td/>").append(row.name), AJS.$("<td/>").append(cellContentsGen(row.linkedCount, row.linkJql)), AJS.$("<td/>").append(cellContentsGen(row.notLinkedCount, row.notLinkJql)), AJS.$("<td/>").append(row.linkedCount + row.notLinkedCount)));
+                    				++rowCount;
+                    			}
+                    			
+                    			table.append(AJS.$("<tr/>").append(AJS.$("<th/>").append("Total Unique Issues:").attr("id", "totalUniqueIssues"), AJS.$("<th/>").append(cellContentsGen(tableSummary.totalLinked, tableSummary.linkJql)).addClass("totalRow"), AJS.$("<th/>").append(cellContentsGen(tableSummary.totalNotLinked, tableSummary.notLinkJql)).addClass("totalRow"), AJS.$("<th/>").append(tableSummary.totalLinked + tableSummary.totalNotLinked).addClass("totalRow")));
+                    			table.append(AJS.$("<tr/>").append(AJS.$("<td/>").append("Showing " + rowCount + " of " + tableSummary.rows.length + " statistics").attr("colspan", "3"), AJS.$("<td/>").append(function () {
+                    				if (gadget.getPref("enforceMax") == "true") {
+                    					return AJS.$("<a/>").append("Show all").click(function() {
+                    						gadget.savePref("enforceMax", "false");
+                    						gadget.showView(true);
+                    					});
+                    				}
+                    				else {
+                    					return AJS.$("<a/>").append("Show less").click(function() {
+                    						gadget.savePref("enforceMax", "true");
+                    						gadget.showView(true);
+                    					});
+                    				}
+                    			}())));
+                    			
+                    			gadget.getView().html(table);
+                    		}
+                    		else {
+                    			var msg = AJS.$("<p/>").append("There are no issues available.");
+                    			gadget.getView().html(msg);
+                    		}
+                    		
+                    	},
+                    	args: [
+                    		{
+                    			key: "linksumm",
+                    			ajaxOptions: function ()
+                    			{
+                    				var searchId = this.getPref("searchId");
+                    				var isProject = (searchId.charAt(searchId.length - 1) == "p");
+                    				searchId = searchId.substr(0, searchId.length - 2);
+                    				return {
+                    					url: "/rest/link-summary-service/1.0/linkSummary/linkAnalysis",
+                    					data: {
+                    						searchId: gadgets.util.unescapeString(searchId),
+                    						isProject: isProject,
+                    						groupField: gadgets.util.unescapeString(this.getPref("yField")),
+                    						sortBy: gadgets.util.unescapeString(this.getPref("sortBy")),
+                    						sortDirection: gadgets.util.unescapeString(this.getPref("sortDirection")),
+                    						baseIssueType: "Requirement",
+                    						linkIssueType: "Task,Sub-task",
+                    						customFieldChecked: "Task/s Link Completed"
+                    					}
+                    				};
+                    			}
+                    			
+                    		}
+                    	]
+                    }
+                });
+            })();
+ 
+        </script>
+  ]]>
+  </Content>
+</Module>

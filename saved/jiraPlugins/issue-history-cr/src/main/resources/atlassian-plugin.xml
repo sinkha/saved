@@ -1,0 +1,29 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}"
+	name="${project.name}" plugins-version="2">
+	<plugin-info>
+		<description>${project.description}</description>
+		<version>${project.version}</version>
+		<vendor name="${project.organization.name}" url="${project.organization.url}" />
+	</plugin-info>
+
+	<report key="issue-history-cr" name="Issue History Report"
+		class="com.tapestrysolutions.jira.plugins.report.issuehistory.IssueHistoryReport">
+		<description key="report.issuehistory.description" />
+		<label key="report.issuehistory.label" />
+
+		<resource type="velocity" name="view"
+			location="templates/issuehistoryreport/issuehistory-report.vm" />
+		<resource type="i18n" name="i18n"
+			location="com.tapestrysolutions.jira.plugins.report.issuehistory.issuehistory_report" />
+		<properties>
+			<property>
+				<key>projectOrFilterId</key>
+				<name>report.issuehistory.filter.or.project.name</name>
+				<description>report.issuehistory.filter.or.project.description
+				</description>
+				<type>filterprojectpicker</type>
+				<i18n>false</i18n>
+			</property>
+		</properties>
+	</report>
+</atlassian-plugin>

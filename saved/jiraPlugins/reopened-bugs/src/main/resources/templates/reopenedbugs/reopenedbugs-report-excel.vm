@@ -1,0 +1,33 @@
+<table class="report">
+<tr>
+	<td class="label">Projects:</td>
+	<td class="data">$project</td>
+</tr>
+<tr>
+	<td class="label">Cycle:</td>
+	<td class="data">$version</td>
+</tr>
+</table>
+
+<table id="reopenedbugs-report-table" border="0" cellpadding="3" cellspacing="1" width="100%">
+   <tr class="rowNormal">
+	   <th>Person</th>
+	   <th>Bugs Fixed</th>
+	   <th>Bugs Reopened</th>
+	   <th>Percentaged Reopened</th>   
+   </tr>
+   #foreach ($issue in $issues)
+   	 <tr class="rowNormal">
+   	   <td>$issue.name</td>
+   	   <td>$issue.bugsFixed</td>
+   	   <td>$issue.bugsReopened</td>   	   
+   	   <td>$issue.percentageReopened</td>   	      	 
+   	 </tr>
+   #end
+       <tr class="rowNormal">
+	   <th>Totals</th>
+	   <th>$summary.totalFixed</th>
+	   <th>$summary.totalReopened</th>
+	   <th>$summary.percentageReopened</th>   
+   </tr>
+</table>

@@ -1,0 +1,74 @@
+select id,child_id,parent_name,child_name,directory_id from cwd_membership where child_name='kjacobsen';
+
+select id,child_id,parent_name,child_name,directory_id from cwd_membership where child_name='kjacobsen' order by parent_name;
+
+select * from cwd_membership where not exists (select * from cwd_user where id=child_id);
+
+select * from cwd_membership where not exists (select * from cwd_user where id=child_id);
+
+delete from cwd_membership where not exists (select * from cwd_user where id=child_id);
+
+select * from cwd_membership where not exists (select * from cwd_user where id=child_id);
+
+select * from cwd_user;
+
+select id,directory_id,user_name,display_name,credential from cwd_user order by user_name;
+
+# find users who are not affiliated with any of the current directories, 
+# delete, 
+# search again
+# DOESN'T ACCOUNT FOR INACTIVE DIRECTORIES
+
+select id,directory_id,user_name,display_name,credential from cwd_user where cwd_user.directory_id not in (select id from cwd_directory) order by user_name;
+
+delete from cwd_user where cwd_user.directory_id not in (select id from cwd_directory);                                                          
+
+select id,directory_id,user_name,display_name,credential from cwd_user where cwd_user.directory_id not in (select id from cwd_directory) order by user_name;
+
+
+# select rows from the membership table with user id's that do not exist in the user table
+# delete
+# search again
+
+select * from cwd_membership where not exists (select * from cwd_user where id=child_id);                                                        
+
+delete from cwd_membership where not exists (select * from cwd_user where id=child_id);                                                          
+
+select * from cwd_membership where not exists (select * from cwd_user where id=child_id);
+
+
+# 
+
+select id,directory_id,user_name,display_name,credential from cwd_user where cwd_user.directory_id not in (select id from cwd_directory) order by user_name;
+
+select * from cwd_directory;
+
+select id,directory_id,user_name,display_name,credential from cwd_user order by user_name;
+
+select * from cwd_directory;
+
+select * from cwd_directory where active=1;
+
+select id,directory_id,user_name,display_name,credential from cwd_user where cwd_user.directory_id not in (select id from cwd_directory where active=1) order by user_name;
+
+remove from cwd_user where cwd_user.directory_id not in (select id from cwd_directory where active=1);                                           
+
+select id,directory_id,user_name,display_name,credential from cwd_user where cwd_user.directory_id not in (select id from cwd_directory where active=1) order by user_name;
+
+select id,directory_id,user_name,display_name,credential from cwd_user where cwd_user.directory_id not in (select id from cwd_directory where active=1);
+
+delete from cwd_user where cwd_user.directory_id not in (select id from cwd_directory where active=1);
+
+select * from cwd_membership where not exists (select * from cwd_user where id=child_id);
+
+delete from cwd_membership where not exists (select * from cwd_user where id=child_id);
+
+
+cwd_user
+cwd_membership
+cwd_directory
+
+
+update <table> set directory_id=1 where directory_id != 1;
+select * <table> where directory_id!=1;
+commit;

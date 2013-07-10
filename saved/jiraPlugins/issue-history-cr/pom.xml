@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.tapestrysolutions.jira.plugins.report.issuehistory</groupId>
+    <artifactId>issue-history-cr</artifactId>
+    <version>1.1-SNAPSHOT</version>
+
+    <developers>
+        <developer>
+            <id>alenz</id>
+            <name>Tony Lenz</name>
+            <email>alenz@tapestrysolutions.com</email>
+            <organization>Tapestry Solutions, Inc.</organization>
+            <organizationUrl>www.tapestrysolutions.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <organization>
+        <name>Tapestry Solutions, Inc.</name>
+        <url>http://www.tapestrysolutions.com/</url>
+    </organization>
+
+    <name>Issue History Report</name>
+    <description>This plugin has a report that allows you to see an issue's history for all the issues for a specific project or filter.</description>
+    <packaging>atlassian-plugin</packaging>
+
+    <properties>
+        <jira.version>4.4.1</jira.version>
+        <jira.data.version>4.4</jira.data.version>
+        <amps.version>3.7.3</amps.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-jira-plugin</artifactId>
+                <version>3.7.3</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <productVersion>${jira.version}</productVersion>
+                    <productDataVersion>${jira.data.version}</productDataVersion>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.atlassian.jira</groupId>
+            <artifactId>atlassian-jira</artifactId>
+            <version>${jira.version}</version>
+            <scope>provided</scope>
+        </dependency>        
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.jira</groupId>
+            <artifactId>jira-func-tests</artifactId>
+            <version>${jira.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+	<scm>
+		<connection>scm:svn:https://slosvn:8443/tapslo/projects/jira-plugins/issue-history-cr/trunk</connection>
+		<developerConnection>scm:svn:https://slosvn:8443/tapslo/projects/jira-plugins/issue-history-cr/trunk</developerConnection>
+	</scm>
+	
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>CorpNet Release Repository</name>
+			<url>file://M:/releases</url>
+		</repository>
+		<snapshotRepository>
+			<uniqueVersion>true</uniqueVersion>
+			<id>snapshots</id>
+			<name>CorpNet Snapshot Repository</name>
+			<url>file://M:/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+</project>

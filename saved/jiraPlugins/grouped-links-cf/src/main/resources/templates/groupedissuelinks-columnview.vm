@@ -1,0 +1,59 @@
+#if ($linkCollection)
+    #if ($linkTypes)
+    	#foreach ($issueLinkType in $linkTypes)
+    		#set ($outissues = $linkCollection.getOutwardIssues($issueLinkType.getName()))
+    		#set ($inissues = $linkCollection.getInwardIssues($issueLinkType.getName()))
+		    #if ($outissues)
+		    	$issueLinkType.getOutward():<br/>
+		        #set ($size = $outissues.size())
+		        #foreach ($issue in $outissues)
+		            #set ($showComma = ($velocityCount != $size))
+		            #if ($displayParams && $displayParams.get('nolink') && !${displayParams.excel_view})
+		                #if ($issue.getResolution())
+		                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>$issue.getKey()</strike>#if($showComma),#end
+		                #else
+		                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$issue.getKey()#if($showComma),#end
+		                #end
+		            #elseif($displayParams && ${displayParams.excel_view})
+		                $issue.getKey()#if($showComma),#end
+		            #else
+		                #if ($issue.getResolution())
+		                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="${requestContext.baseUrl}/browse/$issue.getKey()" title="$textutils.htmlEncode($issue.getSummary())"><strike>$issue.getKey()</strike></a>#if($showComma),#end
+		                #else
+		                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="${requestContext.baseUrl}/browse/$issue.getKey()" title="$textutils.htmlEncode($issue.getSummary())">$issue.getKey()</a>#if($showComma),#end
+		                #end
+		            #end
+		            <br />
+		        #end
+		    #elseif($inissues)
+		    	$issueLinkType.getInward():<br/>
+		        #set ($size = $inissues.size())
+		        #foreach ($issue in $inissues)
+		            #set ($showComma = ($velocityCount != $size))
+		            #if ($displayParams && $displayParams.get('nolink') && !${displayParams.excel_view})
+		                #if ($issue.getResolution())
+		                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>$issue.getKey()</strike>#if($showComma),#end
+		                #else
+		                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$issue.getKey()#if($showComma),#end
+		                #end
+		            #elseif($displayParams && ${displayParams.excel_view})
+		                $issue.getKey()#if($showComma),#end
+		            #else
+		                #if ($issue.getResolution())
+		                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="${requestContext.baseUrl}/browse/$issue.getKey()" title="$textutils.htmlEncode($issue.getSummary())"><strike>$issue.getKey()</strike></a>#if($showComma),#end
+		                #else
+		                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="${requestContext.baseUrl}/browse/$issue.getKey()" title="$textutils.htmlEncode($issue.getSummary())">$issue.getKey()</a>#if($showComma),#end
+		                #end
+		            #end
+		            <br />
+		        #end		    
+		    #else
+		    noi&nbsp;
+		    #end
+		#end
+	#else
+	nolt&nbsp;
+	#end
+#else
+noc&nbsp;
+#end

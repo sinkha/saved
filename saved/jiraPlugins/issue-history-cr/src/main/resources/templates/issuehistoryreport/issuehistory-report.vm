@@ -1,0 +1,212 @@
+#if ($searchRequest)
+    #set ($urlPrefix = "${req.contextPath}/secure/IssueNavigator.jspa?reset=true")
+#end
+
+<table width="100%" class="report">
+<tr><th class="reportHeading">
+#if ($project)
+    <h3 class="formtitle">Project: <a href="$req.contextPath/browse/$project.getKey()">$project.getName()</a></h3>
+#elseif ($searchRequest)
+    <h3 class="formtitle">Filter: <a href="IssueNavigator.jspa?requestId=${searchRequest.getId()}&mode=hide">$searchRequest.name</a></h3>
+#end
+</th></tr>
+</table>
+
+<style type="text/css">
+
+table.issueHistoryTable {
+    border-spacing: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+} 
+
+tr.headerRow th {
+    padding: 1px;
+    border-style: none;
+    border-right: solid;
+    border-color: black;
+    background-color: #D9D9D9;
+    text-align: left;
+    border-width: 2px;
+}
+
+table.issueHistoryTable td {
+    border-width: 1px;
+    padding: 1px;
+    border-style: solid;
+    border-color: #D9D9D9;
+    background-color: white;
+    max-width: 400px;
+    vertical-align: top;
+}   
+
+table.issueHistoryTable  td.bordertop {
+    border-top: solid;
+    border-top-width: 2px;
+}  
+
+table.issueHistoryTable  td.bordertopnobottom {
+    border-top: solid;
+    border-bottom: none;
+    border-top-width: 2px;
+}  
+
+table.issueHistoryTable  td.nobordertop {
+    border-top: none;
+    border-width: 1px;
+}
+
+table.issueHistoryTable  td.noborderbottom {
+    border-bottom: none;
+    border-width: 1px;
+} 
+
+table.issueHistoryTable  td.nobordertopbottom {
+    border-top: none;
+    border-bottom: none;
+    border-width: 1px;
+} 
+
+</style>
+
+<table class="issueHistoryTable">
+<tr class="headerRow">
+    <th>T</th>
+    <th>Key</th>
+    <th>Summary</th>
+    <th>Description</th>
+    <th>User</th>
+    <th>Field</th>
+    <th>Original Value</th>
+    <th style="border-right: none;">New Value</th>
+</tr>
+
+#if($filteredIssues.size() > 0)
+
+#foreach ($identifier in $filteredIssues)
+    #set ($issue = $issueManager.getIssueObject($identifier))
+    #set ($rowSpan = $issueToHistoryChangeNumber.get($identifier))
+    #set ($histories = $changeHistoryManager.getChangeHistories($issue))
+    
+    #if($rowSpan == 0)
+        #set ($rowSpan = 1)
+    #end
+    
+    <tr>
+    
+    <td nowrap="nowrap" rowSpan="$rowSpan" class="bordertop">$issue.getIssueTypeObject().getName()</td>
+    <td nowrap="nowrap" rowSpan="$rowSpan" class="bordertop"><a href="$req.contextPath/browse/$issue.getKey()">$issue.getKey()</a></td>
+    <td max-width="300px" rowSpan="$rowSpan" class="bordertop">
+        #if($issue.getSummary())
+            $textutils.htmlEncode($issue.getSummary())
+        #else
+            N/A
+        #end
+    </td>
+    <td rowSpan="$rowSpan" class="bordertop">
+        #if($issue.getDescription())
+            $textutils.htmlEncode($issue.getDescription())
+        #else
+            N/A
+        #end
+    </td>
+    
+    #set ($firstRow = true)
+    
+    #if($histories.size() == 0)
+        <td class="bordertop">N/A</td>
+        <td class="bordertop">N/A</td>
+        <td class="bordertop">N/A</td>
+        <td class="bordertop">N/A</td>
+        </tr>
+    #else
+    
+    #foreach ($history in $histories)
+    
+    
+        #if($history)
+        
+        #set ($changeList = $history.getChangeItems())
+        #set ($firstPass = true)
+        
+        #set($index = 0)
+        #foreach ($gv in $changeList) 
+            #set($index = $index + 1)
+            #if($firstRow) 
+                #if($changeList.size() > 1) 
+                    #set ($tdTag = '<td class="bordertopnobottom">')
+                #else
+                    #set ($tdTag = '<td class="bordertop">')
+                #end
+                #set ($firstRow = false)
+            #else
+                #if($firstPass)
+                    #if($changeList.size() > 1) 
+                        #set ($tdTag = '<td class="noborderbottom">')
+                    #else
+                        #set ($tdTag = '<td>')
+                    #end
+                #else 
+                    #if($changeList.size() == $index) 
+                        #set ($tdTag = '<td class="nobordertop">')
+                    #else
+                        #set ($tdTag = '<td class="nobordertopbottom">')
+                    #end
+                #end
+                <tr>            
+            #end
+        
+            #if($history.getAuthorUser())
+                $tdTag
+                <nobr>
+                #if($firstPass)
+                    $history.getAuthorUser().getName() - $history.getTimePerformed()
+                    #set ($firstPass = false)
+                #else
+                    &nbsp;                    
+                #end
+                </nobr>
+                </td>
+            #else 
+                $tdTag N/A - $history.getTimePerformed()</td>
+            #end
+        
+            #if($gv)
+                $tdTag
+                #if($gv.get('field'))
+                    $gv.get('field')
+                #else
+                    N/A
+                #end
+                </td>
+                
+                $tdTag
+                #if($gv.get('oldstring'))
+                    $textutils.htmlEncode($gv.get('oldstring'))
+                #else
+                    N/A
+                #end
+                </td>
+                
+                $tdTag
+                #if($gv.get('newstring'))
+                    $textutils.htmlEncode($gv.get('newstring'))
+                #else
+                    N/A
+                #end
+                </td>
+            #else 
+                $tdTag N/A</td>
+                $tdTag N/A</td>
+                $tdTag N/A</td>
+            #end
+            </tr>
+        #end ## foreach ($gv in $changeList)
+        #end ## if($history)
+        
+    #end ## foreach ($history in $histories)
+    #end ## if($histories.size() > 0)
+#end ## foreach ($identifier in $filteredIssues) 
+#end ## if($filteredIssues.size() > 0)
+</table>

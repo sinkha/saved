@@ -1,0 +1,57 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}"
+	name="${project.name}" plugins-version="2">
+	<plugin-info>
+		<description>${project.description}</description>
+		<version>${project.version}</version>
+		<application-version min="4.0" max="4.0"/>
+		<vendor name="${project.organization.name}" url="${project.organization.url}" />
+	</plugin-info>
+	
+    <customfield-type key="grouped-issue-links" name="Grouped Issue Links" class="com.tapestrysolutions.jira.plugins.customfield.linktypes.LinkByTypesCFType">
+		<description>This is a lookup field that displays all issue links grouped by the link type.</description>
+        <resource type="velocity" name="column-view" location="templates/groupedissuelinks-columnview.vm"/>
+    </customfield-type>
+    <customfield-type key="detailed-grouped-issue-links" name="Grouped Issue Links - Detailed" class="com.tapestrysolutions.jira.plugins.customfield.linktypes.LinkByTypesCFType">
+		<description>This is a lookup field that displays a detailed view of all issue links grouped by the link type.</description>
+        <resource type="velocity" name="column-view" location="templates/detailedgroupedissuelinks-columnview.vm"/>
+    </customfield-type>
+
+	<report key="rtm-report" name="Requirements Traceability Matrix Report"
+		class="com.tapestrysolutions.jira.plugins.report.groupedissuelinks.GroupedIssueLinksReport">
+		<description key="report.groupedissuelinks.description" />
+		<label key="Requirements Traceability Matrix (RTM) Report" />
+
+		<resource type="velocity" name="view"
+			location="templates/rtm-report.vm" />
+		<resource type="i18n" name="i18n"
+			location="com.tapestrysolutions.jira.plugins.report.groupedissuelinks_report" />
+		<properties>
+			<property>
+				<key>projectOrFilterId</key>
+				<name>report.groupedissuelinks.filterId.description</name>
+				<description>report.groupedissuelinks.field.project.or.filter.description</description>
+				<type>filterprojectpicker</type>
+				<i18n>false</i18n>
+			</property>
+		</properties>
+	</report>
+	<report key="rtvm-report" name="Requirements Traceability Verification Matrix Report"
+		class="com.tapestrysolutions.jira.plugins.report.groupedissuelinks.GroupedIssueLinksReport">
+		<description key="report.groupedissuelinks.description" />
+		<label key="Requirements Traceability Verification Matrix (RTVM) Report" />
+
+		<resource type="velocity" name="view"
+			location="templates/rtvm-report.vm" />
+		<resource type="i18n" name="i18n"
+			location="com.tapestrysolutions.jira.plugins.report.groupedissuelinks_report" />
+		<properties>
+			<property>
+				<key>projectOrFilterId</key>
+				<name>report.groupedissuelinks.filterId.description</name>
+				<description>report.groupedissuelinks.field.project.or.filter.description</description>
+				<type>filterprojectpicker</type>
+				<i18n>false</i18n>
+			</property>
+		</properties>
+	</report>
+</atlassian-plugin>

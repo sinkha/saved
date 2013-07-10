@@ -1,0 +1,151 @@
+<settings>
+  <servers>
+  <!-- Password to allow deployment to snapshot repository -->
+    <server>
+      <id>snapshots</id>
+      <username>deployment</username>
+      <password>deployment123</password>
+    </server>
+  <!-- Password to allow deployment to release repository -->
+    <server>
+      <id>releases</id>
+      <username>deployment</username>
+      <password>deployment123</password>
+    </server>
+    <!--<server>
+      <id>mars-group</id>
+      <username>mars</username>
+      <password>c2iedm</password>
+    </server>-->
+    
+    <!-- Must have a username and password to perform official releases -->
+    <!-- 
+    <server>
+      <id>releases</id>
+      <username>USER-NAME</username>
+      <password>PASSWORD</password>
+    </server>
+    -->
+  </servers>
+  
+  <mirrors>
+
+    <mirror>
+      <id>central</id>
+      <mirrorOf>central</mirrorOf>
+      <url>https://nexus/content/groups/public</url>
+    </mirror> 
+    <!--<mirror>
+      <id>apache-snapshots</id>
+      <mirrorOf>apache-snapshots</mirrorOf>
+      <url>https://nexus/content/repositories/apache-snapshots</url>
+    </mirror>
+    <mirror>
+      <id>codehaus-snapshots</id>
+      <mirrorOf>codehaus-snapshots</mirrorOf>
+      <name>Codehaus Snapshots</name>
+      <url>https://nexus/content/repositories/codehaus-snapshots</url>
+    </mirror>
+    <mirror>
+      <id>flexmojos-releases</id>
+      <mirrorOf>flexmojos-releases</mirrorOf>
+      <name>Flexmojos Releases</name>
+      <url>https://nexus/content/repositories/flexmojos-releases</url>
+    </mirror> 
+    <mirror>
+      <id>flexmojos-snapshots</id>
+      <mirrorOf>flexmojos-snapshots</mirrorOf>
+      <name>Flexmojos Snapshots</name>
+      <url>https://nexus/content/repositories/flexmojos-snapshots</url>
+    </mirror>    
+    <mirror>
+      <id>jasig-3rdparty</id>
+      <mirrorOf>jasig-3rdparty</mirrorOf>
+      <url>https://nexus/content/repositories/jasig-3rdparty</url>
+    </mirror>
+    <mirror>
+      <id>jasig-m2</id>
+      <mirrorOf>jasig-m2</mirrorOf>
+      <url>https://nexus/content/repositories/jasig-m2</url>
+    </mirror>
+    <mirror>
+      <id>java-net</id>
+      <mirrorOf>java-net</mirrorOf>
+      <url>https://nexus/content/repositories/maven2-repository.dev.java.net/</url>
+    </mirror>    
+    <mirror>
+      <id>jboss-m2</id>
+      <mirrorOf>jboss-m2</mirrorOf>
+      <url>https://nexus/content/repositories/jboss-m2</url>
+    </mirror>
+    <mirror>
+      <id>flexgroup</id>
+      <mirrorOf>flexgroup</mirrorOf>
+      <url>https://nexus/content/repositories/flexgroup</url>
+    </mirror> -->   
+  </mirrors>  
+  
+  <profiles>
+    <profile>
+      <id>cdm-local</id>
+      <activation>
+         <activeByDefault>true</activeByDefault>
+      </activation>
+      <!--  <properties>
+        <ci.email.username>jenkins@tapestrysolution.com</ci.email.username>
+        <ci.email.password></ci.email.password>
+      </properties>-->
+      <repositories>
+        <repository>
+          <id>public</id>
+          <url>https://nexus/content/groups/public</url>
+          <layout>default</layout>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+        </repository>
+        <repository>
+          <id>public-snapshots</id>
+          <url>https://nexus/content/groups/public</url>
+          <layout>default</layout>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+          </snapshots>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>public</id>
+          <url>https://nexus/content/groups/public</url>
+          <layout>default</layout>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+        </pluginRepository>  
+        <pluginRepository>
+          <id>public-snapshots</id>
+          <url>https://nexus/content/groups/public</url>
+          <layout>default</layout>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+          </snapshots>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+        </pluginRepository>
+      </pluginRepositories>     
+    </profile>
+        
+  </profiles>
+</settings>

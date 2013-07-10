@@ -1,0 +1,44 @@
+<project name="Papyrus">
+   
+	<property name="output.repo" value="${build.dir}/target/papyrus-update-site"/>
+	<property name="extra.dir" value="${build.dir}/extras"/>
+	
+   <property name="temp.repo" value="file:/${build.dir}/temp" />
+   
+   <eclipse.publish.featuresAndBundles repository="${temp.repo}">
+      <bundles dir="${extra.dir}/plugins" />
+   </eclipse.publish.featuresAndBundles>
+   
+   <p2.mirror destination="${output.repo}">
+      
+      <source>
+	 <repository location="http://download.eclipse.org/releases/helios" />
+         <repository location="http://community.polarion.com/projects/subversive/download/eclipse/2.0/helios-site/" />
+         <repository location="http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/helios" />
+         
+      </source>
+      
+		<iu id="org.eclipse.papyrus.diagram.activity.feature.group" /> <!-- MDT Papyrus - Activity Diagram editor (Incubation) -->
+		<iu id="org.eclipse.papyrus.layouttool.feature.group" /> <!-- MDT Papyrus - Auto-Layout tools (Incubation) -->
+		<iu id="org.eclipse.papyrus.diagram.clazz.feature.group" /> <!-- MDT Papyrus - Class Diagram editor (Incubation) -->
+		<iu id="org.eclipse.papyrus.diagram.communication.feature.group" /> <!-- MDT Papyrus - Communication Diagram editor (Incubation) -->
+		<iu id="org.eclipse.papyrus.diagram.composite.feature.group" /> <!-- MDT Papyrus - Composite Diagram editor (Incubation) -->
+		<iu id="org.eclipse.papyrus.customization.feature.group" /> <!-- MDT Papyrus - Customization of the tool feature (Incubation) -->
+		<iu id="org.eclipse.papyrus.xtext.uml.feature.group" /> <!-- MDT Papyrus - Direct editors for UML using XText (Incubation) -->
+		<iu id="org.eclipse.papyrus.diagram.menu.feature.group" /> <!-- MDT Papyrus - Menu for Papyrus editor (Incubation) -->
+		<iu id="org.eclipse.papyrus.uml.diagram.pkg.feature.group" /> <!-- MDT Papyrus - Package Diagram editor (Incubation) -->
+		<iu id="org.eclipse.papyrus.diagram.profile.feature.group" /> <!-- MDT Papyrus - Profile Diagram editor (Incubation) -->
+		<iu id="org.eclipse.papyrus.profiletool.feature.group" /> <!-- MDT Papyrus - Profile tool for profile based editors (Incubation) -->
+		<iu id="org.eclipse.papyrus.diagram.sequence.feature.group" /> <!-- MDT Papyrus - Sequence Diagram editor (Incubation) -->
+		<iu id="org.eclipse.papyrus.diagram.statemachine.feature.group" /> <!-- MDT Papyrus - StateMachine Diagram editor (Incubation) -->
+		<iu id="org.eclipse.papyrus.diagram.blockdefinition.feature.group" /> <!-- MDT Papyrus - SysML Block Definition Diagram editor (Incubation) -->
+		<iu id="org.eclipse.papyrus.diagram.internalblock.feature.group" /> <!-- MDT Papyrus - SysML Internal Block Diagram editor (Incubation) -->
+		<iu id="org.eclipse.papyrus.diagram.parametric.feature.group" /> <!-- MDT Papyrus - SysML Parametric Diagram editor (Incubation) -->
+		<iu id="org.eclipse.papyrus.diagram.requirement.feature.group" /> <!-- MDT Papyrus - SysML Requirement Diagram editor (Incubation) -->
+		<iu id="org.eclipse.papyrus.sysml.feature.group" /> <!-- MDT Papyrus - SysML static profile (Incubation) -->
+		<iu id="org.eclipse.papyrus.tests.feature.group" /> <!-- MDT Papyrus - Tests (Incubation) -->
+		<iu id="org.eclipse.papyrus.uml.feature.group" /> <!-- MDT Papyrus - UML core elements (Incubation) -->
+		<iu id="org.eclipse.papyrus.diagram.usecase.feature.group" /> <!-- MDT Papyrus - UseCase Diagram editor (Incubation) -->
+      
+    </p2.mirror>
+ </project>

@@ -1,0 +1,131 @@
+<table class="report">
+<tr>
+	<td class="label">Projects:</td>
+	<td class="data">$project</td>
+</tr>
+<tr>
+	<td class="label">Cycle:</td>
+	<td class="data">$version</td>
+</tr>
+</table>
+
+<style type="text/css">
+
+table.report td.label {
+	text-align:  right;
+	font-weight: bold;
+	
+}
+
+table.report td.data {
+	text-align: left;
+}
+
+table.reopenedbugsTable {
+    border-spacing: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+} 
+
+tr.headerRow th {
+    padding: 1px;
+    border-style: none;
+    border-right: solid;
+    border-color: black;
+    background-color: #D9D9D9;
+    text-align: center;
+    border-width: 2px;
+}
+
+tr.footerRow th {
+    padding: 1px;
+    border-style: none;
+    border-top-style: double;
+    border-right: solid;
+    border-color: black;
+    text-align: center;
+    border-width: 2px;
+}
+
+
+   
+table.reopenedbugsTable td {
+    border-width: 1px;
+    padding: 1px;
+    border-style: solid;
+    border-color: black;
+    background-color: white;
+    width: auto;
+    max-width: 25%;
+    vertical-align: top;
+    text-align: center;
+}   
+
+/*
+table.reopenedbugsTable  td.bordertop {
+    border-top: solid;
+    border-top-width: 2px;
+}
+
+table.reopenedbugsTable  td.bordertopdd {
+    border-style: double solid solid solid
+}  
+
+table.reopenedbugsTable  td.bordertopnobottom {
+    border-top: solid;
+    border-bottom: none;
+    border-top-width: 2px;
+}  
+
+table.reopenedbugsTable  td.nobordertop {
+    border-top: none;
+    border-width: 1px;
+}
+
+table.reopenedbugsTable  td.noborderbottom {
+    border-bottom: none;
+    border-width: 1px;
+} 
+
+table.reopenedbugsTable  td.nobordertopbottom {
+    border-top: none;
+    border-bottom: none;
+    border-width: 1px;
+} 
+
+*/
+
+table.reopenedbugsTable td.user {
+    text-align: left;
+}
+
+table.reopenedbugsTable th.total {
+    text-align: right;
+}
+
+</style>
+
+<table class="reopenedbugsTable">
+
+   <tr class="headerRow">
+	   <th>Person</th>
+	   <th>Bugs Fixed</th>
+	   <th>Bugs Reopened</th>
+	   <th>Percentage Reopened</th>
+   </tr>
+   #foreach ($issue in $issues)
+   	 <tr>
+   	   <td class="user">$issue.name</td>
+   	   <td><a href="$req.contextPath/secure/IssueNavigator.jspa?reset=true&mode=hide&jqlQuery=$issue.getBugsFixedJql()">$issue.bugsFixed</a></td>
+   	   <td><a href="$req.contextPath/secure/IssueNavigator.jspa?reset=true&mode=hide&jqlQuery=$issue.getBugsReopenedJql()">$issue.bugsReopened</a></td>
+   	   <td>$issue.percentageReopened%</td>   
+   	 </tr>
+   #end
+   <tr class="footerRow">
+	   <th class="total">Totals:</th>
+	   <th>$summary.totalFixed</th>
+	   <th>$summary.totalReopened</th>
+	   <th>$summary.percentageReopened%</th>
+   </tr>
+</table>

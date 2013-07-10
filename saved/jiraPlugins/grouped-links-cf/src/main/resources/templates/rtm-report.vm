@@ -1,0 +1,180 @@
+#if ($searchRequest)
+   #set ($urlPrefix = "${req.contextPath}/secure/IssueNavigator.jspa?reset=true")
+#end
+
+<style type="text/css">
+
+table.gilinkreport {
+    border-spacing: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+} 
+
+tr.gilinkreport {
+    padding: 1px;
+    border-style: none;
+    border-right: solid;
+    border-color: black;
+    background-color: #efefef;
+    text-align: left;
+    border-width: 1px;
+}
+
+table.gilinkreport td {
+	height:100%;
+    border-top: none;
+    border-bottom: none;
+    border-width: 1px;
+    padding: 2px;
+    border-style: solid;
+    border-color: #D9D9D9;
+    background-color: white;
+    max-width: 400px;
+    vertical-align: top;
+}
+table.gilinkreport th {
+	height:100%;
+    border-top: none;
+    border-bottom: none;
+    border-width: 1px;
+    padding: 1px;
+    border-style: solid;
+    border-color: black;
+    max-width: 400px;
+    vertical-align: top;
+    background-color:#efefef;
+    align:center;
+}   
+table.gilinkreport tr {
+	vertical-align: top;
+}
+table.gilinkreport  td.topRow {
+    border-top: solid;
+    border-top-width: 2px;
+    border-top-color: black;
+}  
+
+</style>
+
+<table width="100%" id="grouped_issue_links_report_table" class="gilinkreport"">
+
+	<tr>
+		<th colspan="11">
+		   <h3 class="formtitle">$i18n.getText('report.groupedissuelinks.field.project.or.filter.description'): $textutils.htmlEncode($searchRequest.name)</h3>
+		</th>
+	</tr>
+	   <tr>
+	    	<th>T</th>
+			<th>Key</th>
+			<th>Summary</th>
+			<th>Description</th>
+			<th>Status</th>	
+			<th>T</th>
+			<th>Link Key</th>
+			<th>Link Desc</th>
+			<th>Summary</th>
+			<th>Description</th>
+			<th>Status</th>
+	   </tr>
+	#if ($issues)
+	   #foreach ($issue in $issues)	    
+	   		#set ($linkCollection = $issueLinkManager.getLinkCollection($issue, $authenticationContext.getLoggedInUser()))
+	   		#set ($linkTypes = $linkCollection.getLinkTypes())
+
+			#set ($allInwardIssueLinks = false)
+			#set ($allOutwardIssueLinks = false)	
+	   		
+			#set ($totalLinkedIssueCount = 0)
+			#if ($linkCollection && $linkTypes)			    	
+
+
+			    #foreach ($issueLinkType in $linkTypes)
+			    	#set ($outissues = false)
+			    	#set ($inissues = false)
+			    	#set ($outissues = $linkCollection.getOutwardIssues($issueLinkType.getName()))
+			    	#set ($inissues = $linkCollection.getInwardIssues($issueLinkType.getName()))
+			    		
+					#if ($outissues)
+					    #set ($totalLinkedIssueCount = $totalLinkedIssueCount + $outissues.size())
+					#end
+					#if($inissues)
+					    #set ($totalLinkedIssueCount = $totalLinkedIssueCount + $inissues.size())		    
+					#end
+				#end
+						
+			    #if ($totalLinkedIssueCount > 0)					
+			       <tr>
+		            	<td class="topRow" rowspan="$totalLinkedIssueCount">#if($isExcel) $issue.getIssueTypeObject().getName() #else #displayConstantIcon($issue.getIssueTypeObject()) #end</td>
+						<td class="topRow" rowspan="$totalLinkedIssueCount"><a href="${requestContext.baseUrl}/browse/$issue.getKey()" title="$textutils.htmlEncode($issue.getSummary())"><strike>$issue.getKey()</strike></a></td>
+						<td class="topRow" rowspan="$totalLinkedIssueCount">$textutils.htmlEncode($issue.getSummary())</td>
+						<td class="topRow" rowspan="$totalLinkedIssueCount">#if($issue.getDescription()) $textutils.htmlEncode($issue.getDescription())#end</td>
+						<td class="topRow" rowspan="$totalLinkedIssueCount">#if($isExcel) $issue.getStatusObject().getName() #else #displayConstantIcon($issue.getStatusObject()) #end</td>
+
+					#set ($firstRow = true) 
+			    	#foreach ($issueLinkType in $linkTypes)
+			    		#set ($outissues = false)
+			    		#set ($inissues = false)
+			    		#set ($outissues = $linkCollection.getOutwardIssues($issueLinkType.getName()))
+			    		#set ($inissues = $linkCollection.getInwardIssues($issueLinkType.getName()))
+			    		
+					    #if ($outissues)
+					    	#set ($linkDesc = $issueLinkType.getOutward())
+					        #foreach ($issue in $outissues)
+					        	#if($firstRow)
+					       			#set ($tdTag = '<td class="topRow">')
+					       		#else
+					       			#set ($tdTag = '<td>')
+					       		#end
+					        
+			                	#if($firstRow) #set ($firstRow = false) #else <tr> #end							                	
+				                	$tdTag #if($isExcel) $issue.getIssueTypeObject().getName() #else #displayConstantIcon($issue.getIssueTypeObject()) #end</td>
+									$tdTag #if ($issue.getResolution())<a href="${requestContext.baseUrl}/browse/$issue.getKey()" title="$textutils.htmlEncode($issue.getSummary())"><strike>$issue.getKey()</strike></a>#else<a href="${requestContext.baseUrl}/browse/$issue.getKey()" title="$textutils.htmlEncode($issue.getSummary())">$issue.getKey()</a>#end</td>
+									$tdTag $linkDesc</td>
+									$tdTag $issue.getSummary()</td>
+									$tdTag #if($issue.getDescription()) $issue.getDescription()#end</td>
+									$tdTag #if($isExcel) $issue.getStatusObject().getName() #else #displayConstantIcon($issue.getStatusObject()) #end</td>	
+								</tr>
+					        #end
+					    #end
+					    #if($inissues)
+					    	#set ($linkDesc = $issueLinkType.getInward())
+					        #foreach ($issue in $inissues)
+					        	#if($firstRow)
+					       			#set ($tdTag = '<td class="topRow">')
+					       		#else
+					       			#set ($tdTag = '<td>')
+					       		#end
+					       							        				               
+			                    #if($firstRow) #set ($firstRow = false) #else <tr> #end								                	
+				                	$tdTag #if($isExcel) $issue.getIssueTypeObject().getName() #else #displayConstantIcon($issue.getIssueTypeObject()) #end</td>
+									$tdTag #if ($issue.getResolution())<a href="${requestContext.baseUrl}/browse/$issue.getKey()" title="$textutils.htmlEncode($issue.getSummary())"><strike>$issue.getKey()</strike></a>#else <a href="${requestContext.baseUrl}/browse/$issue.getKey()" title="$textutils.htmlEncode($issue.getSummary())">$issue.getKey()</a>#end </td>
+									$tdTag $linkDesc</td>
+									$tdTag $issue.getSummary()</td>
+									$tdTag #if($issue.getDescription()) $issue.getDescription()#end</td>
+									$tdTag #if($isExcel) $issue.getStatusObject().getName() #else #displayConstantIcon($issue.getStatusObject()) #end</td>	
+								</tr>
+					        #end		    
+					    #end
+					#end
+				#else
+					<tr>
+		            	<td class="topRow">#if($isExcel) $issue.getIssueTypeObject().getName() #else #displayConstantIcon($issue.getIssueTypeObject()) #end</td>
+						<td class="topRow"><a href="${requestContext.baseUrl}/browse/$issue.getKey()" title="$textutils.htmlEncode($issue.getSummary())"><strike>$issue.getKey()</strike></a></td>
+						<td class="topRow">$textutils.htmlEncode($issue.getSummary())</td>
+						<td class="topRow">#if($issue.getDescription()) $textutils.htmlEncode($issue.getDescription())#end</td>
+						<td class="topRow">#if($isExcel) $issue.getStatusObject().getName() #else #displayConstantIcon($issue.getStatusObject()) #end</td>
+						<td class="topRow"></td>
+						<td class="topRow"></td>
+						<td class="topRow"></td>
+						<td class="topRow"></td>
+						<td class="topRow"></td>
+						<td class="topRow"></td>
+					</tr>
+				#end
+			#end
+				
+	   #end 
+   #end
+
+</table>

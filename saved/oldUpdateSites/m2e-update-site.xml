@@ -1,0 +1,27 @@
+<project name="M2E">
+   
+	<property name="output.repo" value="${build.dir}/target/m2e-update-site"/>
+	<property name="extra.dir" value="${build.dir}/extras"/>
+	
+   <property name="temp.repo" value="file:/${build.dir}/temp" />
+   
+   <eclipse.publish.featuresAndBundles repository="${temp.repo}">
+      <bundles dir="${extra.dir}/plugins" />
+   </eclipse.publish.featuresAndBundles>
+   
+   <p2.mirror destination="${output.repo}">
+      
+      <source>
+         <repository location="http://download.eclipse.org/technology/m2e/releases" />
+      </source>
+      
+	<iu id="org.eclipse.m2e.feature.feature.group" /> <!-- m2e - Maven Integration for Eclipse -->
+   	<iu id="org.eclipse.jdt.feature.group" /> <!-- Eclipse Java Development Tools -->
+   	<iu id="org.eclipse.platform.feature.group" /> <!-- Eclipse Platform -->
+   	<iu id="org.eclipse.help.feature.group" /> <!-- Eclipse Help System -->
+   	<iu id="org.eclipse.equinox.p2.user.ui.feature.group" /> <!-- Equinox p2 Provisioning-->
+   	<iu id="org.eclipse.rcp.feature.group" /> <!-- Eclipse RCP -->
+	<iu id="org.eclipse.m2e.logback.feature.feature.group" /> <!-- m2e - slf4j over logback logging (Optional) -->
+      
+    </p2.mirror>
+ </project>

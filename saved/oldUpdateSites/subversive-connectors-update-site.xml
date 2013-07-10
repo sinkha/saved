@@ -1,0 +1,24 @@
+<project name="SVNConnectors">
+   
+	<property name="output.repo" value="${build.dir}/target/subversive-connectors-update-site"/>
+	<property name="extra.dir" value="${build.dir}/extras"/>
+	
+   <property name="temp.repo" value="file:/${build.dir}/temp" />
+   
+   <eclipse.publish.featuresAndBundles repository="${temp.repo}">
+      <bundles dir="${extra.dir}/plugins" />
+   </eclipse.publish.featuresAndBundles>
+   
+   <p2.mirror destination="${output.repo}">
+      
+      <source>
+         <repository location="http://community.polarion.com/projects/subversive/download/eclipse/2.0/update-site/" />
+      </source>
+      
+	<iu id="org.polarion.eclipse.team.svn.connector.feature.group" /> <!--   Subversive SVN Connectors -->
+	<iu id="org.polarion.eclipse.team.svn.connector.svnkit15.feature.group" /> <!-- SVNKit 1.2.2 Implementation (Optional) -->
+	<iu id="org.polarion.eclipse.team.svn.connector.svnkit16l.feature.group" /> <!-- SVNKit 1.3.3 Implementation (Optional) -->
+	<iu id="org.polarion.eclipse.team.svn.connector.svnkit16.feature.group" /> <!-- SVNKit 1.3.5 Implementation (Optional) -->
+      
+    </p2.mirror>
+ </project>

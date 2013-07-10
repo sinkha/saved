@@ -1,0 +1,32 @@
+<project name="Subversive">
+   
+	<property name="output.repo" value="${build.dir}/target/subversive-update-site"/>
+	<property name="extra.dir" value="${build.dir}/extras"/>
+	
+   <property name="temp.repo" value="file:/${build.dir}/temp" />
+    
+   <eclipse.publish.featuresAndBundles repository="${temp.repo}">
+      <bundles dir="${extra.dir}/plugins" />
+   </eclipse.publish.featuresAndBundles>
+   
+   <p2.mirror destination="${output.repo}">
+      
+      <source>
+         <repository location="http://download.eclipse.org/technology/subversive/0.7/update-site/" />
+      </source>
+      
+	<iu id="org.eclipse.team.svn.revision.graph.feature.group" /> <!-- Subversive Revision Graph (Optional) (Incubation) -->
+	<!--<iu id="org.eclipse.gef.feature.group" />--> <!-- Graphical Editing Framework GEF -->
+	<!--<iu id="org.eclipse.draw2d.feature.group" />--> <!-- Graphical Editing Framework Draw2d -->
+	<iu id="org.eclipse.team.svn.resource.ignore.rules.jdt.feature.group" /> <!-- Subversive SVN JDT Ignore Extensions (Optional) (Incubation) -->
+	<iu id="org.eclipse.team.svn.feature.group" /> <!-- Subversive SVN Team Provider (Incubation) -->
+	<iu id="org.eclipse.team.svn.nl1.feature.group" /> <!-- Subversive SVN Team Provider Localization (Optional) (Incubation) -->
+	<iu id="org.eclipse.team.svn.source.feature.group" /> <!-- Subversive SVN Team Provider Sources (Incubation) -->
+	<iu id="org.eclipse.team.svn.revision.graph.source.feature.group" /> <!-- Subversive Revision Graph Sources (Optional) (Incubation) -->
+	<iu id="org.eclipse.team.svn.resource.ignore.rules.jdt.source.feature.group" /> <!-- Subversive SVN JDT Ignore Extensions Sources (Optional) (Incubation) -->
+	<iu id="org.eclipse.team.svn.nl1.sources.feature.group" /> <!-- Subversive SVN Team Provider Localization Sources (Optional) (Incubation) -->
+	<iu id="org.eclipse.team.svn.sources.feature.group" /> <!-- Subversive SVN Team Provider Sources (Incubation) -->
+	
+      
+    </p2.mirror>
+ </project>

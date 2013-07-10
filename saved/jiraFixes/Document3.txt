@@ -1,0 +1,116 @@
+1.) Delete any users that do not correspond to an active directory.
+
+	delete from cwd_user where cwd_user.directory_id not in (select id from cwd_directory); 
+	
+	select id,directory_id,user_name,display_name,credential from cwd_user where cwd_user.directory_id not in (select id from cwd_directory) order by user_name;
+
+2.) Delete any membership rows that do not do not refer to an existing user
+
+	delete from cwd_membership where not exists (select * from cwd_user where id=child_id);  
+	
+	select * from cwd_membership where not exists (select * from cwd_user where id=child_id);
+
+2.) Delete groups that do not refer to an existing directory
+
+	select * from cwd_group where cwd_group.directory_id not in (select id from cwd_directory); 
+
+	delete from cwd_group where cwd_group.directory_id not in (select id from cwd_directory); 
+
+3.) Delete any membership rows that do not do not refer to an existing group
+
+	delete from cwd_membership where not exists (select * from cwd_group where id=parent_id);  
+	
+	select * from cwd_membership where not exists (select * from cwd_group where id=parent_id);	
+	
+4.) Delete all user rows that have directory=1 and a second row for another directory.
+
+	select * from cwd_user group by user_name having count(*) > 1;
+	
+	create temporary table temp ( id varchar(100) );
+	insert into temp(id) select user_name from cwd_user group by user_name having count(*) > 1;
+	select * from cwd_user where user_name in (select id from temp) and directory_id=1;
+
+	delete from cwd_user where user_name in (select id from temp) and directory_id=1;
+
+5.) Set all users to have directory=1 (so they will exist in the jira internal directory)
+
+	select * from cwd_user where directory_id!=1;
+	update cwd_user set directory_id=1 where directory_id != 1;
+	select * from cwd_user where directory_id!=1;
+	commit;
+
+6.) Update the values of the id and directory_id for all membership records to reflect existing users.
+
+	select * from cwd_membership where not exists (select * from cwd_user where id=child_id);
+	update cwd_user updatefrom, cwd_membership updateto set updateto.child_id = updatefrom.id where updateto.child_name = updatefrom.user_name;
+	
+7.) Update all memberships to directory=1
+
+	select * from cwd_membership where directory_id!=1;
+	update cwd_membership set directory_id=1 where directory_id != 1;
+	select * from cwd_membership where directory_id!=1;
+	commit;
+
+8.) Delete duplicate rows from memberships
+
+	select child_name, parent_name, count(*) cnt from cwd_membership group by child_name, parent_name having cnt > 1 order by cnt asc;
+	
+	create temporary table tmpTable (id int);
+	
+	insert tmpTable (id) select id from cwd_membership yt where exists (select * from cwd_membership yt2 where yt2.child_name = yt.child_name and yt2.parent_name = yt.parent_name and yt2.id > yt.id);
+	
+	delete from cwd_membership where id in (select id from tmpTable);
+
+	
+9.) Delete any user attributes that do not refer to existing directory
+
+	select * from cwd_user_attributes where cwd_user_attributes.directory_id not in (select id from cwd_directory);
+	
+	delete from cwd_user_attributes where cwd_user_attributes.directory_id not in (select id from cwd_directory);
+	
+10.) Delete any user attributes that do not refer to existing user
+
+	select * from cwd_user_attributes where cwd_user_attributes.user_id not in (select id from cwd_user);
+	
+	delete from cwd_user_attributes where cwd_user_attributes.user_id not in (select id from cwd_user);
+
+
+	
+?.) Delete any memberships that do not refer to existing directory
+
+	select * from cwd_membership where cwd_membership.directory_id not in (select id from cwd_directory);
+	
+
+?.) Delete any group attributes that do not refer to existing directory
+
+	select * from cwd_group_attributes where cwd_group_attributes.directory_id not in (select id from cwd_directory);
+	
+?.) Delete any groups that do not refer to existing directory
+
+	select * from cwd_group where cwd_group.directory_id not in (select id from cwd_directory);
+	
+?.) Delete any attributes that do not refer to existing directory
+
+	select * from cwd_directory_attribute where cwd_directory_attribute.directory_id not in (select id from cwd_directory);
+	
+?.) Delete any operations that do not refer to existing directory
+	
+	select * from cwd_directory_operation where cwd_directory_operation.directory_id not in (select id from cwd_directory);
+	
+
+?.) Delete any user attributes that do not refer to an existing user
+
+	select * from cwd_user_attributes where cwd_user_attributes.user_id not in (select id from cwd_user);
+	
+
+?.) Delete any user attributes that do not refer to an existing user
+
+	select * from cwd_user_attributes where cwd_user_attributes.user_id not in (select id from cwd_user);
+	
+11.) Commit
+	commit;
+
+
+
+update cwd_user updatefrom, cwd_membership updateto set updateto.child_id = updatefrom.id where updateto.child_name = updatefrom.user_name;
+

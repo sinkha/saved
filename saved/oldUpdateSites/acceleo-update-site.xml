@@ -1,0 +1,46 @@
+<project name="Acceleo">
+   
+	<property name="output.repo" value="${build.dir}/target/acceleo-update-site"/>
+	<property name="extra.dir" value="${build.dir}/extras"/>
+	
+   <property name="temp.repo" value="file:/${build.dir}/temp" />
+   
+   <eclipse.publish.featuresAndBundles repository="${temp.repo}">
+      <bundles dir="${extra.dir}/plugins" />
+   </eclipse.publish.featuresAndBundles>
+   
+   <p2.mirror destination="${output.repo}">
+      
+      <source>
+         <repository location="http://download.eclipse.org/modeling/m2t/acceleo/updates/releases/3.1" />
+      </source>
+      
+		<iu id="org.eclipse.acceleo.feature.group" /> <!-- Acceleo -->
+		<iu id="org.eclipse.acceleo.doc.feature.group" /> <!-- Acceleo Documentation -->
+		<iu id="org.eclipse.acceleo.examples.feature.group" /> <!-- Acceleo Examples -->
+		<iu id="org.eclipse.acceleo.runtime.feature.group" /> <!-- Acceleo Runtime -->
+		<iu id="org.eclipse.emf.feature.group" /> <!-- EMF - Eclipse Modeling Framework Runtime and Tools -->
+		<iu id="org.eclipse.emf.ecore.feature.group" /> <!-- EMF - Eclipse Modeling Framework Core Runtime -->
+		<iu id="org.eclipse.emf.codegen.feature.group" /> <!-- EMF Code Generation -->
+		<iu id="org.eclipse.emf.codegen.ui.feature.group" /> <!-- EMF Code Generation UI -->
+		<iu id="org.eclipse.emf.common.feature.group" /> <!-- EMF Common -->
+		<iu id="org.eclipse.emf.common.ui.feature.group" /> <!-- EMF Common UI -->
+		<iu id="org.eclipse.emf.databinding.feature.group" /> <!-- EMF Data Binding -->
+		<iu id="org.eclipse.emf.codegen.ecore.feature.group" /> <!-- EMF Ecore Code Generator -->
+		<iu id="org.eclipse.emf.codegen.ecore.ui.feature.group" /> <!-- EMF Ecore Code Generator UI -->
+		<iu id="org.eclipse.emf.ecore.edit.feature.group" /> <!-- EMF Ecore Edit -->
+		<iu id="org.eclipse.emf.mapping.ecore.feature.group" /> <!-- EMF Ecore Mapping -->
+		<iu id="org.eclipse.emf.mapping.ecore.editor.feature.group" /> <!-- EMF Ecore Mapping Editor -->
+		<iu id="org.eclipse.emf.edit.feature.group" /> <!-- EMF Edit -->
+		<iu id="org.eclipse.emf.databinding.edit.feature.group" /> <!-- EMF Edit Data Binding -->
+		<iu id="org.eclipse.emf.edit.ui.feature.group" /> <!-- EMF Edit UI -->
+		<iu id="org.eclipse.emf.mapping.feature.group" /> <!-- EMF Mapping -->
+		<iu id="org.eclipse.emf.mapping.ui.feature.group" /> <!-- EMF Mapping UI -->
+		<iu id="org.eclipse.emf.converter.feature.group" /> <!-- EMF Model Converter -->
+		<iu id="org.eclipse.emf.ecore.editor.feature.group" /> <!-- EMF Sample Ecore Editor -->
+		<iu id="org.eclipse.acceleo.sdk.feature.group" /> <!-- Acceleo SDK -->
+		<iu id="org.eclipse.acceleo.source.feature.group" /> <!-- Source for Acceleo -->
+		<iu id="org.eclipse.acceleo.ui.capabilities.feature.group" /> <!-- Acceleo UI capability definitions -->
+      
+    </p2.mirror>
+ </project>

@@ -1,0 +1,129 @@
+#if ($linkCollection && $linkTypes)
+    #set ($allIssues = $linkCollection.getAllIssues())
+    #set ($allIssuesSize = $allIssues.size())
+    #if ($allIssuesSize > 0)
+   		<table cellpadding="0" cellspacing="0" border="1" bordercolor="#efefef" width="100%">
+			<tr bgcolor="#efefef" align="center">
+			<th>Link</th>
+			<th>T</th>
+			<th>Key</th>
+			<th>Summary</th>
+			##<th>Description</th>
+			<th>Status</th>
+			</tr>	
+    	#foreach ($issueLinkType in $linkTypes)
+    		#set ($outissues = $linkCollection.getOutwardIssues($issueLinkType.getName()))
+    		#set ($inissues = $linkCollection.getInwardIssues($issueLinkType.getName()))	    
+		    #if ($outissues)
+		    	#set ($linkDesc = $issueLinkType.getOutward())
+		        #foreach ($issue in $outissues)
+		            #if ($displayParams && $displayParams.get('nolink') && !${displayParams.excel_view})
+		                #if ($issue.getResolution())
+		                	<tr>
+			                	<td>$linkDesc</td>
+			                	<td>#displayConstantIcon($issue.getIssueTypeObject())</td>
+			                	<td><strike>$issue.getKey()</strike></td>
+								<td>$issue.getSummary()</td>
+								##<td>#if($issue.getDescription()) $issue.getDescription()#end</td>
+								<td>#displayConstantIcon($issue.getStatusObject())</td>
+							</tr>
+		                #else
+		                	<tr>
+			                    <td>$linkDesc</td>
+			                	<td>#displayConstantIcon($issue.getIssueTypeObject())</td>
+			                	<td>$issue.getKey()</td>
+								<td>$issue.getSummary()</td>
+								##<td>#if($issue.getDescription()) $issue.getDescription()#end</td>
+								<td>#displayConstantIcon($issue.getStatusObject())</td>
+							</tr>
+		                #end
+		            #elseif($displayParams && ${displayParams.excel_view})
+		                    <tr>
+			                    <td>$linkDesc</td>
+			                	<td>#displayConstantIcon($issue.getIssueTypeObject())</td>
+			                	<td>$issue.getKey()</td>
+								<td>$issue.getSummary()</td>
+								##<td>#if($issue.getDescription()) $issue.getDescription()#end</td>
+								<td>#displayConstantIcon($issue.getStatusObject())</td>
+							</tr>
+		            #else
+		                #if ($issue.getResolution())
+		                	<tr>
+			                	<td>$linkDesc</td>
+			                	<td>#displayConstantIcon($issue.getIssueTypeObject())</td>
+								<td><a href="${requestContext.baseUrl}/browse/$issue.getKey()" title="$textutils.htmlEncode($issue.getSummary())"><strike>$issue.getKey()</strike></a></td>
+								<td>$issue.getSummary()</td>
+								##<td>#if($issue.getDescription()) $issue.getDescription()#end</td>
+								<td>#displayConstantIcon($issue.getStatusObject())</td>	
+							</tr>
+		                #else
+			                <tr>
+			                	<td>$linkDesc</td>
+			                	<td>#displayConstantIcon($issue.getIssueTypeObject())</td>
+								<td><a href="${requestContext.baseUrl}/browse/$issue.getKey()" title="$textutils.htmlEncode($issue.getSummary())">$issue.getKey()</a></td>
+								<td>$issue.getSummary()</td>
+								##<td>#if($issue.getDescription()) $issue.getDescription()#end</td>
+								<td>#displayConstantIcon($issue.getStatusObject())</td>
+							</tr>
+		                #end
+		            #end
+		        #end
+		    #elseif($inissues)
+		    	#set ($linkDesc = $issueLinkType.getInward())
+		        #foreach ($issue in $inissues)
+		            #if ($displayParams && $displayParams.get('nolink') && !${displayParams.excel_view})
+		                #if ($issue.getResolution())
+		                    <tr>
+			                	<td>$linkDesc</td>
+			                	<td>#displayConstantIcon($issue.getIssueTypeObject())</td>
+			                	<td><strike>$issue.getKey()</strike></td>
+								<td>$issue.getSummary()</td>
+								##<td>#if($issue.getDescription()) $issue.getDescription()#end</td>
+								<td>#displayConstantIcon($issue.getStatusObject())</td>
+							</tr>
+		                #else
+		                    <tr>
+			                    <td>$linkDesc</td>
+			                	<td>#displayConstantIcon($issue.getIssueTypeObject())</td>
+			                	<td>$issue.getKey()</td>
+								<td>$issue.getSummary()</td>
+								##<td>#if($issue.getDescription()) $issue.getDescription()#end</td>
+								<td>#displayConstantIcon($issue.getStatusObject())</td>
+							</tr>
+						#end
+		            #elseif($displayParams && ${displayParams.excel_view})
+		                    <tr>
+			                    <td>$linkDesc</td>
+			                	<td>#displayConstantIcon($issue.getIssueTypeObject())</td>
+			                	<td>$issue.getKey()</td>
+								<td>$issue.getSummary()</td>
+								##<td>#if($issue.getDescription()) $issue.getDescription()#end</td>
+								<td>#displayConstantIcon($issue.getStatusObject())</td>
+							</tr>
+		            #else
+		                #if ($issue.getResolution())
+		                    <tr>
+			                	<td>$linkDesc</td>
+			                	<td>#displayConstantIcon($issue.getIssueTypeObject())</td>
+								<td><a href="${requestContext.baseUrl}/browse/$issue.getKey()" title="$textutils.htmlEncode($issue.getSummary())"><strike>$issue.getKey()</strike></a></td>
+								<td>$issue.getSummary()</td>
+								##<td>#if($issue.getDescription()) $issue.getDescription()#end</td>
+								<td>#displayConstantIcon($issue.getStatusObject())</td>	
+							</tr>
+		                #else
+		                    <tr>
+			                	<td>$linkDesc</td>
+			                	<td>#displayConstantIcon($issue.getIssueTypeObject())</td>
+								<td><a href="${requestContext.baseUrl}/browse/$issue.getKey()" title="$textutils.htmlEncode($issue.getSummary())">$issue.getKey()</a></td>
+								<td>$issue.getSummary()</td>
+								##<td>#if($issue.getDescription()) $issue.getDescription()#end</td>
+								<td>#displayConstantIcon($issue.getStatusObject())</td>
+							</tr>
+		                #end
+		            #end
+		        #end		    
+		    #end
+		#end
+		</table>
+	#end
+#end
